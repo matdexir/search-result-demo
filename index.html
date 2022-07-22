@@ -1,0 +1,674 @@
+<style>
+  .bravo_banner {
+    background-image: url(https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg) !important;
+    width: auto;
+    height: 320px;
+  }
+
+
+  @media(max-width: 766px) {
+    .bravo_banner {
+      background-image: url(https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg) !important;
+      width: auto !important;
+      height: 200px !important;
+    }
+
+
+
+  }
+</style>
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="csrf-token" content="sxcmHHm5tPy4BxhcKH5b114cCGV2ctEKTSZdzxP0">
+  <link rel="icon" type="image/vnd.microsoft.icon"
+    href="https://worktel.mrhost.com.tw/uploads/0000/1/2022/03/22/favicon.png" />
+  <title>mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform</title>
+
+
+  <meta name="description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta property="og:url" content="https://worktel.mrhost.com.tw/hotel" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform" />
+  <meta property="og:description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta property="og:image" content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform">
+  <meta name="twitter:description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay.">
+  <meta name="twitter:image" content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg">
+  <link rel="canonical" href="https://worktel.mrhost.com.tw/hotel" />
+  <link rel="alternate" href="https://worktel.mrhost.com.tw/hotel" hreflang="x-default" />
+  <link rel="alternate" href="https://worktel.mrhost.com.tw/zh/hotel" hreflang="zh" />
+  <link href="https://worktel.mrhost.com.tw/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/icofont/icofont.min.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/select2/css/select2.min.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/css/notification.css" rel="newest stylesheet">
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/css/app.css?_ver=1.0.12" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.css">
+
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel='stylesheet' id='google-font-css-css'
+    href='https://fonts.googleapis.com/css?family=Poppins%3A300%2C400%2C500%2C600' type='text/css' media='all' />
+  <script>
+    var bookingCore = {
+      url: 'https://worktel.mrhost.com.tw',
+      url_root: 'https://worktel.mrhost.com.tw',
+      booking_decimals: 0,
+      thousand_separator: ',',
+      decimal_separator: '.',
+      currency_position: 'left',
+      currency_symbol: 'NT$',
+      currency_rate: '1',
+      date_format: 'MM/DD/YYYY',
+      map_provider: 'gmap',
+      map_gmap_key: 'AIzaSyAGDg5j4O512bsBovm1nv_AnZTaF6JESFE',
+      map_options: {
+        map_lat_default: '25.032969',
+        map_lng_default: '121.565414',
+        map_clustering: 'on',
+        map_fit_bounds: 'on',
+      },
+      routes: {
+      },
+      module: {
+        hotel: 'https://worktel.mrhost.com.tw/hotel',
+      },
+      currentUser: 0,
+      isAdmin: 0,
+      rtl: 0,
+      markAsRead: 'https://worktel.mrhost.com.tw/notify/markAsRead',
+      markAllAsRead: 'https://worktel.mrhost.com.tw/notify/markAllAsRead',
+      loadNotify: 'https://worktel.mrhost.com.tw/notify/notifications',
+      pusher_api_key: '',
+      pusher_cluster: '',
+    };
+    var i18n = {
+      warning: "Warning",
+      success: "Success",
+    };
+    var daterangepickerLocale = {
+      "applyLabel": "Apply",
+      "cancelLabel": "Cancel",
+      "fromLabel": "From",
+      "toLabel": "To",
+      "customRangeLabel": "Custom",
+      "weekLabel": "W",
+      "first_day_of_week": 1,
+
+      "daysOfWeek": [
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa"
+      ],
+      "monthNames": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+    };
+  </script>
+
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/module/hotel/css/hotel.css?_ver=1.0.12" rel="stylesheet">
+  <link rel="stylesheet" type="text/css"
+    href="https://worktel.mrhost.com.tw/libs/ion_rangeslider/css/ion.rangeSlider.min.css" />
+  <link href="https://worktel.mrhost.com.tw/custom-css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.css" rel="stylesheet">
+
+  <div id="fb-root"></div>
+
+  <div id="fb-customer-chat" class="fb-customerchat">
+  </div>
+  <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "145891912753401");
+    //   chatbox.setAttribute("page_id", "145891912753401");
+    //   chatbox.setAttribute("page_id", "1149874751858022");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    chatbox.setAttribute("theme_color", "#E97676");
+    chatbox.setAttribute("logged_in_greeting", "Hi! How can we help you?");
+
+  </script>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v14.0'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-PFDMNDP');</script>
+
+  <style>
+    .features-list {
+      margin-top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      width: 90%;
+    }
+
+    .features-list-el {
+      color: #A10508;
+      font-size: 10px;
+      margin-right: 5px;
+    }
+
+    .info {}
+
+
+    .capabilities {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .capabilities-el {
+      background-color: #F5F5F5;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #E0E0E0;
+      padding: 3px;
+      font-size: 10px;
+    }
+
+    .info .info-star {
+      font-size: 18px;
+      color: #484848;
+      text-align: right;
+    }
+
+    .info .info-comment {
+      font-size: 12px;
+      color: #A3A3A3;
+      text-align: right;
+    }
+
+
+    .ratings {
+      margin-top: 10px;
+    }
+
+    .ratings .ratings-price {
+      font-size: 10px;
+      color: #0A588A;
+      text-align: right;
+    }
+
+    @media screen and (max-width: 550px) {
+      .ratings .ratings-price {
+        text-align: left;
+      }
+
+      .card-container {
+        align-items: center;
+      }
+    }
+  </style>
+
+</head>
+
+<body class="frontend-page header-normal   ">
+
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+  <div class="bravo_wrap" id="app">
+    <div class="bravo_header">
+      <div class="container">
+        <div class="content">
+          <div class="header-left">
+            <a href="https://worktel.mrhost.com.tw" class="bravo-logo">
+              <img src="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/21/logo-300.png"
+                alt="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform">
+            </a>
+            <div class="bravo-menu">
+            </div>
+
+          </div>
+          <div style="margin-left: auto; margin-right: 0;">
+            <div class="dropdown">
+              <a href="#" data-toggle="dropdown" class="is_login">
+
+                English
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="dropdown-menu text-left">
+                <li>
+                  <a href="https://worktel.mrhost.com.tw/hotel?set_lang=zh" class="is_login" style="margin-left:10px">
+
+                    繁體中文
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bravo-menu-mobile" style="display:none;">
+        <div class="user-profile">
+          <div class="b-close"><i class="icofont-scroll-left"></i></div>
+          <div class="avatar"></div>
+          <ul>
+          </ul>
+          <ul class="multi-lang">
+            <div class="dropdown">
+              <a href="#" data-toggle="dropdown" class="is_login">
+
+                English
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="dropdown-menu text-left">
+                <li>
+                  <a href="https://worktel.mrhost.com.tw/hotel?set_lang=zh" class="is_login" style="margin-left:10px">
+
+                    繁體中文
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </ul>
+        </div>
+        <div class="g-menu">
+        </div>
+      </div>
+    </div>
+    <div class="bravo_search_hotel">
+      <div class="bravo_banner">
+        <div class="container">
+          <h1>
+
+          </h1>
+        </div>
+      </div>
+
+      <div class="" style="margin-top:-45px; margin-bottom:30px">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <form action="https://worktel.mrhost.com.tw/hotel" class="form bravo_form" method="get">
+                <div class="g-field-search">
+                  <div class="row">
+                    <div class="col-md-4 border-right">
+                      <div class="form-group">
+                        <i class="field-icon fa icofont-location-pin"></i>
+                        <div class="form-content">
+                          <label> Area </label>
+                          <div class="smart-search">
+                            <input type="text" class="smart-search-location parent_text form-control" readonly
+                              placeholder="Where are you going?" value="Taipei" data-onLoad="Loading..."
+                              data-default="[{&quot;id&quot;:1,&quot;title&quot;:&quot; Taipei&quot;},{&quot;id&quot;:10,&quot;title&quot;:&quot; New Taipei&quot;},{&quot;id&quot;:4,&quot;title&quot;:&quot; Taichung&quot;},{&quot;id&quot;:6,&quot;title&quot;:&quot; Kaohsiung&quot;},{&quot;id&quot;:2,&quot;title&quot;:&quot; Taoyuan&quot;},{&quot;id&quot;:3,&quot;title&quot;:&quot; Hsinchu&quot;},{&quot;id&quot;:32,&quot;title&quot;:&quot; Miaoli&quot;},{&quot;id&quot;:22,&quot;title&quot;:&quot; Changhua&quot;},{&quot;id&quot;:21,&quot;title&quot;:&quot; Nantou&quot;},{&quot;id&quot;:23,&quot;title&quot;:&quot; Yunlin&quot;},{&quot;id&quot;:31,&quot;title&quot;:&quot; Chiayi&quot;},{&quot;id&quot;:5,&quot;title&quot;:&quot; Tainan&quot;},{&quot;id&quot;:29,&quot;title&quot;:&quot; Pingtung&quot;},{&quot;id&quot;:30,&quot;title&quot;:&quot; Keelung&quot;},{&quot;id&quot;:7,&quot;title&quot;:&quot; Yilan&quot;},{&quot;id&quot;:8,&quot;title&quot;:&quot; Hualien&quot;},{&quot;id&quot;:9,&quot;title&quot;:&quot; Taitung&quot;}]">
+                            <input type="hidden" class="child_id" name="location_id" value="1">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 border-right">
+                      <div class="form-group">
+                        <i class="field-icon icofont-calendar" style=" font-size: 30px;padding-top:3px"></i>
+                        <div class="form-content">
+                          <div class="form-date-search-hotel2">
+                            <div class="date-wrapper">
+                              <div class="check-in-wrapper">
+                                <label>Date</label>
+                                <div class="render check-in-render">07/18/2022</div>
+                                <span> - </span>
+                                <div class="render check-out-render">07/23/2022</div>
+                              </div>
+                            </div>
+                            <input type="hidden" class="check-in-input" value="07/18/2022" name="start">
+                            <input type="hidden" class="check-out-input" value="07/23/2022" name="end">
+                            <input type="text" class="check-in-out" name="date" value="2022-07-18 - 2022-07-23">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 border-right">
+                      <div class="form-select-guests">
+                        <div class="form-group">
+                          <i class="field-icon icofont-user-alt-7" style=" font-size: 28px;padding-top:4px"></i>
+                          <div class="form-content dropdown-toggle" data-toggle="dropdown">
+                            <div class="wrapper-more">
+                              <label> </label>
+                              <label> </label>
+                              <div class="render">
+                                <span class="adults"><span class="one ">1 Adult</span> <span class=" d-none  multi"
+                                    data-html=":count Adults">1 Adults</span></span>
+                                -
+                                <span class="children">
+                                  <span class="one " data-html=":count Child">0 Child</span>
+                                  <span class="multi  d-none " data-html=":count Children">0 Children</span>
+                                </span>
+                                -
+                                <span class="infants">
+                                  <span class="one " data-html=":count Infants">0 Infant</span>
+                                  <span class="multi  d-none " data-html=":count Infants">0 Infants</span>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="dropdown-menu select-guests-dropdown">
+
+                            <div class="dropdown-item-row">
+                              <div class="label">Adults</div>
+                              <div class="val">
+                                <span class="btn-minus" data-input="adults"><i class="icon ion-md-remove"></i></span>
+                                <span class="count-display"><input type="number" name="adults" value="1" min="1"></span>
+                                <span class="btn-add" data-input="adults"><i class="icon ion-ios-add"></i></span>
+                              </div>
+                            </div>
+                            <div class="dropdown-item-row">
+                              <div class="label">Children</div>
+                              <div class="val">
+                                <span class="btn-minus" data-input="children"><i class="icon ion-md-remove"></i></span>
+                                <span class="count-display"><input type="number" name="children" value="0"
+                                    min="0"></span>
+                                <span class="btn-add" data-input="children"><i class="icon ion-ios-add"></i></span>
+                              </div>
+                            </div>
+                            <div class="dropdown-item-row">
+                              <div class="label">Infants</div>
+                              <div class="val">
+                                <span class="btn-minus" data-input="infants"><i class="icon ion-md-remove"></i></span>
+                                <span class="count-display"><input type="number" name="infants" value="0"
+                                    min="0"></span>
+                                <span class="btn-add" data-input="infants"><i class="icon ion-ios-add"></i></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="g-button-submit">
+                  <button class="btn btn-primary btn-search" type="submit" style="font-size:16px;">Search</button>
+                </div>
+              </form>
+              <style>
+                @media(max-width: 766px) {
+
+                  .bravo_wrap .bravo_form .form-content {
+                    position: relative;
+                    padding: 0px 0 0px 45px;
+                    transition: all 0.3s;
+
+                  }
+
+                  .bravo_wrap .bravo_form .dropdown-toggle:after {
+
+                    color: #ffffff;
+
+                  }
+
+
+                }
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-12">
+            <div class="bravo_filter">
+              <form action="https://worktel.mrhost.com.tw/hotel" class="bravo_form_filter" style="margin-bottom:0;">
+
+                <div class="filter-title">
+                  Search
+                </div>
+
+                <div class="accordion" id="attributes-accordion">
+                  <div class="text-center mt-3 mb-3" v-if="attributes.length === 0">
+                    <div class="spinner-border spinner-border-lg" style=" width: 3rem; height: 3rem;" role="status">
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
+                  <div v-for="attribute in attributes">
+                    <div class="card">
+                      <button class="btn" type="button" data-toggle="collapse" :data-target="attribute.slug"
+                        aria-expanded="true" :aria-controls="attribute.slug" @click="toggle_collapse">
+                        {{ attribute.name }}</button>
+                      <!-- <div>{{ checked_attributes }} </div> -->
+                      <div :id="attribute.slug" class="collapse show" data-parent="#attributes-accordion">
+                        <div class="card-body">
+                          <ul style="list-style: none;">
+                            <li v-for="term in attribute.terms">
+                              <input type="checkbox" :aria-label="term.name" :id="term.id" :name="term.name"
+                                v-model="checked_attributes[term.id]" @change="filter_hotels">
+                              <label :for="term.id">
+                                <div :class="{'text-primary': checked_attributes[term.id]}">{{ term.name }}</div>
+                              </label>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+          </div>
+          <div class="col-lg-8 col-md-12">
+
+            <div class="bravo-list-item">
+              <div class="topbar-search">
+                <h2 class="text">
+                  {{ displayed_hotels.length }} hotels found
+                </h2>
+                <div class="control">
+                  <div class="item">
+                    <select class="dropdown" id="select" v-model="sorting_method" aria-labelledby="dropdownMenuButton"
+                      @change="sort_hotels">
+                      <option class="dropdown-item" value="recommended"> Recommended </option>
+                      <option class="dropdown-item" value="price_low_high"> Price (Low to high) </option>
+                      <option class="dropdown-item" value="price_high_low"> Price (High to low) </option>
+                      <option class="dropdown-item" value="rating_high_low"> rating (High to low) </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="list-item" style="display: flex; flex-wrap: wrap; gap: 2rem;">
+              <div class="text-center mx-auto" v-if="hotels.length === 0">
+                <div class="spinner-border spinner-border-lg" style=" width: 3rem; height: 3rem;" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+              <div v-for="hotel in displayed_hotels" class="card mt-3 col-md-5 col-lg-12" style=" max-height: 500px;">
+                <div class="row no-gutters">
+                  <div class="mt-1 m-lg-3 col-md-12 col-lg-4">
+                    <img width="90%" style="max-height: 120px;" :src="hotel.image_id" v-bind:alt="hotel.title"
+                      @error="default_url_alt" class="rounded card-img">
+                  </div>
+                  <div class="col-lg-7">
+                    <div class="card-body mb-lg-3 mt-lg-3 mr-lg-3 m-2" style="padding: 0;">
+                      <div class="row no-gutters">
+                        <div class="float-left" style="font-size: 20px;">{{ hotel.title }}</div>
+                        <div v-if="hotel.rate" class="float-right ml-auto" style="font-size: 18px;"> {{ hotel.rate }}
+                        </div>
+                        <div v-else class="float-right ml-auto" style="font-size: 18px;"> -- </div>
+                      </div>
+                      <div class="row no-gutters">
+                        <div class="float-left" style="color: #0485D6 ;font-size: 12px;">{{ hotel.location.name }}
+                        </div>
+                        <!-- For future use -->
+                        <div class="float-right ml-auto invisible" style="font-size: 12px;">900 comments</div>
+                      </div>
+                      <div class="row no-gutters">
+                        <div class="col-md-12 col-lg-10">
+                          <div class="row no-gutters features-list mb-2">
+                            <div v-for="attribute in (hotel.terms_by_type)">
+                              <span class="features-list-el" name="attribute.id">
+                                {{ attribute.name }}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="row no-gutters capabilities mt-auto mb-2">
+                            <div v-for="facility in (hotel.terms_by_facility)">
+                              <span class="capabilities-el align-bottom" name="facility.id"> {{ facility.name }} </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 col-lg-2">
+                          <div class="row no-gutters" style="font-size: 16px;">
+                            <div v-if="hotel.price" class="ml-sm-auto ratings-price">{{ hotel.price.slice(0, -3) }} NT
+                            </div>
+                            <div v-else class="ml-sm-auto ratings-price"> -- </div>
+                          </div>
+                          <div class="row no-gutters d-none d-lg-block"><button class="rounded ml-auto"
+                              style="color: #fff; background-color: #EC3E3F;">see &#62;
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      /* .bravo_wrap .bravo-list-item .topbar-search .text {
+        flex: 0 0 100% !important;
+    } */
+    </style>
+  </div>
+  <div class="loading">
+    <div class="loading-text">
+      <span class="loading-text-words">L</span>
+      <span class="loading-text-words">O</span>
+      <span class="loading-text-words">A</span>
+      <span class="loading-text-words">D</span>
+      <span class="loading-text-words">I</span>
+      <span class="loading-text-words">N</span>
+      <span class="loading-text-words">G</span>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <div class="bravo_footer">
+    <div class="copy-right">
+      <div class="container context">
+        <div class="row">
+          <div class="col-md-12" style="text-align:center;">
+            <div style="margin:0 auto;">
+              <p>Copyright © 2022 by mrhost</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="https://worktel.mrhost.com.tw/libs/flags/css/flag-icon.min.css">
+  <script src="https://worktel.mrhost.com.tw/libs/lazy-load/intersection-observer.js"></script>
+  <script async src="https://worktel.mrhost.com.tw/libs/lazy-load/lazyload.min.js"></script>
+  <script>
+    // Set the options to make LazyLoad self-initialize
+    window.lazyLoadOptions = {
+      elements_selector: ".lazy",
+      // ... more custom settings?
+    };
+
+    // Listen to the initialization event and get the instance of LazyLoad
+    window.addEventListener('LazyLoad::Initialized', function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    }, false);
+
+
+  </script>
+  <script src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/moment.min.js"></script>
+  <script type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/select2/js/select2.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/js/functions.js?_ver=1.0.12"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/pusher.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/js/home.js?_ver=1.0.12"></script>
+  <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+  <script type="text/javascript"
+    src="https://worktel.mrhost.com.tw/libs/ion_rangeslider/js/ion.rangeSlider.min.js"></script>
+  <script type="text/javascript" src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
+  <script>
+
+    //  alert('in');
+
+    $('.btn-search').click(function () {
+      $('.loading').show();
+      // $('.loader').show();
+
+    });
+    $('.bravo-checkbox').click(function () {
+      $('.loading').show();
+
+    });
+
+    $('.dropdown-item').click(function () {
+      $('.loading').show();
+
+    });
+
+
+
+
+    (function ($) {
+
+    })(jQuery)
+  </script>
+  </div>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
+    integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
+    data-cf-beacon='{"rayId":"72c823974ed40b8b","version":"2022.6.0","r":1,"token":"ce5102fc2ace4254864d17a480cce967","si":100}'
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="./js/hotel-search.js"></script>
+</body>
+
+
+</html>
