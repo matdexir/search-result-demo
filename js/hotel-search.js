@@ -71,7 +71,7 @@
         // this.filter_hotels();
         let tmp_hotels = [...this.displayed_hotels];
         if (this.sorting_method === "recommended") {
-          tmp_hotels = [...this.hotels];
+          // tmp_hotels = [...this.hotels];
           this.displayed_hotels = [...tmp_hotels];
         } else {
           tmp_hotels = tmp_hotels.sort((a, b) => {

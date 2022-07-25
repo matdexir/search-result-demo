@@ -191,6 +191,10 @@
       margin-right: 5px;
     }
 
+    .bravo_wrap .bravo_form .form-content {
+      padding: 0;
+    }
+
     .info {}
 
 
@@ -318,18 +322,17 @@
         </div>
       </div>
 
-      <div class="" style="margin-top:-45px; margin-bottom:30px">
+      <div class="mb-2 pt-2" style="background-color: red;">
         <div class="container">
           <div class="row">
             <div class="col-lg-12 col-md-12">
               <form action="https://worktel.mrhost.com.tw/hotel" class="form bravo_form" method="get">
-                <div class="g-field-search">
+                <div class="g-field-search" style="background-color: red;">
                   <div class="row">
-                    <div class="col-md-4 border-right">
+                    <div class="col-md-2 mr-lg-5 rounded" style="background-color: white;">
                       <div class="form-group">
-                        <i class="field-icon fa icofont-location-pin"></i>
+                        <!-- <i class="field-icon fa icofont-location-pin"></i> -->
                         <div class="form-content">
-                          <label> Area </label>
                           <div class="smart-search">
                             <input type="text" class="smart-search-location parent_text form-control" readonly
                               placeholder="Where are you going?" value="Taipei" data-onLoad="Loading..."
@@ -339,14 +342,13 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4 border-right">
+                    <div class="col-md-3 mr-lg-5 rounded" style="background-color: white;">
                       <div class="form-group">
-                        <i class="field-icon icofont-calendar" style=" font-size: 30px;padding-top:3px"></i>
+                        <!-- <i class="field-icon icofont-calendar" style=" font-size: 30px;padding-top:3px"></i> -->
                         <div class="form-content">
                           <div class="form-date-search-hotel2">
                             <div class="date-wrapper">
                               <div class="check-in-wrapper">
-                                <label>Date</label>
                                 <div class="render check-in-render">07/18/2022</div>
                                 <span> - </span>
                                 <div class="render check-out-render">07/23/2022</div>
@@ -359,15 +361,15 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-4 border-right">
+                    <div class="col-md-5 rounded" style="background-color: white;">
                       <div class="form-select-guests">
                         <div class="form-group">
-                          <i class="field-icon icofont-user-alt-7" style=" font-size: 28px;padding-top:4px"></i>
-                          <div class="form-content dropdown-toggle" data-toggle="dropdown">
+                          <!-- <i class="field-icon icofont-user-alt-7" style=" font-size: 28px;padding-top:4px"></i> -->
+                          <div class="form-content dropdown" data-toggle="dropdown">
                             <div class="wrapper-more">
-                              <label> </label>
-                              <label> </label>
-                              <div class="render">
+                              <!-- <label> </label> -->
+                              <!-- <label> </label> -->
+                              <div class="render mt-1">
                                 <span class="adults"><span class="one ">1 Adult</span> <span class=" d-none  multi"
                                     data-html=":count Adults">1 Adults</span></span>
                                 -
@@ -421,25 +423,6 @@
                   <button class="btn btn-primary btn-search" type="submit" style="font-size:16px;">Search</button>
                 </div>
               </form>
-              <style>
-                @media(max-width: 766px) {
-
-                  .bravo_wrap .bravo_form .form-content {
-                    position: relative;
-                    padding: 0px 0 0px 45px;
-                    transition: all 0.3s;
-
-                  }
-
-                  .bravo_wrap .bravo_form .dropdown-toggle:after {
-
-                    color: #ffffff;
-
-                  }
-
-
-                }
-              </style>
             </div>
           </div>
         </div>
