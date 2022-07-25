@@ -450,8 +450,8 @@
                     </div>
                   </div>
                   <div v-for="attribute in attributes">
-                    <div class="card">
-                      <button class="btn" type="button" data-toggle="collapse" :data-target="attribute.slug"
+                    <div class="card" style="border: none;">
+                      <button class="btn border-top" type="button" data-toggle="collapse" :data-target="attribute.slug"
                         aria-expanded="true" :aria-controls="attribute.slug" @click="toggle_collapse">
                         {{ attribute.name }}</button>
                       <!-- <div>{{ checked_attributes }} </div> -->
