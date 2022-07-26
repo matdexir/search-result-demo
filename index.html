@@ -435,8 +435,8 @@
                   </div>
                 </div>
                 <div class="g-button-submit">
-                  <button class="btn btn-primary btn-search rounded" type="submit"
-                    style="font-size:16px; background-color:  #EC3E3F; border: 2px solid white;">SEARCH</button>
+                  <button class="btn btn-secondary rounded" type="submit"
+                    style="font-size: 16px; background-color: #EC3E3F; border: 2px solid white;">SEARCH</button>
                 </div>
               </form>
             </div>
@@ -491,7 +491,6 @@
               <div class="topbar-search" style="display: block;">
                 <h2 class="text">
                   {{ displayed_hotels.length }} hotels found
-                  {{sorting_method}}
                 </h2>
 
                 <div class="btn-group btn-group-toggle mt-3 mb-3" id="filter-section">
@@ -523,9 +522,9 @@
               <div v-for="hotel in displayed_hotels" class="card mt-3 mb-3 col-md-5 col-lg-12"
                 style=" max-height: 500px;">
                 <div class="row no-gutters">
-                  <div class="mt-1 m-lg-2 col-md-12 col-lg-4">
-                    <img width="90%" style="max-height: 120px;" :src="hotel.image_id" v-bind:alt="hotel.title"
-                      @error="default_url_alt" class="rounded card-img">
+                  <div class="m-lg-2 col-md-12 col-lg-4">
+                    <img width="100%" style="max-height: 150px;" :src="hotel.image_id" v-bind:alt="hotel.title"
+                      @error="default_url_alt" class="rounded card-img mt-2">
                   </div>
                   <div class="col-lg-7">
                     <div class="card-body mb-lg-3 mt-lg-3 mr-lg-3 m-2" style="padding: 0;">
@@ -578,11 +577,6 @@
         </div>
       </div>
     </div>
-    <style>
-      /* .bravo_wrap .bravo-list-item .topbar-search .text {
-        flex: 0 0 100% !important;
-    } */
-    </style>
   </div>
   <div class="loading">
     <div class="loading-text">
