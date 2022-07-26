@@ -140,10 +140,9 @@
           if (
             elem.getElementsByTagName("input")[0].value === this.sorting_method
           ) {
-            // console.log(elem);
-            elem.classList.add("active");
+            elem.classList.add("button-child-target");
           } else {
-            elem.classList.remove("active");
+            elem.classList.remove("button-child-target");
           }
         }
       },
