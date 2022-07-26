@@ -69,11 +69,20 @@
 
       sort_hotels: function () {
         this.handle_active_btn_group();
-        // this.filter_hotels();
         let tmp_hotels = [...this.displayed_hotels];
+        // not too sure what recommended is about but I think it is the way we received it from the backend
         if (this.sorting_method === "recommended") {
-          // tmp_hotels = [...this.hotels];
-          this.displayed_hotels = [...tmp_hotels];
+          let all_false = true;
+          for (let attribute in this.checked_attributes) {
+            if (this.checked_attributes[attribute] === true) {
+              all_false = false;
+            }
+          }
+          if (all_false) {
+            this.displayed_hotels = [...this.hotels];
+          } else {
+            this.displayed_hotels = [...tmp_hotels];
+          }
         } else {
           tmp_hotels = tmp_hotels.sort((a, b) => {
             if (this.sorting_method === "price_low_high")
