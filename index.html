@@ -478,21 +478,41 @@
           <div class="col-lg-8 col-md-12">
 
             <div class="bravo-list-item">
-              <div class="topbar-search">
+              <div class="topbar-search" style="display: block;">
                 <h2 class="text">
                   {{ displayed_hotels.length }} hotels found
+                  {{sorting_method}}
                 </h2>
-                <div class="control">
-                  <div class="item">
-                    <select class="dropdown" id="select" v-model="sorting_method" aria-labelledby="dropdownMenuButton"
-                      @change="sort_hotels">
-                      <option class="dropdown-item" value="recommended"> Recommended </option>
-                      <option class="dropdown-item" value="price_low_high"> Price (Low to high) </option>
-                      <option class="dropdown-item" value="price_high_low"> Price (High to low) </option>
-                      <option class="dropdown-item" value="rating_high_low"> rating (High to low) </option>
-                    </select>
-                  </div>
+
+                <div class="btn-group btn-group-toggle mt-3 mb-3" id="filter-section">
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" value="recommended" id="filter-recommended"
+                      v-model="sorting_method" @change="sort_hotels" autocomplete="off" checked> Recommended
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" value="price_low_high" id="filter-price-low-high"
+                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Price (Low to High)
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" value="price_high_low" id="filter-price-high-low"
+                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Price (High to Low)
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" value="rating_high_low" id="filter-rating-high-low"
+                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Rating (High to Low)
+                  </label>
                 </div>
+                <!-- <div class="control"> -->
+                <!--   <div class="item"> -->
+                <!--     <select class="dropdown" id="select" v-model="sorting_method" aria-labelledby="dropdownMenuButton" -->
+                <!--       @change="sort_hotels"> -->
+                <!--       <option class="dropdown-item" value="recommended"> Recommended </option> -->
+                <!--       <option class="dropdown-item" value="price_low_high"> Price (Low to high) </option> -->
+                <!--       <option class="dropdown-item" value="price_high_low"> Price (High to low) </option> -->
+                <!--       <option class="dropdown-item" value="rating_high_low"> rating (High to low) </option> -->
+                <!--     </select> -->
+                <!--   </div> -->
+                <!-- </div> -->
               </div>
             </div>
             <div class="list-item" style="display: flex; flex-wrap: wrap; gap: 2rem;">

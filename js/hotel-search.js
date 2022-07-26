@@ -68,6 +68,7 @@
       },
 
       sort_hotels: function () {
+        this.handle_active_btn_group();
         // this.filter_hotels();
         let tmp_hotels = [...this.displayed_hotels];
         if (this.sorting_method === "recommended") {
@@ -88,7 +89,7 @@
       filter_hotels: function () {
         // this.sort_hotels();
         let tmp_hotels = [...this.hotels];
-        let all_false = true;
+        // let all_false = true;
         // for (let attr in this.checked_attributes) {
         //   if (this.checked_attributes[attr] === true) {
         //     console.log(this.checked_attributes[attr], attr);
@@ -126,6 +127,25 @@
 
       default_url_alt: function (event) {
         event.target.src = "https://via.placeholder.com/300x150";
+      },
+
+      handle_active_btn_group: function () {
+        // Brute force it my brother
+
+        const btn_groups = document
+          .getElementById("filter-section")
+          .getElementsByTagName("label");
+
+        for (let elem of btn_groups) {
+          if (
+            elem.getElementsByTagName("input")[0].value === this.sorting_method
+          ) {
+            // console.log(elem);
+            elem.classList.add("active");
+          } else {
+            elem.classList.remove("active");
+          }
+        }
       },
     },
   });
