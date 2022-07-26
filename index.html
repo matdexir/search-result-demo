@@ -493,7 +493,7 @@
                   {{ displayed_hotels.length }} hotels found
                 </h2>
 
-                <div class="btn-group btn-group-toggle mt-3 mb-3" id="filter-section">
+                <div class="btn-group btn-group-toggle mt-3 mb-3 d-none d-md-block" id="filter-section">
                   <label class="btn button-child button-child-target">
                     <input type="radio" name="options" value="recommended" id="filter-recommended"
                       v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Recommended
@@ -510,6 +510,17 @@
                     <input type="radio" name="options" value="rating_high_low" id="filter-rating-high-low"
                       v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Rating (High to Low)
                   </label>
+                </div>
+                <div class="control d-sm-none">
+                  <div class="item">
+                    <select class="dropdown" id="select" v-model="sorting_method" aria-labelledby="dropdownMenuButton"
+                      @change="sort_hotels">
+                      <option class="dropdown-item" value="recommended"> Recommended </option>
+                      <option class="dropdown-item" value="price_low_high"> Price (Low to high) </option>
+                      <option class="dropdown-item" value="price_high_low"> Price (High to low) </option>
+                      <option class="dropdown-item" value="rating_high_low"> rating (High to low) </option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>

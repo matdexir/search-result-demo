@@ -1,5 +1,5 @@
 (function ($) {
-  let hotel_list = new Vue({
+  let _ = new Vue({
     el: "#app",
     data: {
       first_time: false,
@@ -49,7 +49,7 @@
           me.attributes = resp.attributes;
           me.locations = resp.locations;
           me.first_time = true;
-          console.log(resp);
+          // console.log(resp);
         } else {
           return;
         }
