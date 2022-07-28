@@ -22,7 +22,24 @@
     },
 
     computed: {
-      // pass
+      // In case the image_id passed is NULL
+      default_url_alt: function () {
+        return "https://via.placeholder.com/300x150";
+      },
+
+      parsed_attributes: function (hotel) {
+        return (hotel) =>
+          hotel.terms.filter((term) => {
+            term.attr_id === 5;
+          });
+      },
+
+      parsed_facilities: function (hotel) {
+        return (hotel) =>
+          hotel.terms.filter((term) => {
+            term.attr_id === 6;
+          });
+      },
     },
 
     methods: {
@@ -30,26 +47,17 @@
         const me = this;
 
         if (!me.first_time) {
-          const api_url = "https://worktel.mrhost.com.tw/api/searchHotels";
+          // const api_url = "https://worktel.mrhost.com.tw/api/searchHotels";
+          const api_url =
+            "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
           const resp = await fetch(api_url).then((res) => res.json());
-          const current_lang = window.location.href.slice(-2);
 
-          if (current_lang === "zh") {
-            // mandarin chinese
-            me.language = "zh";
-          } else if (current_lang === "ja") {
-            // japanese
-            me.language = "ja";
-          } else {
-            // default to english for unknown languages
-            me.language = "en";
-          }
-          me.hotels = resp.hotels.data;
+          console.log(resp);
+          me.hotels = [...resp.hotels];
           me.displayed_hotels = [...me.hotels];
           me.attributes = resp.attributes;
           me.locations = resp.locations;
           me.first_time = true;
-          // console.log(resp);
         } else {
           return;
         }
@@ -134,13 +142,23 @@
         this.displayed_hotels = [...tmp_hotels];
       },
 
-      default_url_alt: function (event) {
+      parse_attributes: function (hotel) {
+        return hotel.terms.filter((term) => term.attr_id === 5);
+      },
+      parse_facilities: function (hotel) {
+        return hotel.terms.filter((term) => term.attr_id === 6);
+      },
+
+      find_location: function (id) {
+        const location = this.locations.find((location) => location.id === id);
+        return location.name;
+      },
+
+      fallback_url: function (event) {
         event.target.src = "https://via.placeholder.com/300x150";
       },
 
       handle_active_btn_group: function () {
-        // Brute force it my brother
-
         const btn_groups = document
           .getElementById("filter-section")
           .getElementsByTagName("label");

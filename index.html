@@ -53,7 +53,6 @@
   <link href="https://worktel.mrhost.com.tw/libs/select2/css/select2.min.css" rel="stylesheet">
   <link href="https://worktel.mrhost.com.tw/dist/frontend/css/notification.css" rel="newest stylesheet">
   <link href="https://worktel.mrhost.com.tw/dist/frontend/css/app.css?_ver=1.0.12" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.css">
 
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel='stylesheet' id='google-font-css-css'
@@ -129,7 +128,9 @@
       ],
     };
   </script>
-
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <link href="https://worktel.mrhost.com.tw/dist/frontend/module/hotel/css/hotel.css?_ver=1.0.12" rel="stylesheet">
   <link rel="stylesheet" type="text/css"
     href="https://worktel.mrhost.com.tw/libs/ion_rangeslider/css/ion.rangeSlider.min.css" />
@@ -266,7 +267,7 @@
 
 </head>
 
-<body class="frontend-page header-normal   ">
+<body class="frontend-page header-normal">
 
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
@@ -447,49 +448,31 @@
           </div>
         </div>
       </div>
-      <div class="sticky-bottom" style="position: fixed; bottom: 30; right: 30;">
-        <a class="btn btn-outline-dark" href="#app" />Back to top</a>
-      </div>
 
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-12">
             <div class="bravo_filter">
-              <form action="https://worktel.mrhost.com.tw/hotel" class="bravo_form_filter" style="margin-bottom:0;">
-
-                <div class="filter-title">
-                  Search
+              <el-card class="box-card" :body-style="{ padding: '0px' }">
+                <div slot="header" class="clearfix">
+                  <span>FILTER </span>
                 </div>
-
-                <div class="accordion" id="attributes-accordion">
-                  <div class="text-center mt-3 mb-3" v-if="attributes.length === 0">
-                    <div class="spinner-border spinner-border-lg" style=" width: 3rem; height: 3rem;" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </div>
-                  <div v-for="attribute in attributes">
-                    <div class="card" style="border: none;">
-                      <button class="btn border-top" type="button" data-toggle="collapse" :data-target="attribute.slug"
-                        aria-expanded="true" :aria-controls="attribute.slug" @click="toggle_collapse">
-                        {{ attribute.name }}</button>
-                      <!-- <div>{{ checked_attributes }} </div> -->
-                      <div :id="attribute.slug" class="collapse show" data-parent="#attributes-accordion">
-                        <div class="card-body">
-                          <ul style="list-style: none;">
-                            <li v-for="term in attribute.terms">
-                              <input type="checkbox" :aria-label="term.name" :id="term.id" :name="term.name"
-                                v-model="checked_attributes[term.id]" @change="filter_hotels">
-                              <label :for="term.id">
-                                <div :class="{'text-primary': checked_attributes[term.id]}">{{ term.name }}</div>
-                              </label>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
+                <el-collapse>
+                  <el-collapse-item v-for="attribute in attributes">
+                    <template slot="title">
+                      <span style="margin-left: 1rem;"> {{ attribute.name }}</span>
+                    </template>
+                    <el-checkbox-group v-model="checked_attributes" @change="filter_hotels">
+                      <el-col>
+                        <el-checkbox v-for="term in attribute.terms" :label="term.id" :key="term.id"
+                          style="margin-left: 0.5rem;">
+                          {{term.name }}
+                        </el-checkbox>
+                      </el-col>
+                    </el-checkbox-group>
+                  </el-collapse-item>
+                </el-collapse>
+              </el-card>
             </div>
 
           </div>
@@ -500,35 +483,18 @@
                 <h2 class="text">
                   {{ displayed_hotels.length }} hotels found
                 </h2>
-
-                <div class="btn-group btn-group-toggle mt-3 mb-3 d-none d-md-block" id="filter-section">
-                  <label class="btn button-child button-child-target">
-                    <input type="radio" name="options" value="recommended" id="filter-recommended"
-                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Recommended
-                  </label>
-                  <label class="btn button-child">
-                    <input type="radio" name="options" value="price_low_high" id="filter-price-low-high"
-                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Price (Low to High)
-                  </label>
-                  <label class="btn button-child">
-                    <input type="radio" name="options" value="price_high_low" id="filter-price-high-low"
-                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Price (High to Low)
-                  </label>
-                  <label class="btn button-child">
-                    <input type="radio" name="options" value="rating_high_low" id="filter-rating-high-low"
-                      v-model="sorting_method" @change="sort_hotels" autocomplete="off"> Rating (High to Low)
-                  </label>
+                <div class="block">
+                  <el-dropdown split-button type="secondary"></el-dropdown>
+                  <el-date-picker v-model="date_range" type="daterange" range-separator="|"></el-date-picker>
+                  <el-input-number size="medium" v-model="num_adults">Adults</el-input-number>
                 </div>
-                <div class="control d-sm-none">
-                  <div class="item">
-                    <select class="dropdown" id="select" v-model="sorting_method" aria-labelledby="dropdownMenuButton"
-                      @change="sort_hotels">
-                      <option class="dropdown-item" value="recommended"> Recommended </option>
-                      <option class="dropdown-item" value="price_low_high"> Price (Low to high) </option>
-                      <option class="dropdown-item" value="price_high_low"> Price (High to low) </option>
-                      <option class="dropdown-item" value="rating_high_low"> rating (High to low) </option>
-                    </select>
-                  </div>
+                <div style="margin-top: 20px;">
+                  <el-radio-group v-model="sorting_method" @change="sort_hotels">
+                    <el-radio-button label="recommended">Recommended</el-radio-button>
+                    <el-radio-button label="price_low_high">Price(Low to High)</el-radio-button>
+                    <el-radio-button label="price_high_low">Price(High to Low)</el-radio-button>
+                    <el-radio-button label="rating_high_low">Rating(High to Low)</el-radio-button>
+                  </el-radio-group>
                 </div>
               </div>
             </div>
@@ -542,10 +508,10 @@
                 style=" max-height: 500px;">
                 <div class="row no-gutters">
                   <div class="m-lg-2 col-md-12 col-lg-4">
-                    <img width="100%" style="max-height: 150px;" :src="hotel.image_id" v-bind:alt="hotel.title"
-                      @error="default_url_alt" class="rounded card-img mt-2">
+                    <img width="100%" style="max-height: 150px;" :src="hotel.image_id || default_url_alt"
+                      :alt="hotel.title" class="rounded card-img mt-2" @error="fallback_url">
                   </div>
-                  <div class="col-lg-7">
+                  <div class="col">
                     <div class="card-body mb-lg-3 mt-lg-3 mr-lg-3 m-2" style="padding: 0;">
                       <div class="row no-gutters">
                         <div class="float-left" style="font-size: 20px;">{{ hotel.title }}</div>
@@ -554,7 +520,8 @@
                         <div v-else class="float-right ml-auto" style="font-size: 18px;"> -- </div>
                       </div>
                       <div class="row no-gutters">
-                        <div class="float-left" style="color: #0485D6 ;font-size: 12px;">{{ hotel.location.name }}
+                        <div class="float-left" style="color: #0485D6 ;font-size: 12px;">{{
+                          find_location(hotel.location_id) }}
                         </div>
                         <!-- For future use -->
                         <div class="float-right ml-auto invisible" style="font-size: 12px;">900 comments</div>
@@ -562,17 +529,17 @@
                       <div class="row no-gutters">
                         <div class="col-md-12 col-lg-10">
                           <div class="row no-gutters features-list mb-2">
-                            <div v-for="attribute in (hotel.terms_by_type)">
+                            <div v-for="attribute in parse_attributes(hotel)">
                               <span class="features-list-el" name="attribute.id">
                                 {{ attribute.name }}
                               </span>
                             </div>
                           </div>
-                          <div class="row no-gutters capabilities mt-auto mb-2">
-                            <div v-for="facility in (hotel.terms_by_facility)">
-                              <span class="capabilities-el align-bottom" name="facility.id"> {{ facility.name }} </span>
-                            </div>
-                          </div>
+                          <el-row :gutter="10">
+                            <el-col v-for="facility in parse_facilities(hotel)">
+                              <el-tag type="info" size="mini">{{ facility.name }}</el-tag>
+                            </el-col>
+                          </el-row>
                         </div>
                         <div class="col-md-12 col-lg-2">
                           <div class="row no-gutters" style="font-size: 16px; font-weight: 700;">
@@ -580,9 +547,9 @@
                             </div>
                             <div v-else class="ml-sm-auto ratings-price"> -- </div>
                           </div>
-                          <div class="row no-gutters d-none d-lg-block"><button class="rounded ml-auto"
-                              style="color: #fff; background-color: #EC3E3F;">see &#62;
-                            </button>
+                          <div class="row no-gutters d-none d-lg-block">
+                            <el-button><a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a>
+                            </el-button>
                           </div>
                         </div>
                       </div>
@@ -598,8 +565,7 @@
     </div>
   </div>
 
-
-  <div class="bravo_footer sticky-bottom" style="background-color: #EC3E3F; color: white;">
+  <div class="bravo_footer" style="background-color: #EC3E3F; color: white;">
     <div class="copy-right">
       <div class="container context">
         <div class="row">
@@ -631,7 +597,6 @@
   </script>
   <script src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
   <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
   <script src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"></script>
   <script src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"></script>
@@ -647,37 +612,152 @@
   <script type="text/javascript" src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
 
-    //  alert('in');
+    const App = new Vue({
+      el: "#app",
+      data: {
+        first_time: false,
+        attributes: [],
+        checked_attributes: [],
+        hotels: [],
+        displayed_hotels: [],
+        locations: [],
+        language: "en",
+        sorting_method: "recommended",
+        date_range: "",
+        num_adults: 1,
+      },
+      created: function () {
+        console.log("new vue element created");
+        const me = this;
+        me.init();
+        console.log("initialized");
+      },
+      mounted() {
+        // pass
+      },
 
-    $('.btn-search').click(function () {
-      $('.loading').show();
-      // $('.loader').show();
+      computed: {
+        // In case the image_id passed is NULL
+        default_url_alt: function () {
+          return "https://via.placeholder.com/300x150";
+        },
 
+        parsed_attributes: function (hotel) {
+          return (hotel) =>
+            hotel.terms.filter((term) => {
+              term.attr_id === 5;
+            });
+        },
+
+        parsed_facilities: function (hotel) {
+          return (hotel) =>
+            hotel.terms.filter((term) => {
+              term.attr_id === 6;
+            });
+        },
+      },
+
+      methods: {
+        init: async function () {
+          const me = this;
+
+          if (!me.first_time) {
+            // const api_url = "https://worktel.mrhost.com.tw/api/searchHotels";
+            const api_url =
+              "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
+            const resp = await fetch(api_url).then((res) => res.json());
+
+            console.log(resp);
+            me.hotels = [...resp.hotels];
+            me.displayed_hotels = [...me.hotels];
+            me.attributes = resp.attributes;
+            me.locations = resp.locations;
+            me.first_time = true;
+          } else {
+            return;
+          }
+        },
+
+        toggle_collapse: function (event) {
+          let target = event.target.dataset.target;
+          const elem = document.getElementById(target);
+
+          if (elem.className === "collapse") {
+            elem.className = "collapse show";
+          } else {
+            elem.className = "collapse";
+          }
+        },
+
+        sort_hotels: function () {
+          let tmp_hotels = [...this.displayed_hotels];
+          // not too sure what recommended is about but I think it is the way we received it from the backend
+          if (this.sorting_method === "recommended") {
+            let all_false = true;
+            for (let attribute in this.checked_attributes) {
+              if (this.checked_attributes[attribute] === true) {
+                all_false = false;
+              }
+            }
+            if (all_false) {
+              this.displayed_hotels = [...this.hotels];
+            } else {
+              this.displayed_hotels = [...tmp_hotels];
+            }
+          } else {
+            tmp_hotels = tmp_hotels.sort((a, b) => {
+              if (this.sorting_method === "price_low_high")
+                return a.price - b.price;
+              else if (this.sorting_method === "price_high_low")
+                return b.price - a.price;
+              else if (this.sorting_method === "rating_high_low")
+                return b.rate - a.rate;
+            });
+            this.displayed_hotels = [...tmp_hotels];
+          }
+        },
+        filter_hotels: function () {
+          let tmp_hotels = [...this.hotels];
+          tmp_hotels = tmp_hotels.filter((hotel) => {
+            const all_attributes = [...hotel.terms];
+            let passed = true;
+            for (let attr of this.checked_attributes) {
+              const found = all_attributes.find(elem => elem.term_id === attr);
+              if (!found) {
+                passed = false;
+                break;
+              }
+            }
+            return passed;
+          });
+          this.displayed_hotels = [...tmp_hotels];
+        },
+
+        parse_attributes: function (hotel) {
+          return hotel.terms.filter((term) => term.attr_id === 5);
+        },
+        parse_facilities: function (hotel) {
+          return hotel.terms.filter((term) => term.attr_id === 6);
+        },
+
+        find_location: function (id) {
+          const location = this.locations.find((location) => location.id === id);
+          return location.name;
+        },
+
+        fallback_url: function (event) {
+          event.target.src = "https://via.placeholder.com/300x150";
+        },
+      },
     });
-    $('.bravo-checkbox').click(function () {
-      $('.loading').show();
 
-    });
-
-    $('.dropdown-item').click(function () {
-      $('.loading').show();
-
-    });
-
-
-
-
-    (function ($) {
-
-    })(jQuery)
   </script>
-  </div>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
-    integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
-    data-cf-beacon='{"rayId":"72c823974ed40b8b","version":"2022.6.0","r":1,"token":"ce5102fc2ace4254864d17a480cce967","si":100}'
-    crossorigin="anonymous"></script>
+  <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" -->
+  <!--   integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" -->
+  <!--   data-cf-beacon='{"rayId":"72c823974ed40b8b","version":"2022.6.0","r":1,"token":"ce5102fc2ace4254864d17a480cce967","si":100}' -->
+  <!--   crossorigin="anonymous"></script> -->
 
-  <script type="text/javascript" src="./js/hotel-search.js"></script>
+  <!-- <script type="text/javascript" src="./js/hotel-search.js"></script> -->
 </body>
 
 

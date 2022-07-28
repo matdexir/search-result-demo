@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="csrf-token" content="pQDj7DCysfRjJDGwwPAHLqAtQvyTX2J2f3jLPRTg">
+  <link rel="icon" type="image/vnd.microsoft.icon"
+    href="https://worktel.mrhost.com.tw/uploads/0000/1/2022/03/22/favicon.png" />
+  <title>mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform</title>
+
+
+  <meta name="description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta property="og:url" content="https://worktel.mrhost.com.tw" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="mrhost" />
+  <meta property="og:description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta property="og:image" content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mrhost">
+  <meta name="twitter:description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay.">
+  <meta name="twitter:image" content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg">
+  <link rel="canonical" href="https://worktel.mrhost.com.tw" />
+  <link rel="alternate" href="https://worktel.mrhost.com.tw" hreflang="x-default" />
+  <link rel="alternate" href="https://worktel.mrhost.com.tw/zh" hreflang="zh" />
+  <link href="https://worktel.mrhost.com.tw/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/icofont/icofont.min.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/select2/css/select2.min.css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/css/notification.css" rel="newest stylesheet">
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/css/app.css?_ver=1.0.12" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.css">
+
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel='stylesheet' id='google-font-css-css'
+    href='https://fonts.googleapis.com/css?family=Poppins%3A300%2C400%2C500%2C600' type='text/css' media='all' />
+  <script>
+    var bookingCore = {
+      url: 'https://worktel.mrhost.com.tw',
+      url_root: 'https://worktel.mrhost.com.tw',
+      booking_decimals: 0,
+      thousand_separator: ',',
+      decimal_separator: '.',
+      currency_position: 'left',
+      currency_symbol: 'NT$',
+      currency_rate: '1',
+      date_format: 'MM/DD/YYYY',
+      map_provider: 'gmap',
+      map_gmap_key: 'AIzaSyAGDg5j4O512bsBovm1nv_AnZTaF6JESFE',
+      map_options: {
+        map_lat_default: '25.032969',
+        map_lng_default: '121.565414',
+        map_clustering: 'on',
+        map_fit_bounds: 'on',
+      },
+      routes: {
+      },
+      module: {
+        hotel: 'https://worktel.mrhost.com.tw/hotel',
+      },
+      currentUser: 0,
+      isAdmin: 0,
+      rtl: 0,
+      markAsRead: 'https://worktel.mrhost.com.tw/notify/markAsRead',
+      markAllAsRead: 'https://worktel.mrhost.com.tw/notify/markAllAsRead',
+      loadNotify: 'https://worktel.mrhost.com.tw/notify/notifications',
+      pusher_api_key: '',
+      pusher_cluster: '',
+    };
+    var i18n = {
+      warning: "Warning",
+      success: "Success",
+    };
+    var daterangepickerLocale = {
+      "applyLabel": "Apply",
+      "cancelLabel": "Cancel",
+      "fromLabel": "From",
+      "toLabel": "To",
+      "customRangeLabel": "Custom",
+      "weekLabel": "W",
+      "first_day_of_week": 1,
+
+      "daysOfWeek": [
+        "Su",
+        "Mo",
+        "Tu",
+        "We",
+        "Th",
+        "Fr",
+        "Sa"
+      ],
+      "monthNames": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
+    };
+  </script>
+
+  <link href="https://worktel.mrhost.com.tw/custom-css" rel="stylesheet">
+  <link href="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.css" rel="stylesheet">
+
+  <div id="fb-root"></div>
+
+  <div id="fb-customer-chat" class="fb-customerchat">
+  </div>
+  <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "145891912753401");
+    //   chatbox.setAttribute("page_id", "145891912753401");
+    //   chatbox.setAttribute("page_id", "1149874751858022");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    chatbox.setAttribute("theme_color", "#E97676");
+    chatbox.setAttribute("logged_in_greeting", "Hi! How can we help you?");
+
+  </script>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: 'v14.0'
+      });
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-PFDMNDP');</script>
+
+  <style>
+    .bravo-news .widget_category ul li span,
+    .bravo_wrap .bravo_search_tour .bravo_form_search .bravo_form .g-button-submit button,
+    .bravo_wrap .bravo_search_tour .bravo_filter .filter-title:before,
+    .bravo_wrap .bravo_search_tour .bravo_filter .g-filter-item .item-content .bravo-filter-price .irs--flat .irs-bar,
+    .bravo_wrap .bravo_search_tour .bravo_filter .g-filter-item .item-content .bravo-filter-price .irs--flat .irs-from,
+    .bravo_wrap .bravo_search_tour .bravo_filter .g-filter-item .item-content .bravo-filter-price .irs--flat .irs-to,
+    .bravo_wrap .bravo_search_tour .bravo_filter .g-filter-item .item-content .bravo-filter-price .irs--flat .irs-single,
+    .bravo_wrap .bravo_search_tour .bravo_filter .g-filter-item .item-content .bravo-filter-price .irs--flat .irs-handle>i:first-child,
+    .bravo-news .header .cate ul li,
+    .bravo_wrap .page-template-content .bravo-form-search-tour .bravo_form_search_tour .g-button-submit button,
+    .bravo_wrap .page-template-content .bravo-list-locations .list-item .destination-item .image .content .desc,
+    .bravo_wrap .bravo_detail_space .bravo_content .g-attributes h3:after,
+    .bravo_wrap .bravo_form .g-button-submit button,
+    .btn.btn-primary,
+    .bravo_wrap .bravo_form .g-button-submit button:active,
+    .btn.btn-primary:active,
+    .bravo_wrap .bravo_detail_space .bravo-list-hotel-related-widget .heading:after,
+    .btn-primary:not(:disabled):not(.disabled):active {
+      border-style: solid;
+      border-color: #e60014;
+      background: rgba(255, 0, 0, 0.3)
+    }
+
+    .bravo_wrap .page-template-content .bravo-list-locations.style_3 .list-item .destination-item .content .title {
+      padding: 0px;
+    }
+
+    .bravo_wrap .page-template-content .bravo-list-locations .list-item .destination-item .image .content {
+      position: absolute;
+      top: 15%;
+      right: auto;
+      z-index: 1;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .bravo_wrap .page-template-content .bravo-list-locations.style_3 .list-item .destination-item {
+      border-radius: 5px;
+      min-height: auto;
+      aspect-ratio: 2/1;
+    }
+
+
+    .bravo_wrap .page-template-content .bravo-list-locations.style_3 .list-item .destination-item .content .desc {
+      font-size: 0.7em !important;
+    }
+
+    .bravo_wrap .page-template-content .bravo-list-locations.style_3 .list-item .destination-item .content .title {
+      font-size: 1.5em;
+    }
+
+    .bravo_wrap .bravo_footer .copy-right {
+      background: #e60014;
+      color: #eaeef3;
+    }
+
+    .bravo_wrap .bravo_footer .copy-right .context {
+      position: relative;
+      padding: 20px 15px;
+    }
+
+    .bravo_wrap .bravo-list-hotel .item-loop {
+      border: 1px solid #dfdfdf;
+      border-radius: 10px;
+      overflow: hidden;
+      padding-bottom: 20px;
+      position: relative;
+      margin-bottom: 30px;
+      margin-right: 10px;
+    }
+  </style>
+
+</head>
+
+<body class="frontend-page header-normal   ">
+
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+  <div class="bravo_wrap">
+    <div class="bravo_header">
+      <div class="container">
+        <div class="content">
+          <div class="header-left">
+            <a href="https://worktel.mrhost.com.tw" class="bravo-logo">
+              <img src="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/21/logo-300.png"
+                alt="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform">
+            </a>
+            <div class="bravo-menu">
+            </div>
+
+          </div>
+          <div style="margin-left: auto; margin-right: 0;">
+            <div class="dropdown">
+              <a href="#" data-toggle="dropdown" class="is_login">
+
+                English
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="dropdown-menu text-left" style="font-size: 1em; min-width: 5rem;">
+                <li>
+                  <a href="https://worktel.mrhost.com.tw?set_lang=zh" class="is_login" style="margin-left:30px">
+
+                    繁體中文
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bravo-menu-mobile" style="display:none;">
+        <div class="user-profile">
+          <div class="b-close"><i class="icofont-scroll-left"></i></div>
+          <div class="avatar"></div>
+          <ul>
+          </ul>
+          <ul class="multi-lang">
+            <div class="dropdown">
+              <a href="#" data-toggle="dropdown" class="is_login">
+
+                English
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="dropdown-menu text-left">
+                <li>
+                  <a href="https://worktel.mrhost.com.tw?set_lang=zh" class="is_login" style="margin-left:10px">
+
+                    繁體中文
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </ul>
+        </div>
+        <div class="g-menu">
+        </div>
+      </div>
+    </div>
+    <div class="page-template-content">
+
+      <div class="bravo-form-search-hotel ">
+        <div class="effect">
+          <div class="owl-carousel">
+            <div class="item">
+              <div class="item-bg"
+                style="background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('https://worktel.mrhost.com.tw/uploads/0000/1/2022/03/22/1596750286.jpeg') !important">
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-bg"
+                style="background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-tc1.jpg') !important">
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-bg"
+                style="background-image: linear-gradient(0deg,rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('') !important">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h1 class="text-heading" style="color:#e60014; font-weight: 500;
+                font-size: 48px;"></h1>
+              <div class="sub-heading" style="color:#fff; font-weight: 500;
+                font-size: 24px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="search-bar">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <form action="https://worktel.mrhost.com.tw/hotel" class="form bravo_form" method="get">
+                  <div class="g-field-search">
+                    <div class="row">
+                      <div class="col-md-4 border-right">
+                        <div class="form-group">
+                          <i class="field-icon fa icofont-location-pin"></i>
+                          <div class="form-content">
+                            <label> Area </label>
+                            <div class="smart-search">
+                              <input type="text" class="smart-search-location parent_text form-control" readonly
+                                placeholder="Where are you going?" value="Taipei" data-onLoad="Loading..."
+                                data-default="[{&quot;id&quot;:1,&quot;title&quot;:&quot; Taipei&quot;},{&quot;id&quot;:10,&quot;title&quot;:&quot; New Taipei&quot;},{&quot;id&quot;:4,&quot;title&quot;:&quot; Taichung&quot;},{&quot;id&quot;:6,&quot;title&quot;:&quot; Kaohsiung&quot;},{&quot;id&quot;:2,&quot;title&quot;:&quot; Taoyuan&quot;},{&quot;id&quot;:3,&quot;title&quot;:&quot; Hsinchu&quot;},{&quot;id&quot;:32,&quot;title&quot;:&quot; Miaoli&quot;},{&quot;id&quot;:22,&quot;title&quot;:&quot; Changhua&quot;},{&quot;id&quot;:21,&quot;title&quot;:&quot; Nantou&quot;},{&quot;id&quot;:23,&quot;title&quot;:&quot; Yunlin&quot;},{&quot;id&quot;:31,&quot;title&quot;:&quot; Chiayi&quot;},{&quot;id&quot;:5,&quot;title&quot;:&quot; Tainan&quot;},{&quot;id&quot;:29,&quot;title&quot;:&quot; Pingtung&quot;},{&quot;id&quot;:30,&quot;title&quot;:&quot; Keelung&quot;},{&quot;id&quot;:7,&quot;title&quot;:&quot; Yilan&quot;},{&quot;id&quot;:8,&quot;title&quot;:&quot; Hualien&quot;},{&quot;id&quot;:9,&quot;title&quot;:&quot; Taitung&quot;}]">
+                              <input type="hidden" class="child_id" name="location_id" value="1">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 border-right">
+                        <div class="form-group">
+                          <i class="field-icon icofont-calendar" style=" font-size: 30px;padding-top:3px"></i>
+                          <div class="form-content">
+                            <div class="form-date-search-hotel2">
+                              <div class="date-wrapper">
+                                <div class="check-in-wrapper">
+                                  <label>Date</label>
+                                  <div class="render check-in-render">07/12/2022</div>
+                                  <span> - </span>
+                                  <div class="render check-out-render">07/17/2022</div>
+                                </div>
+                              </div>
+                              <input type="hidden" class="check-in-input" value="07/12/2022" name="start">
+                              <input type="hidden" class="check-out-input" value="07/17/2022" name="end">
+                              <input type="text" class="check-in-out" name="date" value="2022-07-12 - 2022-07-17">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 border-right">
+                        <div class="form-select-guests">
+                          <div class="form-group">
+                            <i class="field-icon icofont-user-alt-7" style=" font-size: 28px;padding-top:4px"></i>
+                            <div class="form-content dropdown-toggle" data-toggle="dropdown">
+                              <div class="wrapper-more">
+                                <label> </label>
+                                <label> </label>
+                                <div class="render">
+                                  <span class="adults"><span class="one ">1 Adult</span> <span class=" d-none  multi"
+                                      data-html=":count Adults">1 Adults</span></span>
+                                  -
+                                  <span class="children">
+                                    <span class="one " data-html=":count Child">0 Child</span>
+                                    <span class="multi  d-none " data-html=":count Children">0 Children</span>
+                                  </span>
+                                  -
+                                  <span class="infants">
+                                    <span class="one " data-html=":count Infants">0 Infant</span>
+                                    <span class="multi  d-none " data-html=":count Infants">0 Infants</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="dropdown-menu select-guests-dropdown">
+
+                              <div class="dropdown-item-row">
+                                <div class="label">Adults</div>
+                                <div class="val">
+                                  <span class="btn-minus" data-input="adults"><i class="icon ion-md-remove"></i></span>
+                                  <span class="count-display"><input type="number" name="adults" value="1"
+                                      min="1"></span>
+                                  <span class="btn-add" data-input="adults"><i class="icon ion-ios-add"></i></span>
+                                </div>
+                              </div>
+                              <div class="dropdown-item-row">
+                                <div class="label">Children</div>
+                                <div class="val">
+                                  <span class="btn-minus" data-input="children"><i
+                                      class="icon ion-md-remove"></i></span>
+                                  <span class="count-display"><input type="number" name="children" value="0"
+                                      min="0"></span>
+                                  <span class="btn-add" data-input="children"><i class="icon ion-ios-add"></i></span>
+                                </div>
+                              </div>
+                              <div class="dropdown-item-row">
+                                <div class="label">Infants</div>
+                                <div class="val">
+                                  <span class="btn-minus" data-input="infants"><i class="icon ion-md-remove"></i></span>
+                                  <span class="count-display"><input type="number" name="infants" value="0"
+                                      min="0"></span>
+                                  <span class="btn-add" data-input="infants"><i class="icon ion-ios-add"></i></span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="g-button-submit">
+                    <button class="btn btn-primary btn-search" type="submit" style="font-size:16px;">Search</button>
+                  </div>
+                </form>
+                <style>
+                  /* .bravo_form_search {
+    margin-top: -50px;
+    position: relative;
+    margin-bottom: 50px;
+    border: none;
+    outline: none;
+    
+    @media(max-width: 766px){
+        margin-top: -30px;
+        margin-bottom:20px;
+    }
+    .bravo_form{
+        .g-field-search{
+            flex: 0 0 85%;
+            max-width: 85%;
+        }
+        .g-button-submit{
+            flex: 0 0 15%;
+            max-width: 15%;
+            outline: none;
+            border: none;
+            
+        }
+    }
+} */
+
+                  /* .g-button-submit{
+            flex: 0 0 15%;
+            max-width: 15%;
+            outline: none;
+            border: none;
+            .btn .button{
+                ::selection {
+                background-color: #ff0000 !important;
+                color: #ff0000 !important;
+            }
+        } */
+                  /* .g-button-submit{
+                height: 100%;
+                display: flex;
+                width: 100%;
+                .btn{
+                    flex-grow: 1;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    border-radius: 0px;
+                    margin-right: -1px;
+                }
+            } */
+
+                  /* .g-button-submit {
+    
+    .btn-primary {
+    color: rgb(248, 239, 225);
+    background-color: rgb(23, 99, 179);
+    border-color: rgb(255, 87, 157);
+} */
+                </style>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <style>
+        .search-bar {
+          padding-top: 230px;
+          margin-bottom: 0px;
+          border-radius: 10px;
+        }
+
+        .bravo_wrap .bravo_form {
+          /*
+          width: 1200px;
+          height: 75px;
+          left: 360px;
+          margin-left: auto;
+          margin-right: auto;
+          top: 382px; 
+
+          background: #FFFFFF;
+          box-shadow: 0px 4px 4px 2px rgba(107, 107, 107, 0.25);
+          border-radius: 10px;
+          */
+        }
+
+        .bravo-form-search-hotel {
+          background-image: url('https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg') !important;
+          width: auto;
+          height: 400px;
+
+          @media(max-width: 766px) {}
+        }
+
+        @media(max-width: 766px) {
+          /* background-image: url('https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg') !important; */
+          /* background-position: center!important; */
+
+          .bravo-form-search-hotel {
+            background-image: url('https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg') !important;
+            width: auto;
+            height: 200px;
+            margin-bottom: 280px;
+
+          }
+
+          .search-bar {
+            padding-top: 30px;
+            margin-bottom: 0px
+          }
+
+          /* .g-form-control{
+            margin-top:200px; margin-bottom:30px;
+        } */
+
+        }
+      </style>
+      <div class="container">
+        <div class="bravo-list-hotel layout_carousel">
+          <div class="title" style="margin-top:60px">
+            Service apartments guests love
+          </div>
+          <div class="list-item">
+            <div class="owl-carousel">
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/green-garden-apartments-a">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/15/green-garden-apartments-a-9-600.jpg
+                      alt='Green Garden Apartments-A'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/green-garden-apartments-a">
+                    Green Garden Apartments-A
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">4.1/5 - Very Good</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$2,800 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/the-corner-house">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/21/the-corner-house-2-600.jpeg
+                      alt='The Corner House'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/the-corner-house">
+                    The Corner House
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">4.5/5 - Wonderful</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$2,999 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/jolley-hotel">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/10/jolley-hotel-outlook-3-600.jpg
+                      alt='Jolley Hotel'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/jolley-hotel">
+                    Jolley Hotel
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">4.7/5 - Wonderful</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$3,360 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/gloria-residence">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/21/gloria-residence-17-600.jpeg
+                      alt='GLORIA RESIDENCE'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/gloria-residence">
+                    GLORIA RESIDENCE
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">4.5/5 - Wonderful</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$3,437 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/ck-serviced-residence">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/27/800press-outlook-1-600.jpg
+                      alt='CK Serviced Residence'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/ck-serviced-residence">
+                    CK Serviced Residence
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">4.5/5 - Wonderful</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$3,400 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/the-denizen">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/05/19/800press-outlook-5-600.jpg
+                      alt='The Denizen'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/the-denizen">
+                    The Denizen
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">5.0/5 - Exceptional</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$3,300 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/the-huan-hotel-taichung">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/21/the-huan-hotel-taichung-1-600.jpeg
+                      alt='The Huan Hotel Taichung'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/the-huan-hotel-taichung">
+                    The Huan Hotel Taichung
+                  </a>
+                </div>
+
+
+                <div class="service-review">
+                  <span class="rate">4.3/5 - Excellent</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$3,700 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="item-loop ">
+                <div class="thumb-image ">
+                  <a href="https://worktel.mrhost.com.tw/hotel/good-garden">
+                    <img class='img-responsive lazy'
+                      data-src=https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/21/good-garden-7-600.jpeg
+                      alt='Good Garden'>
+                  </a>
+                </div>
+                <div class="item-title">
+                  <a href="https://worktel.mrhost.com.tw/hotel/good-garden">
+                    Good Garden
+                  </a>
+                </div>
+
+                <div class="service-review">
+                  <span class="rate">4.0/5 - Very Good</span>
+                </div>
+
+                <div class="info">
+                  <div class="g-price">
+                    <div class="prefix">
+                      <span class="fr_text">from</span>
+                    </div>
+                    <div class="price">
+                      <span class="text-price">NT$650 <span class="unit">/night</span></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="bravo-list-locations  style_3 ">
+          <div class="title">
+            Top Destinations
+          </div>
+          <div class="list-item">
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="destination-item ">
+                  <a href="https://worktel.mrhost.com.tw/hotel?location_id=1">
+                    <div class="image"
+                      style="background: url(https://worktel.mrhost.com.tw/uploads/0000/2/2022/06/21/305-bn-taipei-smaill-44.jpg)">
+                      <div class="effect"></div>
+                      <div class="content">
+                        <h4 class="title">Taipei</h4>
+                        <div class="desc">64 Hotels</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="destination-item ">
+                  <a href="https://worktel.mrhost.com.tw/hotel?location_id=10">
+                    <div class="image"
+                      style="background: url(https://worktel.mrhost.com.tw/uploads/0000/2/2022/06/21/305-bn-newtaipei-44-600.jpg)">
+                      <div class="effect"></div>
+                      <div class="content">
+                        <h4 class="title">New Taipei</h4>
+                        <div class="desc">5 Hotels</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="destination-item ">
+                  <a href="https://worktel.mrhost.com.tw/hotel?location_id=4">
+                    <div class="image"
+                      style="background: url(https://worktel.mrhost.com.tw/uploads/0000/2/2022/06/19/305-bn-taichung-smaill-105.jpg)">
+                      <div class="effect"></div>
+                      <div class="content">
+                        <h4 class="title">Taichung</h4>
+                        <div class="desc">7 Hotels</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="destination-item ">
+                  <a href="https://worktel.mrhost.com.tw/hotel?location_id=6">
+                    <div class="image"
+                      style="background: url(https://worktel.mrhost.com.tw/uploads/0000/2/2022/06/19/305-bn-kaohsiung-small-125.jpg)">
+                      <div class="effect"></div>
+                      <div class="content">
+                        <h4 class="title">Kaohsiung</h4>
+                        <div class="desc">14 Hotels</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="destination-item ">
+                  <a href="https://worktel.mrhost.com.tw/hotel?location_id=23">
+                    <div class="image"
+                      style="background: url(https://worktel.mrhost.com.tw/uploads/0000/2/2022/06/19/1306744566-72.png)">
+                      <div class="effect"></div>
+                      <div class="content">
+                        <h4 class="title">Yunlin</h4>
+                        <div class="desc">2 Hotels</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="destination-item ">
+                  <a href="https://worktel.mrhost.com.tw/hotel?location_id=5">
+                    <div class="image"
+                      style="background: url(https://worktel.mrhost.com.tw/uploads/0000/2/2022/06/19/305-bn-tainan-small-87.jpg)">
+                      <div class="effect"></div>
+                      <div class="content">
+                        <h4 class="title">Tainan</h4>
+                        <div class="desc">1 Hotels</div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bravo_footer">
+      <div class="copy-right">
+        <div class="container context">
+          <div class="row">
+            <div class="col-md-12" style="text-align:center;">
+              <div style="margin:0 auto;">
+                <p>Copyright © 2022 by mrhost</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="https://worktel.mrhost.com.tw/libs/flags/css/flag-icon.min.css">
+    <script src="https://worktel.mrhost.com.tw/libs/lazy-load/intersection-observer.js"></script>
+    <script async src="https://worktel.mrhost.com.tw/libs/lazy-load/lazyload.min.js"></script>
+    <script>
+      // Set the options to make LazyLoad self-initialize
+      window.lazyLoadOptions = {
+        elements_selector: ".lazy",
+        // ... more custom settings?
+      };
+
+      // Listen to the initialization event and get the instance of LazyLoad
+      window.addEventListener('LazyLoad::Initialized', function (event) {
+        window.lazyLoadInstance = event.detail.instance;
+      }, false);
+
+
+    </script>
+    <script src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/moment.min.js"></script>
+    <script type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/select2/js/select2.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/js/functions.js?_ver=1.0.12"></script>
+    <script src="https://worktel.mrhost.com.tw/libs/pusher.min.js"></script>
+    <script src="https://worktel.mrhost.com.tw/js/home.js?_ver=1.0.12"></script>
+    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+  </div>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
+    integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
+    data-cf-beacon='{"rayId":"7296778d2f590cbf","version":"2022.6.0","r":1,"token":"ce5102fc2ace4254864d17a480cce967","si":100}'
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
