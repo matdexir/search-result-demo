@@ -283,52 +283,13 @@
             </a>
             <div class="bravo-menu">
             </div>
-
           </div>
           <div style="margin-left: auto; margin-right: 0;">
-            <div class="dropdown">
-              <a href="#" data-toggle="dropdown" class="is_login">
-
-                English
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <ul class="dropdown-menu text-left">
-                <li>
-                  <a href="https://worktel.mrhost.com.tw/hotel?set_lang=zh" class="is_login" style="margin-left:10px">
-
-                    繁體中文
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <el-select v-model="language" placeholder="language">
+              <el-option key="English" label="English" value="en"></el-option>
+              <el-option key="繁體中文" label="繁體中文" value="zh"></el-option>
+            </el-select>
           </div>
-        </div>
-      </div>
-      <div class="bravo-menu-mobile" style="display:none;">
-        <div class="user-profile">
-          <div class="b-close"><i class="icofont-scroll-left"></i></div>
-          <div class="avatar"></div>
-          <ul>
-          </ul>
-          <ul class="multi-lang">
-            <div class="dropdown">
-              <a href="#" data-toggle="dropdown" class="is_login">
-
-                English
-                <i class="fa fa-angle-down"></i>
-              </a>
-              <ul class="dropdown-menu text-left">
-                <li>
-                  <a href="https://worktel.mrhost.com.tw/hotel?set_lang=zh" class="is_login" style="margin-left:10px">
-
-                    繁體中文
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </ul>
-        </div>
-        <div class="g-menu">
         </div>
       </div>
     </div>
@@ -343,108 +304,36 @@
 
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <form action="https://worktel.mrhost.com.tw/hotel" class="form bravo_form" method="get"
-                style="box-shadow: none;">
-                <div class="g-field-search" style="background-color: #EC3E3F;">
-                  <div class="row">
-                    <div class="col-2 mr-md-4 rounded" style="background-color: white;">
-                      <div class="form-group">
-                        <!-- <i class="field-icon fa icofont-location-pin"></i> -->
-                        <div class="form-content">
-                          <div class="smart-search" style="margin-top: 0.2rem;">
-                            <input type="text" class="smart-search-location parent_text form-control" readonly
-                              placeholder="Where are you going?" value="Taipei" data-onLoad="Loading..."
-                              data-default="[{&quot;id&quot;:1,&quot;title&quot;:&quot; Taipei&quot;},{&quot;id&quot;:10,&quot;title&quot;:&quot; New Taipei&quot;},{&quot;id&quot;:4,&quot;title&quot;:&quot; Taichung&quot;},{&quot;id&quot;:6,&quot;title&quot;:&quot; Kaohsiung&quot;},{&quot;id&quot;:2,&quot;title&quot;:&quot; Taoyuan&quot;},{&quot;id&quot;:3,&quot;title&quot;:&quot; Hsinchu&quot;},{&quot;id&quot;:32,&quot;title&quot;:&quot; Miaoli&quot;},{&quot;id&quot;:22,&quot;title&quot;:&quot; Changhua&quot;},{&quot;id&quot;:21,&quot;title&quot;:&quot; Nantou&quot;},{&quot;id&quot;:23,&quot;title&quot;:&quot; Yunlin&quot;},{&quot;id&quot;:31,&quot;title&quot;:&quot; Chiayi&quot;},{&quot;id&quot;:5,&quot;title&quot;:&quot; Tainan&quot;},{&quot;id&quot;:29,&quot;title&quot;:&quot; Pingtung&quot;},{&quot;id&quot;:30,&quot;title&quot;:&quot; Keelung&quot;},{&quot;id&quot;:7,&quot;title&quot;:&quot; Yilan&quot;},{&quot;id&quot;:8,&quot;title&quot;:&quot; Hualien&quot;},{&quot;id&quot;:9,&quot;title&quot;:&quot; Taitung&quot;}]">
-                            <input type="hidden" class="child_id" name="location_id" value="1">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-3 mr-md-4 rounded" style="background-color: white;">
-                      <div class="form-group">
-                        <!-- <i class="field-icon icofont-calendar" style=" font-size: 30px;padding-top:3px"></i> -->
-                        <div class="form-content">
-                          <div class="form-date-search-hotel2">
-                            <div class="date-wrapper">
-                              <div class="check-in-wrapper">
-                                <div class="render check-in-render">07/18/2022</div>
-                                <span> - </span>
-                                <div class="render check-out-render">07/23/2022</div>
-                              </div>
-                            </div>
-                            <input type="hidden" class="check-in-input" value="07/18/2022" name="start">
-                            <input type="hidden" class="check-out-input" value="07/23/2022" name="end">
-                            <input type="text" class="check-in-out" name="date" value="2022-07-18 - 2022-07-23">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-5 rounded" style="background-color: white;">
-                      <div class="form-select-guests">
-                        <div class="form-group">
-                          <!-- <i class="field-icon icofont-user-alt-7" style=" font-size: 28px;padding-top:4px"></i> -->
-                          <div class="form-content dropdown" data-toggle="dropdown">
-                            <div class="wrapper-more">
-                              <!-- <label> </label> -->
-                              <!-- <label> </label> -->
-                              <div class="render mt-1">
-                                <span class="adults"><span class="one ">1 Adult</span> <span class=" d-none  multi"
-                                    data-html=":count Adults">1 Adults</span></span>
-                                -
-                                <span class="children">
-                                  <span class="one " data-html=":count Child">0 Child</span>
-                                  <span class="multi  d-none " data-html=":count Children">0 Children</span>
-                                </span>
-                                -
-                                <span class="infants">
-                                  <span class="one " data-html=":count Infants">0 Infant</span>
-                                  <span class="multi  d-none " data-html=":count Infants">0 Infants</span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="dropdown-menu select-guests-dropdown">
-
-                            <div class="dropdown-item-row">
-                              <div class="label">Adults</div>
-                              <div class="val">
-                                <span class="btn-minus" data-input="adults"><i class="icon ion-md-remove"></i></span>
-                                <span class="count-display"><input type="number" name="adults" value="1" min="1"></span>
-                                <span class="btn-add" data-input="adults"><i class="icon ion-ios-add"></i></span>
-                              </div>
-                            </div>
-                            <div class="dropdown-item-row">
-                              <div class="label">Children</div>
-                              <div class="val">
-                                <span class="btn-minus" data-input="children"><i class="icon ion-md-remove"></i></span>
-                                <span class="count-display"><input type="number" name="children" value="0"
-                                    min="0"></span>
-                                <span class="btn-add" data-input="children"><i class="icon ion-ios-add"></i></span>
-                              </div>
-                            </div>
-                            <div class="dropdown-item-row">
-                              <div class="label">Infants</div>
-                              <div class="val">
-                                <span class="btn-minus" data-input="infants"><i class="icon ion-md-remove"></i></span>
-                                <span class="count-display"><input type="number" name="infants" value="0"
-                                    min="0"></span>
-                                <span class="btn-add" data-input="infants"><i class="icon ion-ios-add"></i></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="g-button-submit">
-                  <button class="btn btn-secondary rounded" type="submit"
-                    style="font-size: 16px; background-color: #EC3E3F; border: 2px solid white;">SEARCH</button>
-                </div>
-              </form>
-            </div>
+          <div style="display: flex; gap: 20px; padding-bottom: 15px;">
+            <el-select v-model="selected_city" filterable placeholder="City" @change="console.log(selected_city)">
+              <el-option v-for="location in locations" :label="location.name" :key="location.name+location.id"
+                :value="location.id">
+                {{location.name}}
+              </el-option>
+            </el-select>
+            <el-date-picker v-model="date_range" type="daterange" range-separator="|"></el-date-picker>
+            <el-dropdown trigger="click">
+              <el-button>{{num_adults}} Adults {{num_children}} children {{num_infants}} Infants
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </el-button>
+              <el-dropdown-menu slot="dropdown">
+                <el-row style="margin: 10px;">
+                  <span>Adults</span>
+                  <el-input-number size="mini" v-model="num_adults" :min="1" :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 10px;">
+                  <span>Children</span>
+                  <el-input-number size="mini" v-model="num_children" :min="0" :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 10px;">
+                  <span>Infants</span>
+                  <el-input-number size="mini" v-model="num_infants" :min="0" :max="20">
+                  </el-input-number>
+                </el-row>
+              </el-dropdown-menu>
+            </el-dropdown>
           </div>
         </div>
       </div>
@@ -453,7 +342,7 @@
         <div class="row">
           <div class="col-lg-4 col-md-12">
             <div class="bravo_filter">
-              <el-card class="box-card" :body-style="{ padding: '0px' }">
+              <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
                 <div slot="header" class="clearfix">
                   <span>FILTER </span>
                 </div>
@@ -464,10 +353,11 @@
                     </template>
                     <el-checkbox-group v-model="checked_attributes" @change="filter_hotels">
                       <el-col>
-                        <el-checkbox v-for="term in attribute.terms" :label="term.id" :key="term.id"
-                          style="margin-left: 0.5rem;">
-                          {{term.name }}
-                        </el-checkbox>
+                        <el-row v-for="term in attribute.terms">
+                          <el-checkbox :label="term.id" :key="term.id" style="margin-left: 0.5rem;">
+                            {{term.name }}
+                          </el-checkbox>
+                        </el-row>
                       </el-col>
                     </el-checkbox-group>
                   </el-collapse-item>
@@ -483,11 +373,6 @@
                 <h2 class="text">
                   {{ displayed_hotels.length }} hotels found
                 </h2>
-                <div class="block">
-                  <el-dropdown split-button type="secondary"></el-dropdown>
-                  <el-date-picker v-model="date_range" type="daterange" range-separator="|"></el-date-picker>
-                  <el-input-number size="medium" v-model="num_adults">Adults</el-input-number>
-                </div>
                 <div style="margin-top: 20px;">
                   <el-radio-group v-model="sorting_method" @change="sort_hotels">
                     <el-radio-button label="recommended">Recommended</el-radio-button>
@@ -504,6 +389,16 @@
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
+              <el-card :body-style="{padding: '0px' }" shadow="hover">
+                <el-col :xs=" 24" :sm="24" :md="8" style="padding: 10px;">
+                  <img src='https://worktel.mrhost.com.tw/uploads/0000/2/2022/04/21/urhome-7.jpeg'
+                    style=" width: 100%; border-radius: 5px; max-height: 250px;" class="image">
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="16">
+                  <div style="padding: 10px; height: 100%; position: relative; display: flex;">
+                  </div>
+                </el-col>
+              </el-card>
               <div v-for="hotel in displayed_hotels" class="card mt-3 mb-3 col-md-5 col-lg-12"
                 style=" max-height: 500px;">
                 <div class="row no-gutters">
@@ -625,6 +520,9 @@
         sorting_method: "recommended",
         date_range: "",
         num_adults: 1,
+        num_infants: 0,
+        num_children: 0,
+        selected_city: "",
       },
       created: function () {
         console.log("new vue element created");
