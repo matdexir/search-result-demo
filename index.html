@@ -620,13 +620,8 @@
           let tmp_hotels = [...this.displayed_hotels];
           // not too sure what recommended is about but I think it is the way we received it from the backend
           if (this.sorting_method === "recommended") {
-            let all_false = true;
-            for (let attribute in this.checked_attributes) {
-              if (this.checked_attributes[attribute] === true) {
-                all_false = false;
-              }
-            }
-            if (all_false) {
+            if (this.checked_attributes.length === 0) {
+              console.log("attributes are not checked ninja", this.checked_attributes)
               this.displayed_hotels = [...this.hotels];
             } else {
               this.displayed_hotels = [...tmp_hotels];
