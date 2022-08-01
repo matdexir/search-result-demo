@@ -244,14 +244,32 @@
 
     }
 
-    .ratings {
-      margin-top: 10px;
-    }
 
-    .ratings .ratings-price {
-      font-size: 10px;
+    .ratings-price {
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
       color: #0A588A;
       text-align: right;
+    }
+
+    .hotel-details {
+      height: 180px;
+      padding: 10px;
+      position: relative;
+    }
+
+    .hotel-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .hotel-rate {
+      font-size: 18px;
+    }
+
+    .image-container {
+      padding: 10px;
     }
 
     .image-el-card {
@@ -262,6 +280,7 @@
     .hotel-card {
       width: 825px;
       height: 180px;
+      margin-bottom: 10px;
     }
 
     @media screen and (max-width: 550px) {
@@ -293,6 +312,7 @@
       style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="bravo_wrap" id="app">
+    <el-backtop target=".bravo_header"></el-backtop>
     <div class="bravo_header">
       <div class="container">
         <div class="content">
@@ -336,13 +356,13 @@
               <el-button>{{num_adults}} Adults {{num_children}} children {{num_infants}} Infants
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
-              <el-dropdown-menu slot="dropdown">
-                <el-row style="margin: 10px;">
+              <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
+                <el-row style="margin: 10px;" style="position: absolute; right: 0;">
                   <span>Adults</span>
                   <el-input-number size="mini" v-model="num_adults" :min="1" :max="20">
                   </el-input-number>
                 </el-row>
-                <el-row style="margin: 10px;">
+                <el-row style="margin: 10px;" style="position: absolute; right: 0;">
                   <span>Children</span>
                   <el-input-number size="mini" v-model="num_children" :min="0" :max="20">
                   </el-input-number>
@@ -375,7 +395,7 @@
                     <el-checkbox-group v-model="checked_attributes" @change="filter_hotels">
                       <el-col>
                         <el-row v-for="term in attribute.terms">
-                          <el-checkbox :label="term.id" :key="term.id" style="margin-left: 0.5rem;">
+                          <el-checkbox :label="term.id" :key="term.id" style="margin-left: 1rem;">
                             {{term.name }}
                           </el-checkbox>
                         </el-row>
@@ -413,51 +433,48 @@
 
               <div v-for="hotel in displayed_hotels">
                 <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
-                  <el-col :xs=" 24" :sm="24" :md="8" style="padding:12px;">
-                    <img width="100%" style="max-height: 150px;" :src="hotel.image_id || default_url_alt"
-                      :alt="hotel.title" class="image image-el-card" @error="fallback_url">
+                  <el-col class="image-container" :xs=" 24" :sm="24" :md="8">
+                    <img width="100%" :src="hotel.image_id || default_url_alt" :alt="hotel.title"
+                      class="image image-el-card" @error="fallback_url">
                   </el-col>
-                  <el-col :xs="24" :sm="24" :md="16" style="height: 180px; padding: 10px; position: relative;">
-                    <!-- <div style="padding: 10px;"> -->
+                  <el-col :xs="24" :sm="24" :md="16" class="hotel-details">
                     <el-row>
-                      <span class="float-left" style="font-size: 20px;">{{ hotel.title }}</span>
-                      <span v-if="hotel.rate" class="float-right" style="font-size: 18px;">
-                        {{ hotel.rate }}
+                      <span class="float-left hotel-title">{{ hotel.title }}</span>
+                      <span v-if="hotel.rate" class="float-right hotel-rating">
+                        {{ hotel.rate }} <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
                       </span>
-                      <span v-else class="float-right" style="font-size: 18px;"> -- </span>
+                      <span v-else class="float-right hotel-rating"> -- </span>
                     </el-row>
                     <el-row>
-                      <span>
-                        {{ find_location(hotel.location_id) }}
+                      <span style="font-size: 12px; color: #0485D6;">
+                        <i class="el-icon-location"></i>{{ find_location(hotel.location_id) }}
                       </span>
                     </el-row>
-                    <el-row style="height: 60%;">
+                    <el-row style="height: 70%;">
                       <el-col :xs=" 24" :sm="24" :md="18" style="border-style: solid 2px;">
-                        <el-row>
-                          <div v-for="attribute in parse_attributes(hotel)">
-                            <span class="features-list-el" name="attribute.id">
-                              {{ attribute.name }}
-                            </span>
-                          </div>
+                        <el-row style="margin-top: 5px;">
+                          <span v-for="attribute in parse_attributes(hotel)" class="features-list-el"
+                            name="attribute.id">
+                            {{ attribute.name }}
+                          </span>
                         </el-row>
-                        <el-row style="margin-top: 10px; position: absolute; bottom: 0;">
+                        <el-row style="margin-top: 10px; position: absolute; bottom: 0; width: 80%;">
                           <el-tag v-for="facility in parse_facilities(hotel)" type="info" size="mini"
-                            style="margin-right: 10px;">
+                            style="margin-right: 10px; margin-bottom: 5px;">
                             {{ facility.name}}
                           </el-tag>
                         </el-row>
                       </el-col>
-                      <el-col :xs="24" :sm="24" :md="6">
+                      <el-col :xs="24" :sm="24" :md="6" style="height: 100%; position: relative;">
                         <div v-if="hotel.price" class="ratings-price float-right">
                           {{ hotel.price.slice(0, -3) }} NT
                         </div>
                         <div v-else class="ratings-price float-right"> -- </div>
-                        <el-button class="float-right">
+                        <el-button class="float-right" style="position: absolute; bottom: 0; right: 0;">
                           <a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a>
                         </el-button>
                       </el-col>
                     </el-row>
-                    <!-- </div> -->
                   </el-col>
                 </el-card>
 
