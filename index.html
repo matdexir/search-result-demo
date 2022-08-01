@@ -254,6 +254,16 @@
       text-align: right;
     }
 
+    .image-el-card {
+      width: 260px;
+      height: 150px;
+    }
+
+    .hotel-card {
+      width: 825px;
+      height: 180px;
+    }
+
     @media screen and (max-width: 550px) {
       .ratings .ratings-price {
         text-align: left;
@@ -261,6 +271,16 @@
 
       .card-container {
         align-items: center;
+      }
+
+      .image-el-card {
+        width: 315px;
+        height: 120px;
+      }
+
+      .hotel-card {
+        width: 315px;
+        height: 280px;
       }
     }
   </style>
@@ -392,100 +412,54 @@
               </div>
 
               <div v-for="hotel in displayed_hotels">
-                <el-card :body-style="{padding: '0px' }" shadow="hover">
-                  <el-col :xs=" 24" :sm="24" :md="8" style="padding: 10px;">
+                <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
+                  <el-col :xs=" 24" :sm="24" :md="8" style="padding:12px;">
                     <img width="100%" style="max-height: 150px;" :src="hotel.image_id || default_url_alt"
-                      :alt="hotel.title" class="image" @error="fallback_url">
+                      :alt="hotel.title" class="image image-el-card" @error="fallback_url">
                   </el-col>
-                  <el-col :xs="24" :sm="24" :md="16">
-                    <div style="padding: 10px;">
-                      <el-row><span class="float-left" style="font-size: 20px;">{{ hotel.title }}</span> <span
-                          class="float-right" style="font-size: 18px;">{{
-                          hotel.rate }}</span>
-                      </el-row>
-                      <el-row>
-                        <span>
-                          {{ find_location(hotel.location_id) }}
-                        </span>
-                      </el-row>
-                      <el-row>
-                        <el-col :xs=" 24" :sm="24" :md="18">
-                          <el-row>
-                            <div v-for="attribute in parse_attributes(hotel)">
-                              <span class="features-list-el" name="attribute.id">
-                                {{ attribute.name }}
-                              </span>
-                            </div>
-                          </el-row>
-                          <el-row style="margin-top: 12%;">
-                            <el-col v-for="facility in parse_facilities(hotel)">
-                              <el-tag type="info" size="mini">{{ facility.name }}</el-tag>
-                            </el-col>
-                          </el-row>
-                        </el-col>
-                        <el-col :xs="24" :sm="24" :md="6">
-                          <div v-if="hotel.price" class="ratings-price">
-                            {{ hotel.price.slice(0, -3) }} NT
+                  <el-col :xs="24" :sm="24" :md="16" style="height: 180px; padding: 10px; position: relative;">
+                    <!-- <div style="padding: 10px;"> -->
+                    <el-row>
+                      <span class="float-left" style="font-size: 20px;">{{ hotel.title }}</span>
+                      <span v-if="hotel.rate" class="float-right" style="font-size: 18px;">
+                        {{ hotel.rate }}
+                      </span>
+                      <span v-else class="float-right" style="font-size: 18px;"> -- </span>
+                    </el-row>
+                    <el-row>
+                      <span>
+                        {{ find_location(hotel.location_id) }}
+                      </span>
+                    </el-row>
+                    <el-row style="height: 60%;">
+                      <el-col :xs=" 24" :sm="24" :md="18" style="border-style: solid 2px;">
+                        <el-row>
+                          <div v-for="attribute in parse_attributes(hotel)">
+                            <span class="features-list-el" name="attribute.id">
+                              {{ attribute.name }}
+                            </span>
                           </div>
-                          <div v-else class="ratings-price"> -- </div>
-                          <el-button>
-                            <a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a>
-                          </el-button>
-                        </el-col>
-                      </el-row>
-                    </div>
+                        </el-row>
+                        <el-row style="margin-top: 10px; position: absolute; bottom: 0;">
+                          <el-tag v-for="facility in parse_facilities(hotel)" type="info" size="mini"
+                            style="margin-right: 10px;">
+                            {{ facility.name}}
+                          </el-tag>
+                        </el-row>
+                      </el-col>
+                      <el-col :xs="24" :sm="24" :md="6">
+                        <div v-if="hotel.price" class="ratings-price float-right">
+                          {{ hotel.price.slice(0, -3) }} NT
+                        </div>
+                        <div v-else class="ratings-price float-right"> -- </div>
+                        <el-button class="float-right">
+                          <a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a>
+                        </el-button>
+                      </el-col>
+                    </el-row>
+                    <!-- </div> -->
                   </el-col>
                 </el-card>
-
-                <!-- <div class="card mt-3 mb-3 col-md-5 col-lg-12" style=" max-height: 500px;"> -->
-                <!--   <div class="row no-gutters"> -->
-                <!--     <div class="m-lg-2 col-md-12 col-lg-4"> -->
-                <!--       <img width="100%" style="max-height: 150px;" :src="hotel.image_id || default_url_alt" -->
-                <!--         :alt="hotel.title" class="rounded card-img mt-2" @error="fallback_url"> -->
-                <!--     </div> -->
-                <!--     <div class="col"> -->
-                <!--       <div class="card-body mb-lg-3 mt-lg-3 mr-lg-3 m-2" style="padding: 0;"> -->
-                <!--         <div class="row no-gutters"> -->
-                <!--           <div class="float-left" style="font-size: 20px;">{{ hotel.title }}</div> -->
-                <!--           <div v-if="hotel.rate" class="float-right ml-auto" style="font-size: 18px;"> {{ hotel.rate }} -->
-                <!--           </div> -->
-                <!--           <div v-else class="float-right ml-auto" style="font-size: 18px;"> -- </div> -->
-                <!--         </div> -->
-                <!--         <div class="row no-gutters"> -->
-                <!--           <div class="float-left" style="color: #0485D6 ;font-size: 12px;">{{ -->
-                <!--             find_location(hotel.location_id) }} -->
-                <!--           </div> -->
-                <!--            For future use -->
-                <!--           <div class="float-right ml-auto invisible" style="font-size: 12px;">900 comments</div> -->
-                <!--         </div> -->
-                <!--         <div class="row no-gutters"> -->
-                <!--           <div class="col-md-12 col-lg-10"> -->
-                <!--             <div class="row no-gutters features-list mb-2"> -->
-                <!--               <div v-for="attribute in parse_attributes(hotel)"> -->
-                <!--                 <span class="features-list-el" name="attribute.id"> -->
-                <!--                   {{ attribute.name }} -->
-                <!--                 </span> -->
-                <!--               </div> -->
-                <!--             </div> -->
-                <!--             <el-row :gutter="10"> -->
-                <!--               <el-col v-for="facility in parse_facilities(hotel)"> -->
-                <!--                 <el-tag type="info" size="mini">{{ facility.name }}</el-tag> -->
-                <!--               </el-col> -->
-                <!--             </el-row> -->
-                <!--           </div> -->
-                <!--           <div class="col-md-12 col-lg-2"> -->
-                <!--             <div class="row no-gutters" style="font-size: 16px; font-weight: 700;"> -->
-                <!--               <div v-if="hotel.price" class="ml-sm-auto ratings-price">{{ hotel.price.slice(0, -3) }} NT -->
-                <!--               </div> -->
-                <!--               <div v-else class="ml-sm-auto ratings-price"> -- </div> -->
-                <!--             </div> -->
-                <!--             <div class="row no-gutters d-none d-lg-block"> -->
-                <!--               <el-button><a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a> -->
-                <!--               </el-button> -->
-                <!--             </div> -->
-                <!--           </div> -->
-                <!--         </div> -->
-                <!--       </div> -->
 
               </div>
             </div>
