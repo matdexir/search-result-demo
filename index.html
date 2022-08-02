@@ -380,7 +380,7 @@
             </div>
           </div>
           <div style="margin-left: auto; margin-right: 0;">
-            <el-select v-model="language" placeholder="language">
+            <el-select v-model="language" placeholder="language" @change="fetch_data">
               <el-option key="English" label="English" value="en"></el-option>
               <el-option key="繁體中文" label="繁體中文" value="zh"></el-option>
             </el-select>
@@ -400,17 +400,23 @@
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
-            <el-select :xs="24" v-model="selected_city" filterable placeholder="City"
-              @change="console.log(selected_city)">
-              <el-option v-for="location in locations" :label="location.name" :key="location.name+location.id"
-                :value="location.id">
+            <el-select :xs="24" v-model="selected_city" filterable placeholder="City" @change="fetch_data">
+              <el-option v-for="location in locations" :label="find_location(location.id)"
+                :key="location.name+location.id" :value="location.id">
                 {{location.name}}
               </el-option>
             </el-select>
             <el-date-picker v-model="date_range" type="daterange" range-separator="|"></el-date-picker>
             <el-dropdown trigger="click">
-              <el-button>{{num_adults}} Adults {{num_children}} children {{num_infants}} Infants
-                <i class="el-icon-arrow-down el-icon--right"></i>
+              <el-button>
+                <span v-if="language ==='en' ">
+                  {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <span v-else>
+                  {{num_adults}} 位成人 - {{num_children}} 名孩童 - {{num_infants}} 名嬰兒
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
               </el-button>
               <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
                 <el-row style="margin: 10px;" style="position: relative;">
@@ -433,7 +439,14 @@
                 </el-row>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button>SEARCH</el-button>
+            <el-button>
+              <span v-if="language === 'en'">
+                SEARCH
+              </span>
+              <span v-else>
+                搜尋
+              </span>
+            </el-button>
           </div>
         </div>
       </div>
@@ -444,18 +457,19 @@
             <div class="bravo_filter">
               <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
                 <div slot="header" class="clearfix">
-                  <span>FILTER </span>
+                  <span v-if="language === 'en' ">FILTER:</span>
+                  <span v-else>透過以下分類搜尋:</span>
                 </div>
                 <el-collapse>
                   <el-collapse-item v-for="attribute in attributes">
                     <template slot="title">
-                      <span style="margin-left: 1rem;"> {{ attribute.name }}</span>
+                      <span style="margin-left: 1rem;"> {{ proper_language(attribute) }}</span>
                     </template>
                     <el-checkbox-group v-model="checked_attributes" @change="filter_hotels">
                       <el-col>
                         <el-row v-for="term in attribute.terms">
                           <el-checkbox :label="term.id" :key="term.id" style="margin-left: 1rem;">
-                            {{term.name }}
+                            {{ proper_language(term) }}
                           </el-checkbox>
                         </el-row>
                       </el-col>
@@ -471,14 +485,31 @@
             <div class="bravo-list-item">
               <div class="topbar-search" style="display: block;">
                 <h2 class="text">
-                  {{ displayed_hotels.length }} hotels found
+                  <span v-if="language==='en'">
+                    {{ displayed_hotels.length }} hotels found
+                  </span>
+                  <span v-else>
+                    找到{{ displayed_hotels.length }}間住宿
+                  </span>
                 </h2>
                 <div style="margin-top: 20px;">
                   <el-radio-group v-model="sorting_method" @change="sort_hotels">
-                    <el-radio-button label="recommended">Recommended</el-radio-button>
-                    <el-radio-button label="price_low_high">Price(Low to High)</el-radio-button>
-                    <el-radio-button label="price_high_low">Price(High to Low)</el-radio-button>
-                    <el-radio-button label="rating_high_low">Rating(High to Low)</el-radio-button>
+                    <el-radio-button label="recommended">
+                      <span v-if="language==='en'">Recommended</span>
+                      <span v-else>爲您精選</span>
+                    </el-radio-button>
+                    <el-radio-button label="price_low_high">
+                      <span v-if="language==='en'">Price(Low to High)</span>
+                      <span v-else>價錢由低至高</span>
+                    </el-radio-button>
+                    <el-radio-button label="price_high_low">
+                      <span v-if="language==='en'">Price(High to Low)</span>
+                      <span v-else>價錢由高至低</span>
+                    </el-radio-button>
+                    <el-radio-button label="rating_high_low">
+                      <span v-if="language==='en'">Rating(High to Low)</span>
+                      <span v-else>星級最高</span>
+                    </el-radio-button>
                   </el-radio-group>
                 </div>
               </div>
@@ -528,11 +559,19 @@
 
                       <el-col :xs="24" :sm="24" :md="6" class="pricing-col">
                         <div v-if="hotel.price" class="ratings-price float-right">
-                          {{ hotel.price.slice(0, -3) }} NT
+                          <span v-if="language ==='en' ">
+                            {{ hotel.price.slice(0, -3) }} NT
+                          </span>
+                          <span v-else>
+                            NT {{ hotel.price.slice(0, -3)}}起
+                          </span>
                         </div>
                         <div v-else class="ratings-price float-right"> -- </div>
                         <el-button class="float-right price-btn" style="position: absolute; bottom: 0; right: 0;">
-                          <a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a>
+                          <a :href="hotel.detail_url">
+                            <span v-if="language === 'en'"> see</span>
+                            <span v-else>查看</span>
+                            <i class="el-icon-arrow-right"></i></a>
                         </el-button>
                       </el-col>
                     </el-row>
@@ -612,7 +651,7 @@
         num_adults: 1,
         num_infants: 0,
         num_children: 0,
-        selected_city: "",
+        selected_city: 1,
       },
       created: function () {
         console.log("new vue element created");
@@ -650,7 +689,6 @@
           const me = this;
 
           if (!me.first_time) {
-            // const api_url = "https://worktel.mrhost.com.tw/api/searchHotels";
             const api_url =
               "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
             const resp = await fetch(api_url).then((res) => res.json());
@@ -666,23 +704,11 @@
           }
         },
 
-        toggle_collapse: function (event) {
-          let target = event.target.dataset.target;
-          const elem = document.getElementById(target);
-
-          if (elem.className === "collapse") {
-            elem.className = "collapse show";
-          } else {
-            elem.className = "collapse";
-          }
-        },
-
         sort_hotels: function () {
           let tmp_hotels = [...this.displayed_hotels];
           // not too sure what recommended is about but I think it is the way we received it from the backend
           if (this.sorting_method === "recommended") {
             if (this.checked_attributes.length === 0) {
-              console.log("attributes are not checked ninja", this.checked_attributes)
               this.displayed_hotels = [...this.hotels];
             } else {
               this.displayed_hotels = [...tmp_hotels];
@@ -725,7 +751,28 @@
 
         find_location: function (id) {
           const location = this.locations.find((location) => location.id === id);
-          return location.name;
+          const lang = (this.language === "en") ? 0 : 1;
+          return location.translations[lang].name;
+        },
+        proper_language: function (component) {
+          const lang = (this.language === "en") ? 0 : 1;
+          console.log(component);
+          if (component.translations.length < 2)
+            return component.translations[0].name;
+          else
+            return component.translations[lang].name;
+        },
+
+        fetch_data: async function () {
+          console.log("Hello world", this.selected_city)
+          const api_url =
+            "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=" + this.selected_city + "&locale=" + this.language;
+          const resp = await fetch(api_url).then((res) => res.json());
+          console.log(resp);
+          this.hotels = [...resp.hotels];
+          this.displayed_hotels = [...this.hotels];
+          this.attributes = resp.attributes;
+          this.locations = resp.locations;
         },
 
         fallback_url: function (event) {
