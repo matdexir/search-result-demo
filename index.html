@@ -399,8 +399,9 @@
 
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
         <div class="container">
-          <div style="display: flex; gap: 20px; padding-bottom: 15px;">
-            <el-select v-model="selected_city" filterable placeholder="City" @change="console.log(selected_city)">
+          <div style="display: flex; gap: 20px; padding-bottom: 10px;">
+            <el-select :xs="24" v-model="selected_city" filterable placeholder="City"
+              @change="console.log(selected_city)">
               <el-option v-for="location in locations" :label="location.name" :key="location.name+location.id"
                 :value="location.id">
                 {{location.name}}
@@ -412,19 +413,22 @@
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
-                <el-row style="margin: 10px;" style="position: absolute; right: 0;">
+                <el-row style="margin: 10px;" style="position: relative;">
                   <span>Adults</span>
-                  <el-input-number size="mini" v-model="num_adults" :min="1" :max="20">
+                  <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_adults" :min="1"
+                    :max="20">
                   </el-input-number>
                 </el-row>
-                <el-row style="margin: 10px;" style="position: absolute; right: 0;">
+                <el-row style="margin: 10px;" style="position: relative;">
                   <span>Children</span>
-                  <el-input-number size="mini" v-model="num_children" :min="0" :max="20">
+                  <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_children" :min="0"
+                    :max="20">
                   </el-input-number>
                 </el-row>
-                <el-row style="margin: 10px;">
+                <el-row style="margin: 10px;" style="position: relative;">
                   <span>Infants</span>
-                  <el-input-number size="mini" v-model="num_infants" :min="0" :max="20">
+                  <el-input-number style="position: absolute; right: 0;" size="mini" v-model="num_infants" :min="0"
+                    :max="20">
                   </el-input-number>
                 </el-row>
               </el-dropdown-menu>
