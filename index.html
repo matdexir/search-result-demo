@@ -241,7 +241,6 @@
 
     .render {
       margin-top: 0.2rem;
-
     }
 
 
@@ -269,7 +268,7 @@
     }
 
     .image-container {
-      padding: 10px;
+      padding: 13px;
     }
 
     .image-el-card {
@@ -281,6 +280,26 @@
       width: 825px;
       height: 180px;
       margin-bottom: 10px;
+    }
+
+    .details-row {
+      height: 70%;
+    }
+
+    .facility-row {
+      position: absolute;
+      bottom: 4;
+    }
+
+    .attributes-col {
+      position: relative;
+      height: 100%;
+      margin-bottom: 10px;
+    }
+
+    .pricing-col {
+      height: 100%;
+      position: relative;
     }
 
     @media screen and (max-width: 550px) {
@@ -297,9 +316,46 @@
         height: 120px;
       }
 
+      .image-container {
+        padding: 1px;
+      }
+
+      .ratings-price {
+        margin-bottom: 0;
+      }
+
       .hotel-card {
+        margin-left: 15;
         width: 315px;
-        height: 280px;
+        height: initial;
+      }
+
+      .hotel-details {
+        height: initial;
+        padding: 5px;
+      }
+
+      .details-row {
+        height: initial;
+      }
+
+      .facility-row {
+        margin-top: 10px;
+        position: relative;
+      }
+
+      .pricing-col {
+        height: initial;
+        position: relative;
+      }
+
+      .price-btn {
+        display: none;
+      }
+
+      .attributes-col {
+        height: initial;
+        margin-bottom: 5px;
       }
     }
   </style>
@@ -312,7 +368,6 @@
       style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="bravo_wrap" id="app">
-    <el-backtop target=".bravo_header"></el-backtop>
     <div class="bravo_header">
       <div class="container">
         <div class="content">
@@ -424,7 +479,7 @@
                 </div>
               </div>
             </div>
-            <div class="list-item" style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div class="list-item" style="justify-content: center;">
               <div class="text-center mx-auto" v-if="hotels.length === 0">
                 <div class="spinner-border spinner-border-lg" style=" width: 3rem; height: 3rem;" role="status">
                   <span class="sr-only">Loading...</span>
@@ -447,30 +502,32 @@
                     </el-row>
                     <el-row>
                       <span style="font-size: 12px; color: #0485D6;">
-                        <i class="el-icon-location"></i>{{ find_location(hotel.location_id) }}
+                        <i class="el-icon-location"></i> {{ find_location(hotel.location_id) }}
                       </span>
                     </el-row>
-                    <el-row style="height: 70%;">
-                      <el-col :xs=" 24" :sm="24" :md="18" style="border-style: solid 2px;">
+                    <el-row class="details-row">
+
+                      <el-col :xs=" 24" :sm="24" :md="18" class="attributes-col" style="border-style: solid 2px;">
                         <el-row style="margin-top: 5px;">
                           <span v-for="attribute in parse_attributes(hotel)" class="features-list-el"
                             name="attribute.id">
-                            {{ attribute.name }}
+                            <i class="el-icon-info"></i> {{ attribute.name }}
                           </span>
                         </el-row>
-                        <el-row style="margin-top: 10px; position: absolute; bottom: 0; width: 80%;">
+                        <el-row class="facility-row">
                           <el-tag v-for="facility in parse_facilities(hotel)" type="info" size="mini"
                             style="margin-right: 10px; margin-bottom: 5px;">
                             {{ facility.name}}
                           </el-tag>
                         </el-row>
                       </el-col>
-                      <el-col :xs="24" :sm="24" :md="6" style="height: 100%; position: relative;">
+
+                      <el-col :xs="24" :sm="24" :md="6" class="pricing-col">
                         <div v-if="hotel.price" class="ratings-price float-right">
                           {{ hotel.price.slice(0, -3) }} NT
                         </div>
                         <div v-else class="ratings-price float-right"> -- </div>
-                        <el-button class="float-right" style="position: absolute; bottom: 0; right: 0;">
+                        <el-button class="float-right price-btn" style="position: absolute; bottom: 0; right: 0;">
                           <a :href="hotel.detail_url"> see <i class="el-icon-arrow-right"></i></a>
                         </el-button>
                       </el-col>
