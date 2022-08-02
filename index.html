@@ -403,7 +403,7 @@
             <el-select :xs="24" v-model="selected_city" filterable placeholder="City" @change="fetch_data">
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
-                {{location.name}}
+                {{find_location(location.id)}}
               </el-option>
             </el-select>
             <el-date-picker v-model="date_range" type="daterange" range-separator="|"></el-date-picker>
