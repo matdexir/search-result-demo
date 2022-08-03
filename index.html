@@ -302,6 +302,32 @@
       position: relative;
     }
 
+    .el-radio-button__inner:hover {
+      color: #EC3E3F;
+    }
+
+
+    .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+      color: #FFF;
+      background-color: #EC3E3F;
+      border-color: #DCDFE6;
+    }
+
+    .el-select-dropdown__item.selected {
+      color: #EC3E3F;
+      font-weight: 700;
+    }
+
+    .el-date-editor .el-range__icon {
+      color: #000;
+    }
+
+    .el-tag.el-tag--info {
+      background-color: #F5F5F5;
+      border-color: #E0E0E0;
+      color: #484848;
+    }
+
     @media screen and (max-width: 550px) {
       .ratings .ratings-price {
         text-align: left;
@@ -357,6 +383,10 @@
         height: initial;
         margin-bottom: 5px;
       }
+
+      .guests-type-selection {
+        display: none;
+      }
     }
   </style>
 
@@ -397,6 +427,10 @@
         </div>
       </div>
 
+      <el-button id="scroll-btn" type="info" @click="back_to_top"
+        style="position: fixed; bottom: 40px; right: 20px; z-index: 99;">
+        Back to top
+      </el-button>
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
@@ -406,8 +440,9 @@
                 {{find_location(location.id)}}
               </el-option>
             </el-select>
-            <el-date-picker v-model="date_range" type="daterange" range-separator="|"></el-date-picker>
-            <el-dropdown trigger="click">
+            <el-date-picker v-model="date_range" type="daterange" range-separator="|">
+            </el-date-picker>
+            <el-dropdown class="guests-type-selection" trigger="click">
               <el-button>
                 <span v-if="language ==='en' ">
                   {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
@@ -439,7 +474,7 @@
                 </el-row>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button>
+            <el-button style="background-color: #EC3E3F; color: #FFF;">
               <span v-if="language === 'en'">
                 SEARCH
               </span>
@@ -494,7 +529,7 @@
                 </h2>
                 <div style="margin-top: 20px;">
                   <el-radio-group v-model="sorting_method" @change="sort_hotels">
-                    <el-radio-button label="recommended">
+                    <el-radio-button class="radio-btn" label="recommended">
                       <span v-if="language==='en'">Recommended</span>
                       <span v-else>爲您精選</span>
                     </el-radio-button>
@@ -567,8 +602,9 @@
                           </span>
                         </div>
                         <div v-else class="ratings-price float-right"> -- </div>
-                        <el-button class="float-right price-btn" style="position: absolute; bottom: 0; right: 0;">
-                          <a :href="hotel.detail_url">
+                        <el-button class="float-right price-btn"
+                          style="position: absolute; bottom: 0; right: 0; background-color: #EC3E3F;">
+                          <a :href="hotel.detail_url" style="text-decoration: none; color: #FFF;">
                             <span v-if="language === 'en'"> see</span>
                             <span v-else>查看</span>
                             <i class="el-icon-arrow-right"></i></a>
@@ -584,9 +620,6 @@
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
   </div>
 
   <div class="bravo_footer" style="background-color: #EC3E3F; color: white;">
@@ -756,17 +789,23 @@
         },
         proper_language: function (component) {
           const lang = (this.language === "en") ? 0 : 1;
-          console.log(component);
           if (component.translations.length < 2)
             return component.translations[0].name;
           else
             return component.translations[lang].name;
         },
 
+        back_to_top: function () {
+          document.body.scrollTop = 0;
+        },
+
         fetch_data: async function () {
           console.log("Hello world", this.selected_city)
-          const api_url =
-            "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=" + this.selected_city + "&locale=" + this.language;
+          const parameters = {
+            location_id: this.selected_city,
+            locale: this.language
+          }
+          const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString()
           const resp = await fetch(api_url).then((res) => res.json());
           console.log(resp);
           this.hotels = [...resp.hotels];
