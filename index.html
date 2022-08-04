@@ -440,6 +440,7 @@
                 {{find_location(location.id)}}
               </el-option>
             </el-select>
+            {{ date_range }}
             <el-date-picker v-model="date_range" type="daterange" range-separator="|">
             </el-date-picker>
             <el-dropdown class="guests-type-selection" trigger="click">
@@ -669,11 +670,8 @@
   <script type="text/javascript" src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
     if (window.Worker) {
-      let worker_pool = [];
-      for (let i = 0; i < 11; i++) {
-        worker_pool.push(new Worker("./siteminder_worker.js"));
-        worker_pool[i].postMessage({first_name: i, last_name: "we on?"});
-      }
+
+
       const App = new Vue({
         el: "#app",
         data: {
@@ -682,6 +680,8 @@
           checked_attributes: [],
           hotels: [],
           displayed_hotels: [],
+          NUM_WOKERS: 5,
+          worker_pool: new Array(this.NUM_WOKERS),
           locations: [],
           language: "en",
           sorting_method: "recommended",
@@ -695,14 +695,15 @@
           console.log("new vue element created");
           const me = this;
           me.init();
+
           console.log("initialized");
         },
         mounted() {
-          for (worker of worker_pool) {
-            worker.onmessage = (e) => {
-              console.log(e.data);
-            }
-          }
+          // pass
+        },
+
+        watch: {
+          // pass
         },
 
         computed: {
@@ -729,11 +730,14 @@
         methods: {
           init: async function () {
             const me = this;
-
             if (!me.first_time) {
               const api_url =
                 "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
-              const resp = await fetch(api_url).then((res) => res.json());
+              const resp = await fetch(api_url)
+                .then((res) => res.json())
+                .catch((err) => {
+                  console.error(err)
+                });
 
               console.log(resp);
               me.hotels = [...resp.hotels];
@@ -809,18 +813,42 @@
           },
 
           fetch_data: async function () {
-            console.log("Hello world", this.selected_city)
             const parameters = {
               location_id: this.selected_city,
               locale: this.language
             }
             const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString()
             const resp = await fetch(api_url).then((res) => res.json());
+
             console.log(resp);
             this.hotels = [...resp.hotels];
             this.displayed_hotels = [...this.hotels];
             this.attributes = resp.attributes;
             this.locations = resp.locations;
+            this.worker_pool = [];
+
+            for (let i = 0; i <= this.NUM_WOKERS; i++) {
+              this.worker_pool[i] = {work: new Worker("./siteminder_worker.js"), busy: false, id: i};
+              this.worker_pool[i].work.onmessage = (e) => {
+                console.log(e.data, this.worker_pool[i].id, "worker is reset");
+                this.worker_pool[i].busy = false;
+              }
+            };
+            console.log(this.displayed_hotels.length)
+            for (let id = 0; id < this.displayed_hotels.length; id++) {
+              if (this.displayed_hotels[id].siteminder_digital_id != null) {
+                let worker_not_found = true;
+                const current_worker = this.worker_pool.find(wrk => wrk.busy === false)
+
+                if (current_worker) {
+                  current_worker.work.postMessage({worker_id: current_worker.id, siteminder_id: this.displayed_hotels[id].siteminder_digital_id})
+                  current_worker.busy = true;
+                  worker_not_found = false
+                } else {
+                  console.log("worker not found")
+                }
+              }
+            }
           },
 
           fallback_url: function (event) {
