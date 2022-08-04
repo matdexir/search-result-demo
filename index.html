@@ -682,6 +682,7 @@
           displayed_hotels: [],
           NUM_WOKERS: 5,
           worker_pool: new Array(this.NUM_WOKERS),
+          query_queue: [],
           locations: [],
           language: "en",
           sorting_method: "recommended",
@@ -702,8 +703,12 @@
           // pass
         },
 
-        watch: {
-          // pass
+        watch: { // pass
+          worker_pool: function () {
+            const worker = this.worker_pool.find(wrk => wrk.busy === false);
+            const task = this.query_queue.shift();
+            worker.work.postMessage({siteminder_id: task.siteminder_digital_id, id: worker.id});
+          }
         },
 
         computed: {
@@ -834,19 +839,9 @@
                 this.worker_pool[i].busy = false;
               }
             };
-            console.log(this.displayed_hotels.length)
             for (let id = 0; id < this.displayed_hotels.length; id++) {
               if (this.displayed_hotels[id].siteminder_digital_id != null) {
-                let worker_not_found = true;
-                const current_worker = this.worker_pool.find(wrk => wrk.busy === false)
-
-                if (current_worker) {
-                  current_worker.work.postMessage({worker_id: current_worker.id, siteminder_id: this.displayed_hotels[id].siteminder_digital_id})
-                  current_worker.busy = true;
-                  worker_not_found = false
-                } else {
-                  console.log("worker not found")
-                }
+                this.query_queue.push(this.displayed_hotels[id])
               }
             }
           },
