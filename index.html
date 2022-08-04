@@ -429,7 +429,7 @@
 
       <el-button id="scroll-btn" type="info" @click="back_to_top"
         style="position: fixed; bottom: 40px; right: 20px; z-index: 99;">
-        Back to top
+        <i class="el-icon-top"></i>
       </el-button>
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
         <div class="container">
@@ -668,157 +668,167 @@
     src="https://worktel.mrhost.com.tw/libs/ion_rangeslider/js/ion.rangeSlider.min.js"></script>
   <script type="text/javascript" src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
-
-    const App = new Vue({
-      el: "#app",
-      data: {
-        first_time: false,
-        attributes: [],
-        checked_attributes: [],
-        hotels: [],
-        displayed_hotels: [],
-        locations: [],
-        language: "en",
-        sorting_method: "recommended",
-        date_range: "",
-        num_adults: 1,
-        num_infants: 0,
-        num_children: 0,
-        selected_city: 1,
-      },
-      created: function () {
-        console.log("new vue element created");
-        const me = this;
-        me.init();
-        console.log("initialized");
-      },
-      mounted() {
-        // pass
-      },
-
-      computed: {
-        // In case the image_id passed is NULL
-        default_url_alt: function () {
-          return "https://via.placeholder.com/300x150";
+    if (window.Worker) {
+      let worker_pool = [];
+      for (let i = 0; i < 11; i++) {
+        worker_pool.push(new Worker("./siteminder_worker.js"));
+        worker_pool[i].postMessage({first_name: i, last_name: "we on?"});
+      }
+      const App = new Vue({
+        el: "#app",
+        data: {
+          first_time: false,
+          attributes: [],
+          checked_attributes: [],
+          hotels: [],
+          displayed_hotels: [],
+          locations: [],
+          language: "en",
+          sorting_method: "recommended",
+          date_range: "",
+          num_adults: 1,
+          num_infants: 0,
+          num_children: 0,
+          selected_city: 1,
         },
-
-        parsed_attributes: function (hotel) {
-          return (hotel) =>
-            hotel.terms.filter((term) => {
-              term.attr_id === 5;
-            });
-        },
-
-        parsed_facilities: function (hotel) {
-          return (hotel) =>
-            hotel.terms.filter((term) => {
-              term.attr_id === 6;
-            });
-        },
-      },
-
-      methods: {
-        init: async function () {
+        created: function () {
+          console.log("new vue element created");
           const me = this;
-
-          if (!me.first_time) {
-            const api_url =
-              "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
-            const resp = await fetch(api_url).then((res) => res.json());
-
-            console.log(resp);
-            me.hotels = [...resp.hotels];
-            me.displayed_hotels = [...me.hotels];
-            me.attributes = resp.attributes;
-            me.locations = resp.locations;
-            me.first_time = true;
-          } else {
-            return;
+          me.init();
+          console.log("initialized");
+        },
+        mounted() {
+          for (worker of worker_pool) {
+            worker.onmessage = (e) => {
+              console.log(e.data);
+            }
           }
         },
 
-        sort_hotels: function () {
-          let tmp_hotels = [...this.displayed_hotels];
-          // not too sure what recommended is about but I think it is the way we received it from the backend
-          if (this.sorting_method === "recommended") {
-            if (this.checked_attributes.length === 0) {
-              this.displayed_hotels = [...this.hotels];
+        computed: {
+          // In case the image_id passed is NULL
+          default_url_alt: function () {
+            return "https://via.placeholder.com/300x150";
+          },
+
+          parsed_attributes: function (hotel) {
+            return (hotel) =>
+              hotel.terms.filter((term) => {
+                term.attr_id === 5;
+              });
+          },
+
+          parsed_facilities: function (hotel) {
+            return (hotel) =>
+              hotel.terms.filter((term) => {
+                term.attr_id === 6;
+              });
+          },
+        },
+
+        methods: {
+          init: async function () {
+            const me = this;
+
+            if (!me.first_time) {
+              const api_url =
+                "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
+              const resp = await fetch(api_url).then((res) => res.json());
+
+              console.log(resp);
+              me.hotels = [...resp.hotels];
+              me.displayed_hotels = [...me.hotels];
+              me.attributes = resp.attributes;
+              me.locations = resp.locations;
+              me.first_time = true;
             } else {
+              return;
+            }
+          },
+
+          sort_hotels: function () {
+            let tmp_hotels = [...this.displayed_hotels];
+            // not too sure what recommended is about but I think it is the way we received it from the backend
+            if (this.sorting_method === "recommended") {
+              if (this.checked_attributes.length === 0) {
+                this.displayed_hotels = [...this.hotels];
+              } else {
+                this.displayed_hotels = [...tmp_hotels];
+              }
+            } else {
+              tmp_hotels = tmp_hotels.sort((a, b) => {
+                if (this.sorting_method === "price_low_high")
+                  return a.price - b.price;
+                else if (this.sorting_method === "price_high_low")
+                  return b.price - a.price;
+                else if (this.sorting_method === "rating_high_low")
+                  return b.rate - a.rate;
+              });
               this.displayed_hotels = [...tmp_hotels];
             }
-          } else {
-            tmp_hotels = tmp_hotels.sort((a, b) => {
-              if (this.sorting_method === "price_low_high")
-                return a.price - b.price;
-              else if (this.sorting_method === "price_high_low")
-                return b.price - a.price;
-              else if (this.sorting_method === "rating_high_low")
-                return b.rate - a.rate;
+          },
+          filter_hotels: function () {
+            let tmp_hotels = [...this.hotels];
+            tmp_hotels = tmp_hotels.filter((hotel) => {
+              const all_attributes = [...hotel.terms];
+              let passed = true;
+              for (let attr of this.checked_attributes) {
+                const found = all_attributes.find(elem => elem.term_id === attr);
+                if (!found) {
+                  passed = false;
+                  break;
+                }
+              }
+              return passed;
             });
             this.displayed_hotels = [...tmp_hotels];
-          }
-        },
-        filter_hotels: function () {
-          let tmp_hotels = [...this.hotels];
-          tmp_hotels = tmp_hotels.filter((hotel) => {
-            const all_attributes = [...hotel.terms];
-            let passed = true;
-            for (let attr of this.checked_attributes) {
-              const found = all_attributes.find(elem => elem.term_id === attr);
-              if (!found) {
-                passed = false;
-                break;
-              }
+          },
+
+          parse_attributes: function (hotel) {
+            return hotel.terms.filter((term) => term.attr_id === 5);
+          },
+          parse_facilities: function (hotel) {
+            return hotel.terms.filter((term) => term.attr_id === 6);
+          },
+
+          find_location: function (id) {
+            const location = this.locations.find((location) => location.id === id);
+            const lang = (this.language === "en") ? 0 : 1;
+            return location.translations[lang].name;
+          },
+          proper_language: function (component) {
+            const lang = (this.language === "en") ? 0 : 1;
+            if (component.translations.length < 2)
+              return component.translations[0].name;
+            else
+              return component.translations[lang].name;
+          },
+
+          back_to_top: function () {
+            document.body.scrollTop = 0;
+          },
+
+          fetch_data: async function () {
+            console.log("Hello world", this.selected_city)
+            const parameters = {
+              location_id: this.selected_city,
+              locale: this.language
             }
-            return passed;
-          });
-          this.displayed_hotels = [...tmp_hotels];
-        },
+            const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString()
+            const resp = await fetch(api_url).then((res) => res.json());
+            console.log(resp);
+            this.hotels = [...resp.hotels];
+            this.displayed_hotels = [...this.hotels];
+            this.attributes = resp.attributes;
+            this.locations = resp.locations;
+          },
 
-        parse_attributes: function (hotel) {
-          return hotel.terms.filter((term) => term.attr_id === 5);
+          fallback_url: function (event) {
+            event.target.src = "https://via.placeholder.com/300x150";
+          },
         },
-        parse_facilities: function (hotel) {
-          return hotel.terms.filter((term) => term.attr_id === 6);
-        },
-
-        find_location: function (id) {
-          const location = this.locations.find((location) => location.id === id);
-          const lang = (this.language === "en") ? 0 : 1;
-          return location.translations[lang].name;
-        },
-        proper_language: function (component) {
-          const lang = (this.language === "en") ? 0 : 1;
-          if (component.translations.length < 2)
-            return component.translations[0].name;
-          else
-            return component.translations[lang].name;
-        },
-
-        back_to_top: function () {
-          document.body.scrollTop = 0;
-        },
-
-        fetch_data: async function () {
-          console.log("Hello world", this.selected_city)
-          const parameters = {
-            location_id: this.selected_city,
-            locale: this.language
-          }
-          const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString()
-          const resp = await fetch(api_url).then((res) => res.json());
-          console.log(resp);
-          this.hotels = [...resp.hotels];
-          this.displayed_hotels = [...this.hotels];
-          this.attributes = resp.attributes;
-          this.locations = resp.locations;
-        },
-
-        fallback_url: function (event) {
-          event.target.src = "https://via.placeholder.com/300x150";
-        },
-      },
-    });
+      });
+    }
 
   </script>
   <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" -->
