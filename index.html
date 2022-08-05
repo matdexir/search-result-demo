@@ -571,7 +571,7 @@
                     </a>
 
                   </el-col>
-                  <el-col :xs="24" :sm="24" :md="16" class="hotel-details">
+                  <el-col :xs="24" :sm="16" :md="16" class="hotel-details">
                     <el-row>
                       <span class="float-left hotel-title">{{ hotel.title }}</span>
                       <span v-if="hotel.rate" class="float-right hotel-rating">
@@ -586,7 +586,7 @@
                     </el-row>
                     <el-row class="details-row">
 
-                      <el-col :xs=" 24" :sm="24" :md="18" class="attributes-col" style="border-style: solid 2px;">
+                      <el-col :xs=" 24" :sm="18" :md="18" class="attributes-col" style="border-style: solid 2px;">
                         <el-row style="margin-top: 5px;">
                           <span v-for="attribute in parse_attributes(hotel)" class="features-list-el"
                             name="attribute.id">
