@@ -1,5 +1,6 @@
 onmessage = async (e) => {
-  const siteminder_id = e.data.siteminder_id;
+  const siteminder_id = e.data.task.siteminder_id;
+
   console.log(e.data, typeof siteminder_id);
 
   const URL = "https://book-directonline.com/api/graphql";
@@ -13,8 +14,8 @@ onmessage = async (e) => {
       variables: {
         propertyId: parseInt(siteminder_id),
         promocode: "",
-        checkInDate: "2022-08-09",
-        checkOutDate: "2022-08-10",
+        checkInDate: "2022-08-10",
+        checkOutDate: "2022-08-12",
         adults: 1,
         children: 0,
         infants: 0,
@@ -28,12 +29,15 @@ onmessage = async (e) => {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 
+  if (resp === undefined) {
+    postMessage({ error: "Request failed" });
+    return;
+  }
   const rooms = [...resp.data.quoteSets];
   let min_price = Infinity;
 
   for (let room of rooms) {
     min_price = Math.min(room.price.amount, min_price);
   }
-  console.log(rooms, e.data.worker_id, min_price);
-  postMessage({ data: e.data, price: min_price });
+  postMessage({ task: e.data.task, price: min_price, err: null });
 };

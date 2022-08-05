@@ -434,7 +434,7 @@
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
-            <el-select :xs="24" v-model="selected_city" filterable placeholder="City" @change="fetch_data">
+            <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
                 {{find_location(location.id)}}
@@ -475,7 +475,7 @@
                 </el-row>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button style="background-color: #EC3E3F; color: #FFF;">
+            <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data">
               <span v-if="language === 'en'">
                 SEARCH
               </span>
@@ -596,10 +596,10 @@
                       <el-col :xs="24" :sm="24" :md="6" class="pricing-col">
                         <div v-if="hotel.price" class="ratings-price float-right">
                           <span v-if="language ==='en' ">
-                            {{ hotel.price.slice(0, -3) }} NT
+                            {{ Math.floor(parseInt(hotel.price)) }} NT
                           </span>
                           <span v-else>
-                            NT {{ hotel.price.slice(0, -3)}}起
+                            NT {{ Math.floor(parseInt(hotel.price)) }}起
                           </span>
                         </div>
                         <div v-else class="ratings-price float-right"> -- </div>
@@ -680,7 +680,7 @@
           checked_attributes: [],
           hotels: [],
           displayed_hotels: [],
-          NUM_WOKERS: 5,
+          NUM_WOKERS: 150,
           worker_pool: new Array(this.NUM_WOKERS),
           query_queue: [],
           locations: [],
@@ -703,12 +703,18 @@
           // pass
         },
 
-        watch: { // pass
+        watch: {
           worker_pool: function () {
             const worker = this.worker_pool.find(wrk => wrk.busy === false);
             const task = this.query_queue.shift();
-            worker.work.postMessage({siteminder_id: task.siteminder_digital_id, id: worker.id});
-          }
+            if (worker === undefined || task === undefined)
+              return;
+            let pool_copy = [...this.worker_pool]
+            pool_copy[worker.id].busy = true;
+            pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
+            this.worker_pool = pool_copy;
+            console.log("worker is dispatched", pool_copy[worker.id]);
+          },
         },
 
         computed: {
@@ -836,12 +842,15 @@
               this.worker_pool[i] = {work: new Worker("./siteminder_worker.js"), busy: false, id: i};
               this.worker_pool[i].work.onmessage = (e) => {
                 console.log(e.data, this.worker_pool[i].id, "worker is reset");
+                const array_id = e.data.task.hotel_in_array_id;
+                this.displayed_hotels[array_id].price = Math.floor(e.data.price)
+                console.log(e.data.price, array_id, this.displayed_hotels)
                 this.worker_pool[i].busy = false;
               }
             };
             for (let id = 0; id < this.displayed_hotels.length; id++) {
               if (this.displayed_hotels[id].siteminder_digital_id != null) {
-                this.query_queue.push(this.displayed_hotels[id])
+                this.query_queue.push({siteminder_id: this.displayed_hotels[id].siteminder_digital_id, hotel_in_array_id: id})
               }
             }
           },
