@@ -5,10 +5,16 @@ onmessage = async (e) => {
   const adults = e.data.task.adults;
   const children = e.data.task.children;
   const infants = e.data.task.infants;
+  const sleep_time = 100;
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 
   console.log(e.data, typeof siteminder_id);
 
   const URL = "https://book-directonline.com/api/graphql";
+  await sleep(sleep_time);
   const resp = await fetch(URL, {
     method: "POST",
     headers: {
