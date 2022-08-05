@@ -1,5 +1,10 @@
 onmessage = async (e) => {
   const siteminder_id = e.data.task.siteminder_id;
+  const start_date = e.data.task.date_start;
+  const end_date = e.data.task.date_end;
+  const adults = e.data.task.adults;
+  const children = e.data.task.children;
+  const infants = e.data.task.infants;
 
   console.log(e.data, typeof siteminder_id);
 
@@ -14,11 +19,11 @@ onmessage = async (e) => {
       variables: {
         propertyId: parseInt(siteminder_id),
         promocode: "",
-        checkInDate: "2022-08-10",
-        checkOutDate: "2022-08-12",
-        adults: 1,
-        children: 0,
-        infants: 0,
+        checkInDate: start_date,
+        checkOutDate: end_date,
+        adults: adults,
+        children: children,
+        infants: infants,
         currencyFrom: "TWD",
         currencyTo: "TWD",
       },

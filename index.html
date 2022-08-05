@@ -428,7 +428,7 @@
       </div>
 
       <el-button id="scroll-btn" type="info" @click="back_to_top"
-        style="position: fixed; bottom: 40px; right: 20px; z-index: 99;">
+        style="position: fixed; bottom: 40px; right: 20px; z-index: 99; background-color: #EC3E3F;">
         <i class="el-icon-top"></i>
       </el-button>
       <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
@@ -437,10 +437,9 @@
             <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
-                {{find_location(location.id)}}
+                {{ find_location(location.id) }}
               </el-option>
             </el-select>
-            {{ date_range }}
             <el-date-picker v-model="date_range" type="daterange" range-separator="|">
             </el-date-picker>
             <el-dropdown class="guests-type-selection" trigger="click">
@@ -560,8 +559,11 @@
               <div v-for="hotel in displayed_hotels">
                 <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
                   <el-col class="image-container" :xs=" 24" :sm="24" :md="8">
-                    <img width="100%" :src="hotel.image_id || default_url_alt" :alt="hotel.title"
-                      class="image image-el-card" @error="fallback_url">
+                    <a :href="hotel.detail_url">
+                      <img width="100%" :src="hotel.image_id || default_url_alt" :alt="hotel.title"
+                        class="image image-el-card" @error="fallback_url">
+                    </a>
+
                   </el-col>
                   <el-col :xs="24" :sm="24" :md="16" class="hotel-details">
                     <el-row>
@@ -671,7 +673,8 @@
   <script>
     if (window.Worker) {
 
-
+      const today = new Date()
+      const tomorrow = new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000)
       const App = new Vue({
         el: "#app",
         data: {
@@ -686,7 +689,7 @@
           locations: [],
           language: "en",
           sorting_method: "recommended",
-          date_range: "",
+          date_range: [today, tomorrow],
           num_adults: 1,
           num_infants: 0,
           num_children: 0,
@@ -713,7 +716,7 @@
             pool_copy[worker.id].busy = true;
             pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
             this.worker_pool = pool_copy;
-            console.log("worker is dispatched", pool_copy[worker.id]);
+            // console.log("worker is dispatched", pool_copy[worker.id]);
           },
         },
 
@@ -844,13 +847,21 @@
                 console.log(e.data, this.worker_pool[i].id, "worker is reset");
                 const array_id = e.data.task.hotel_in_array_id;
                 this.displayed_hotels[array_id].price = Math.floor(e.data.price)
-                console.log(e.data.price, array_id, this.displayed_hotels)
+                // console.log(e.data.price, array_id, this.displayed_hotels)
                 this.worker_pool[i].busy = false;
               }
             };
             for (let id = 0; id < this.displayed_hotels.length; id++) {
               if (this.displayed_hotels[id].siteminder_digital_id != null) {
-                this.query_queue.push({siteminder_id: this.displayed_hotels[id].siteminder_digital_id, hotel_in_array_id: id})
+                this.query_queue.push({
+                  siteminder_id: this.displayed_hotels[id].siteminder_digital_id,
+                  hotel_in_array_id: id,
+                  date_start: this.date_range[0].toISOString().slice(0, 10),
+                  date_end: this.date_range[1].toISOString().slice(0, 10),
+                  adults: this.num_adults,
+                  children: this.num_children,
+                  infants: this.num_infants,
+                })
               }
             }
           },
