@@ -652,6 +652,14 @@
   <script type="text/javascript" src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
     if (window.Worker) {
+      let MAX_WORKERS = 0;
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        // true for mobile device
+        MAX_WORKERS = 0;
+      } else {
+        // false for not mobile device
+        MAX_WORKERS = 150;
+      }
 
       const today = new Date()
       const tomorrow = new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000)
@@ -664,7 +672,7 @@
           checked_attributes: [],
           hotels: [],
           displayed_hotels: [],
-          NUM_WORKERS: 0,
+          NUM_WORKERS: MAX_WORKERS,
           worker_pool: new Array(this.NUM_WORKERS),
           query_queue: [],
           locations: [],
