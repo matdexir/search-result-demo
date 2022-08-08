@@ -848,8 +848,11 @@
           },
           proper_language: function (component) {
             const lang = (this.language === "en") ? 0 : 1;
-            if (component.translations.length < 2)
+            if (component.translations.length < 2) {
+              if (lang === 0) // english 
+                return component.name
               return component.translations[0].name;
+            }
             else
               return component.translations[lang].name;
           },
@@ -866,6 +869,7 @@
               locale: this.language
             }
             const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString()
+            this.sorting_method = "recommended";
             const resp = await fetch(api_url).then((res) => res.json());
             console.log(resp);
             this.hotels = [...resp.hotels];
