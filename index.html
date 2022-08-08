@@ -734,8 +734,13 @@
           init: async function () {
             const me = this;
             if (!me.first_time) {
+              const parameters = {
+                location_id: this.selected_city,
+                locale: this.language
+              }
               const api_url =
-                "https://worktel.mrhost.com.tw/api/SearchHotels_v2?location_id=1&locale=en";
+                "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString();
+
               const resp = await fetch(api_url)
                 .then((res) => res.json())
                 .catch((err) => {
@@ -843,7 +848,7 @@
               location_id: this.selected_city,
               locale: this.language
             }
-            const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString()
+            const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString();
             this.sorting_method = "recommended";
             const resp = await fetch(api_url).then((res) => res.json());
             console.log(resp);
