@@ -152,32 +152,6 @@
 
   </script>
 
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        xfbml: true,
-        version: 'v14.0'
-      });
-    };
-
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-PFDMNDP');</script>
-
   <style>
     html {
       scroll-behavior: smooth;
@@ -566,8 +540,8 @@
                       <span v-else>售完</span>
                     </div>
                     <a :href="hotel.detail_url">
-                      <img width="100%" :src="hotel.image_id || default_url_alt" :alt="hotel.title"
-                        class="image image-el-card" @error="fallback_url">
+                      <img :src="hotel.image_id || default_url_alt" :alt="hotel.title" class="image image-el-card"
+                        @error="fallback_url">
                     </a>
 
                   </el-col>
@@ -832,6 +806,7 @@
               (hotel) => parseInt(hotel.price) > 0
             )
             this.displayed_hotels = [...available, ...sold_out];
+            console.profileEnd();
           },
 
           parse_attributes: function (hotel) {
@@ -925,12 +900,6 @@
     }
 
   </script>
-  <!-- <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194" -->
-  <!--   integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw==" -->
-  <!--   data-cf-beacon='{"rayId":"72c823974ed40b8b","version":"2022.6.0","r":1,"token":"ce5102fc2ace4254864d17a480cce967","si":100}' -->
-  <!--   crossorigin="anonymous"></script> -->
-
-  <!-- <script type="text/javascript" src="./js/hotel-search.js"></script> -->
 </body>
 
 
