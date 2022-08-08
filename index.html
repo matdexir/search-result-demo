@@ -499,7 +499,7 @@
                 <el-collapse v-model="shown_attributes">
                   <el-collapse-item v-for="attribute in attributes" :name="attribute.slug">
                     <template slot="title">
-                      <span style="margin-left: 1rem;"> {{ proper_language(attribute) }}</span>
+                      <span style="margin-left: 1rem; font-weight: 700;"> {{ proper_language(attribute) }}</span>
                     </template>
                     <el-checkbox-group v-model="checked_attributes" @change="filter_hotels">
                       <el-col>
@@ -705,7 +705,8 @@
           error: 0,
           date_picker_options: {
             disabledDate(time) {
-              return time.getTime() < Date.now() - 3600 * 1000 * 24;
+              const day = 3600 * 1000 * 24;
+              return time.getTime() < Date.now() - day;
             },
           },
         },
