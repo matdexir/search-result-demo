@@ -377,7 +377,7 @@
         <div class="content">
           <div class="header-left">
             <a href="https://worktel.mrhost.com.tw" class="bravo-logo">
-              <img src="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/21/logo-300.png"
+              <img decoding="async" src="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/21/logo-300.png"
                 alt="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform">
             </a>
             <div class="bravo-menu">
@@ -540,8 +540,8 @@
                       <span v-else>售完</span>
                     </div>
                     <a :href="hotel.detail_url">
-                      <img :src="hotel.image_id || default_url_alt" :alt="hotel.title" class="image image-el-card"
-                        @error="fallback_url">
+                      <img :src="hotel.image_id || default_url_alt" decoding="async" :alt="hotel.title"
+                        class="image image-el-card" @error="fallback_url">
                     </a>
 
                   </el-col>
@@ -619,7 +619,7 @@
     </div>
   </div>
   <link rel="stylesheet" href="https://worktel.mrhost.com.tw/libs/flags/css/flag-icon.min.css">
-  <script src="https://worktel.mrhost.com.tw/libs/lazy-load/intersection-observer.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/lazy-load/intersection-observer.js"></script>
   <script async src="https://worktel.mrhost.com.tw/libs/lazy-load/lazyload.min.js"></script>
   <script>
     // Set the options to make LazyLoad self-initialize
@@ -635,21 +635,23 @@
 
 
   </script>
-  <script src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
   <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"></script>
-  <script type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/moment.min.js"></script>
-  <script type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/libs/select2/js/select2.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/js/functions.js?_ver=1.0.12"></script>
-  <script src="https://worktel.mrhost.com.tw/libs/pusher.min.js"></script>
-  <script src="https://worktel.mrhost.com.tw/js/home.js?_ver=1.0.12"></script>
-  <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"></script>
+  <script defer type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/moment.min.js"></script>
+  <script defer type="text/javascript"
+    src="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/select2/js/select2.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/js/functions.js?_ver=1.0.12"></script>
+  <script defer src="https://worktel.mrhost.com.tw/js/home.js?_ver=1.0.12"></script>
+  <script defer src="https://apps.elfsight.com/p/platform.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/pusher.min.js"></script>
   <script type="text/javascript"
     src="https://worktel.mrhost.com.tw/libs/ion_rangeslider/js/ion.rangeSlider.min.js"></script>
-  <script type="text/javascript" src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
+  <script defer type="text/javascript"
+    src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
     if (window.Worker) {
       let MAX_WORKERS = 0;
