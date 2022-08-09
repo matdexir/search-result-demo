@@ -658,7 +658,7 @@
         MAX_WORKERS = 0;
       } else {
         // false for not mobile device
-        MAX_WORKERS = 150;
+        MAX_WORKERS = 15;
       }
 
       const today = new Date()
@@ -880,29 +880,37 @@
                   this.error++;
                   return;
                 }
-                const array_id = e.data.task.hotel_in_array_id;
+                const array_id = e.data.hotel_in_array_id;
                 const total_days = (this.date_range[1] - this.date_range[0]) / (3600 * 1000 * 24);
                 console.log(total_days)
                 this.displayed_hotels[array_id].price = Math.floor(e.data.price / total_days)
                 // console.log(e.data.price, array_id, this.displayed_hotels)
                 this.worker_pool[i].busy = false;
-                this.worker_pool[i].work.terminate();
+                // this.worker_pool[i].work.terminate();
               }
             };
+            let siteminder_queue = [];
             for (let id = 0; id < this.displayed_hotels.length; id++) {
               if (this.displayed_hotels[id].siteminder_digital_id != null) {
-                this.query_queue.push({
+                siteminder_queue.push({
                   siteminder_id: this.displayed_hotels[id].siteminder_digital_id,
                   hotel_in_array_id: id,
-                  date_start: this.date_range[0].toISOString().slice(0, 10),
-                  date_end: this.date_range[1].toISOString().slice(0, 10),
-                  adults: this.num_adults,
-                  children: this.num_children,
-                  infants: this.num_infants,
-                })
+                });
+                if ((id && id % this.NUM_WORKERS === 0) || id === this.displayed_hotels.length - 1) {
+                  this.query_queue.push({
+                    siteminder_queue: [...siteminder_queue],
+                    hotel_in_array_id: id,
+                    date_start: this.date_range[0].toISOString().slice(0, 10),
+                    date_end: this.date_range[1].toISOString().slice(0, 10),
+                    adults: this.num_adults,
+                    children: this.num_children,
+                    infants: this.num_infants,
+                  })
+                  siteminder_queue = [];
+                }
               }
             }
-            console.log("query_queue", this.query_queue.length);
+            console.log("query_queue", this.query_queue);
           },
 
           fallback_url: function (event) {
