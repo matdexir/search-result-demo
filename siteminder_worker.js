@@ -13,7 +13,7 @@ onmessage = async (e) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  console.log(e.data, typeof siteminder_id);
+  // console.log(e.data, typeof siteminder_id);
 
   const URL = "https://book-directonline.com/api/graphql";
   for (let siteminder_query of siteminder_queue) {
@@ -49,12 +49,17 @@ onmessage = async (e) => {
     }
     const rooms = [...resp.data.quoteSets];
     let min_price = Infinity;
-
+    let sold_out = true;
     for (let room of rooms) {
       min_price = Math.min(room.price.amount, min_price);
+      console.log(rooms, room.available, min_price);
+      if (room.available > 0) {
+        sold_out = false;
+      }
     }
     postMessage({
       hotel_in_array_id: siteminder_query.hotel_in_array_id,
+      sold_out: sold_out,
       price: min_price,
       err: null,
     });

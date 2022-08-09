@@ -532,7 +532,7 @@
               <div v-for="hotel in displayed_hotels">
                 <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
                   <el-col class="image-container" :xs=" 24" :sm="24" :md="8" style="position: relative;">
-                    <div v-if=" !hotel.price"
+                    <div v-if="hotel.sold_out"
                       style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; color: #FFF; font-weight: 500; padding: 5px;">
                       <span v-if="language === 'en'">Sold out</span>
                       <span v-else>售完</span>
@@ -652,7 +652,8 @@
     src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
     if (window.Worker) {
-      let MAX_WORKERS = 0;
+      let MAX_WORKERS = 5;
+      /*
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         // true for mobile device
         MAX_WORKERS = 0;
@@ -660,9 +661,10 @@
         // false for not mobile device
         MAX_WORKERS = 15;
       }
+   */
 
       const today = new Date()
-      const tomorrow = new Date(today.getTime() + 1 * 24 * 60 * 60 * 1000)
+      const end_date = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000)
       const App = new Vue({
         el: "#app",
         data: {
@@ -678,7 +680,7 @@
           locations: [],
           language: "en",
           sorting_method: "recommended",
-          date_range: [today, tomorrow],
+          date_range: [today, end_date],
           shown_attributes: ["property-type", "facilities-1"],
           num_adults: 1,
           num_infants: 0,
@@ -715,6 +717,18 @@
             this.worker_pool = pool_copy;
             // console.log("worker is dispatched", pool_copy[worker.id]);
           },
+          /*
+          displayed_hotels: function () {
+            const sold_out = this.displayed_hotels.filter(
+              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
+            )
+            console.log("sold out array", sold_out);
+            let tmp_hotels = this.displayed_hotels.filter(
+              (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
+            )
+            this.displayed_hotels = [...tmp_hotels, ...sold_out];
+          }
+              */
         },
 
         computed: {
@@ -758,7 +772,7 @@
               console.log(resp);
               me.hotels = [...resp.hotels];
               const sold_out = me.hotels.filter(
-                (hotel) => parseInt(hotel.price) === 0 || hotel.price === null
+                (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
               )
               const available = me.hotels.filter(
                 (hotel) => parseInt(hotel.price) > 0
@@ -774,18 +788,15 @@
 
           sort_hotels: function () {
             const sold_out = this.displayed_hotels.filter(
-              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null
+              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
             )
+            console.log("sold out array", sold_out);
             let tmp_hotels = this.displayed_hotels.filter(
-              (hotel) => parseInt(hotel.price) > 0
+              (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
             )
             // not too sure what recommended is about but I think it is the way we received it from the backend
             if (this.sorting_method === "recommended") {
-              if (this.checked_attributes.length === 0) {
-                this.displayed_hotels = [...this.hotels];
-              } else {
-                this.displayed_hotels = [...tmp_hotels, ...sold_out];
-              }
+              this.displayed_hotels = [...tmp_hotels, ...sold_out];
             } else {
               tmp_hotels = tmp_hotels.sort((a, b) => {
                 if (this.sorting_method === "price_low_high")
@@ -813,13 +824,12 @@
               return passed;
             });
             const sold_out = tmp_hotels.filter(
-              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null
+              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
             )
             const available = tmp_hotels.filter(
               (hotel) => parseInt(hotel.price) > 0
             )
             this.displayed_hotels = [...available, ...sold_out];
-            console.profileEnd();
           },
 
           parse_attributes: function (hotel) {
@@ -862,7 +872,7 @@
             console.log(resp);
             this.hotels = [...resp.hotels];
             const sold_out = this.hotels.filter(
-              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null
+              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
             )
             const available = this.hotels.filter(
               (hotel) => parseInt(hotel.price) > 0
@@ -882,8 +892,8 @@
                 }
                 const array_id = e.data.hotel_in_array_id;
                 const total_days = (this.date_range[1] - this.date_range[0]) / (3600 * 1000 * 24);
-                console.log(total_days)
                 this.displayed_hotels[array_id].price = Math.floor(e.data.price / total_days)
+                this.displayed_hotels[array_id].sold_out = e.data.sold_out;
                 // console.log(e.data.price, array_id, this.displayed_hotels)
                 this.worker_pool[i].busy = false;
                 // this.worker_pool[i].work.terminate();
