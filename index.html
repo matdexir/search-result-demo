@@ -900,24 +900,27 @@
               }
             };
             let siteminder_queue = [];
+            let period = Math.floor(this.displayed_hotels.length / this.NUM_WORKERS);
             for (let id = 0; id < this.displayed_hotels.length; id++) {
               if (this.displayed_hotels[id].siteminder_digital_id != null) {
                 siteminder_queue.push({
                   siteminder_id: this.displayed_hotels[id].siteminder_digital_id,
                   hotel_in_array_id: id,
                 });
-                if ((id && id % this.NUM_WORKERS === 0) || id === this.displayed_hotels.length - 1) {
-                  this.query_queue.push({
-                    siteminder_queue: [...siteminder_queue],
-                    hotel_in_array_id: id,
-                    date_start: this.date_range[0].toISOString().slice(0, 10),
-                    date_end: this.date_range[1].toISOString().slice(0, 10),
-                    adults: this.num_adults,
-                    children: this.num_children,
-                    infants: this.num_infants,
-                  })
-                  siteminder_queue = [];
-                }
+              }
+              console.log("period & id", period, id)
+              if ((id && (id % period === 0)) || id === this.displayed_hotels.length - 1) {
+                console.log(id, period, siteminder_queue)
+                this.query_queue.push({
+                  siteminder_queue: [...siteminder_queue],
+                  hotel_in_array_id: id,
+                  date_start: this.date_range[0].toISOString().slice(0, 10),
+                  date_end: this.date_range[1].toISOString().slice(0, 10),
+                  adults: this.num_adults,
+                  children: this.num_children,
+                  infants: this.num_infants,
+                })
+                siteminder_queue = [];
               }
             }
             console.log("query_queue", this.query_queue);
