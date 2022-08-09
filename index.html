@@ -754,8 +754,7 @@
 
         methods: {
           init: async function () {
-            const me = this;
-            if (!me.first_time) {
+            if (!this.first_time) {
               const parameters = {
                 location_id: this.selected_city,
                 locale: this.language
@@ -770,17 +769,19 @@
                 });
 
               console.log(resp);
-              me.hotels = [...resp.hotels];
-              const sold_out = me.hotels.filter(
+              this.hotels = [...resp.hotels];
+              this.worker_pool = [];
+              this.dynamic_price_update();
+              const sold_out = this.hotels.filter(
                 (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
               )
-              const available = me.hotels.filter(
+              const available = this.hotels.filter(
                 (hotel) => parseInt(hotel.price) > 0
               )
-              me.displayed_hotels = [...available, ...sold_out];
-              me.attributes = resp.attributes;
-              me.locations = resp.locations;
-              me.first_time = true;
+              this.displayed_hotels = [...available, ...sold_out];
+              this.attributes = resp.attributes;
+              this.locations = resp.locations;
+              this.first_time = true;
             } else {
               return;
             }
@@ -859,29 +860,7 @@
             document.body.scrollTop = 0;
           },
 
-          fetch_data: async function () {
-            this.displayed_hotels = []
-            this.error = 0;
-            const parameters = {
-              location_id: this.selected_city,
-              locale: this.language
-            }
-            const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString();
-            this.sorting_method = "recommended";
-            const resp = await fetch(api_url).then((res) => res.json());
-            console.log(resp);
-            this.hotels = [...resp.hotels];
-            const sold_out = this.hotels.filter(
-              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
-            )
-            const available = this.hotels.filter(
-              (hotel) => parseInt(hotel.price) > 0
-            )
-            this.displayed_hotels = [...available, ...sold_out];
-            this.attributes = resp.attributes;
-            this.locations = resp.locations;
-            this.worker_pool = [];
-
+          dynamic_price_update: function () {
             for (let i = 0; i < this.NUM_WORKERS; i++) {
               this.worker_pool[i] = {work: new Worker("./siteminder_worker.js"), busy: false, id: i};
               this.worker_pool[i].work.onmessage = (e) => {
@@ -892,24 +871,24 @@
                 }
                 const array_id = e.data.hotel_in_array_id;
                 const total_days = (this.date_range[1] - this.date_range[0]) / (3600 * 1000 * 24);
-                this.displayed_hotels[array_id].price = Math.floor(e.data.price / total_days)
-                this.displayed_hotels[array_id].sold_out = e.data.sold_out;
-                // console.log(e.data.price, array_id, this.displayed_hotels)
+                this.hotels[array_id].price = Math.floor(e.data.price / total_days)
+                this.hotels[array_id].sold_out = e.data.sold_out;
+                // console.log(e.data.price, array_id, this.hotels)
                 this.worker_pool[i].busy = false;
                 // this.worker_pool[i].work.terminate();
               }
             };
             let siteminder_queue = [];
-            let period = Math.floor(this.displayed_hotels.length / this.NUM_WORKERS);
-            for (let id = 0; id < this.displayed_hotels.length; id++) {
-              if (this.displayed_hotels[id].siteminder_digital_id != null) {
+            let period = Math.floor(this.hotels.length / this.NUM_WORKERS);
+            for (let id = 0; id < this.hotels.length; id++) {
+              if (this.hotels[id].siteminder_digital_id != null) {
                 siteminder_queue.push({
-                  siteminder_id: this.displayed_hotels[id].siteminder_digital_id,
+                  siteminder_id: this.hotels[id].siteminder_digital_id,
                   hotel_in_array_id: id,
                 });
               }
               console.log("period & id", period, id)
-              if ((id && (id % period === 0)) || id === this.displayed_hotels.length - 1) {
+              if ((id && (id % period === 0)) || id === this.hotels.length - 1) {
                 console.log(id, period, siteminder_queue)
                 this.query_queue.push({
                   siteminder_queue: [...siteminder_queue],
@@ -924,6 +903,33 @@
               }
             }
             console.log("query_queue", this.query_queue);
+
+          },
+
+          fetch_data: async function () {
+            this.displayed_hotels = []
+            this.error = 0;
+            const parameters = {
+              location_id: this.selected_city,
+              locale: this.language
+            }
+            const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString();
+            this.sorting_method = "recommended";
+            const resp = await fetch(api_url).then((res) => res.json());
+            console.log(resp);
+            this.hotels = [...resp.hotels];
+            this.worker_pool = [];
+            this.dynamic_price_update();
+            const sold_out = this.hotels.filter(
+              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
+            )
+            const available = this.hotels.filter(
+              (hotel) => parseInt(hotel.price) > 0
+            )
+            this.displayed_hotels = [...available, ...sold_out];
+            this.attributes = resp.attributes;
+            this.locations = resp.locations;
+
           },
 
           fallback_url: function (event) {
