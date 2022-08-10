@@ -13,8 +13,6 @@ onmessage = async (e) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  // console.log(e.data, typeof siteminder_id);
-
   const URL = "https://book-directonline.com/api/graphql";
   for (let siteminder_query of siteminder_queue) {
     await sleep(sleep_time);
