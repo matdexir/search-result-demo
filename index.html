@@ -558,7 +558,7 @@
                     </el-row>
                     <el-row class="details-row">
 
-                      <el-col :xs=" 24" :sm="18" :md="18" class="attributes-col" style="border-style: solid 2px;">
+                      <el-col :xs=" 24" :sm="16" :md="16" class="attributes-col" style="border-style: solid 2px;">
                         <el-row style="margin-top: 5px;">
                           <span v-for="attribute in parse_attributes(hotel)" class="features-list-el"
                             name="attribute.id">
@@ -573,10 +573,10 @@
                         </el-row>
                       </el-col>
 
-                      <el-col :xs="24" :sm="24" :md="6" class="pricing-col">
+                      <el-col :xs="24" :sm="24" :md="8" class="pricing-col">
                         <div v-if="hotel.price" class="ratings-price float-right">
                           <span v-if="language ==='en' ">
-                            {{ Math.floor(parseInt(hotel.price)) }} NT
+                            From {{ Math.floor(parseInt(hotel.price)) }} NT
                           </span>
                           <span v-else>
                             NT {{ Math.floor(parseInt(hotel.price)) }}起
@@ -652,7 +652,7 @@
     src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
     if (window.Worker) {
-      let MAX_WORKERS = 5;
+      let MAX_WORKERS = 15;
       /*
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         // true for mobile device
@@ -711,24 +711,12 @@
             const task = this.query_queue.shift();
             if (worker === undefined || task === undefined)
               return;
-            let pool_copy = [...this.worker_pool]
+            let pool_copy = [...this.worker_pool];
             pool_copy[worker.id].busy = true;
             pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
             this.worker_pool = pool_copy;
             // console.log("worker is dispatched", pool_copy[worker.id]);
           },
-          /*
-          displayed_hotels: function () {
-            const sold_out = this.displayed_hotels.filter(
-              (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
-            )
-            console.log("sold out array", sold_out);
-            let tmp_hotels = this.displayed_hotels.filter(
-              (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
-            )
-            this.displayed_hotels = [...tmp_hotels, ...sold_out];
-          }
-              */
         },
 
         computed: {
@@ -758,7 +746,7 @@
               const parameters = {
                 location_id: this.selected_city,
                 locale: this.language
-              }
+              };
               const api_url =
                 "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString();
 
@@ -772,11 +760,17 @@
               this.hotels = [...resp.hotels];
               this.worker_pool = [];
               this.dynamic_price_update();
+              /*
+              function sleep(ms) {
+                return new Promise((resolve) => setTimeout(resolve, ms));
+              }
+              await sleep(5000);
+              */
               const sold_out = this.hotels.filter(
                 (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
               )
               const available = this.hotels.filter(
-                (hotel) => parseInt(hotel.price) > 0
+                (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
               )
               this.displayed_hotels = [...available, ...sold_out];
               this.attributes = resp.attributes;
@@ -791,7 +785,7 @@
             const sold_out = this.displayed_hotels.filter(
               (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
             )
-            console.log("sold out array", sold_out);
+            // console.log("sold out array", sold_out);
             let tmp_hotels = this.displayed_hotels.filter(
               (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
             )
@@ -828,7 +822,7 @@
               (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
             )
             const available = tmp_hotels.filter(
-              (hotel) => parseInt(hotel.price) > 0
+              (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
             )
             this.displayed_hotels = [...available, ...sold_out];
           },
@@ -875,7 +869,6 @@
                 this.hotels[array_id].sold_out = e.data.sold_out;
                 // console.log(e.data.price, array_id, this.hotels)
                 this.worker_pool[i].busy = false;
-                // this.worker_pool[i].work.terminate();
               }
             };
             let siteminder_queue = [];
@@ -886,10 +879,9 @@
                   siteminder_id: this.hotels[id].siteminder_digital_id,
                   hotel_in_array_id: id,
                 });
-              }
-              console.log("period & id", period, id)
+              };
               if ((id && (id % period === 0)) || id === this.hotels.length - 1) {
-                console.log(id, period, siteminder_queue)
+                // console.log(id, period, siteminder_queue)
                 this.query_queue.push({
                   siteminder_queue: [...siteminder_queue],
                   hotel_in_array_id: id,
@@ -898,21 +890,21 @@
                   adults: this.num_adults,
                   children: this.num_children,
                   infants: this.num_infants,
-                })
+                });
                 siteminder_queue = [];
-              }
+              };
             }
             console.log("query_queue", this.query_queue);
 
           },
 
           fetch_data: async function () {
-            this.displayed_hotels = []
+            this.displayed_hotels = [];
             this.error = 0;
             const parameters = {
               location_id: this.selected_city,
               locale: this.language
-            }
+            };
             const api_url = "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" + new URLSearchParams(parameters).toString();
             this.sorting_method = "recommended";
             const resp = await fetch(api_url).then((res) => res.json());
@@ -922,10 +914,10 @@
             this.dynamic_price_update();
             const sold_out = this.hotels.filter(
               (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
-            )
+            );
             const available = this.hotels.filter(
               (hotel) => parseInt(hotel.price) > 0
-            )
+            );
             this.displayed_hotels = [...available, ...sold_out];
             this.attributes = resp.attributes;
             this.locations = resp.locations;
