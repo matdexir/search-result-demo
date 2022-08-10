@@ -407,6 +407,7 @@
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
             <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
+              <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
                 {{ find_location(location.id) }}
@@ -706,17 +707,20 @@
         },
 
         watch: {
-          worker_pool: function () {
-            const worker = this.worker_pool.find(wrk => wrk.busy === false);
-            const task = this.query_queue.shift();
-            if (worker === undefined || task === undefined)
-              return;
-            let pool_copy = [...this.worker_pool];
-            pool_copy[worker.id].busy = true;
-            pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
-            this.worker_pool = pool_copy;
-            // console.log("worker is dispatched", pool_copy[worker.id]);
-          },
+          /*
+      worker_pool: function () {
+        const worker = this.worker_pool.find(wrk => wrk.busy === false);
+        const task = this.query_queue.shift();
+        if (worker === undefined || task === undefined) {
+          return;
+        }
+        let pool_copy = [...this.worker_pool];
+        pool_copy[worker.id].busy = true;
+        pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
+        this.worker_pool = pool_copy;
+        // console.log("worker is dispatched", pool_copy[worker.id]);
+      },
+          */
         },
 
         computed: {
@@ -760,12 +764,6 @@
               this.hotels = [...resp.hotels];
               this.worker_pool = [];
               this.dynamic_price_update();
-              /*
-              function sleep(ms) {
-                return new Promise((resolve) => setTimeout(resolve, ms));
-              }
-              await sleep(5000);
-              */
               const sold_out = this.hotels.filter(
                 (hotel) => parseInt(hotel.price) === 0 || hotel.price === null || hotel.sold_out === true
               )
@@ -856,9 +854,9 @@
 
           dynamic_price_update: function () {
             for (let i = 0; i < this.NUM_WORKERS; i++) {
-              this.worker_pool[i] = {work: new Worker("./siteminder_worker.js"), busy: false, id: i};
+              this.worker_pool[i] = {work: new Worker("./siteminder_worker.js"), id: i};
               this.worker_pool[i].work.onmessage = (e) => {
-                console.log(e.data, this.worker_pool[i].id, "worker is reset");
+                console.log(e.data, this.worker_pool[i].id, "worker returned");
                 if (e.data.error != null) {
                   this.error++;
                   return;
@@ -868,7 +866,6 @@
                 this.hotels[array_id].price = Math.floor(e.data.price / total_days)
                 this.hotels[array_id].sold_out = e.data.sold_out;
                 // console.log(e.data.price, array_id, this.hotels)
-                this.worker_pool[i].busy = false;
               }
             };
             let siteminder_queue = [];
@@ -884,18 +881,27 @@
                 // console.log(id, period, siteminder_queue)
                 this.query_queue.push({
                   siteminder_queue: [...siteminder_queue],
-                  hotel_in_array_id: id,
                   date_start: this.date_range[0].toISOString().slice(0, 10),
                   date_end: this.date_range[1].toISOString().slice(0, 10),
                   adults: this.num_adults,
                   children: this.num_children,
                   infants: this.num_infants,
                 });
+
+                // flush the siteminder_queue
                 siteminder_queue = [];
               };
             }
             console.log("query_queue", this.query_queue);
 
+            for (let worker of this.worker_pool) {
+              const task = this.query_queue.shift();
+              // console.log(task, worker, this.query_queue.length)
+              if (task === undefined) {
+                break;
+              }
+              worker.work.postMessage({task: task, id: worker.id});
+            };
           },
 
           fetch_data: async function () {
