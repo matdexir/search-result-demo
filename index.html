@@ -5,15 +5,12 @@
     height: 320px;
   }
 
-
   @media(max-width: 766px) {
     .bravo_banner {
       background-image: url(https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg) !important;
       width: auto !important;
       height: 200px !important;
     }
-
-
 
   }
 </style>
@@ -194,7 +191,6 @@
       line-height: 2;
     }
 
-
     .capabilities {
       display: flex;
       flex-wrap: wrap;
@@ -288,7 +284,6 @@
     .el-radio-button__inner:hover {
       color: #EC3E3F;
     }
-
 
     .el-radio-button__orig-radio:checked+.el-radio-button__inner {
       color: #FFF;
@@ -392,8 +387,11 @@
 
 <body class="frontend-page header-normal">
 
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
+      style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
 
   <div class="bravo_wrap" id="app">
     <div class="bravo_header">
@@ -420,7 +418,6 @@
       <div class="bravo_banner">
         <div class="container">
           <h1>
-
           </h1>
         </div>
       </div>
@@ -433,7 +430,6 @@
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
             <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
-              <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
                 {{ find_location(location.id) }}
@@ -685,7 +681,6 @@
   <script defer type="text/javascript"
     src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
-    // Vue.use(vant.lazyload)
     if (window.Worker) {
       let MAX_WORKERS = 15;
       /*
@@ -751,7 +746,6 @@
         pool_copy[worker.id].busy = true;
         pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
         this.worker_pool = pool_copy;
-        // console.log("worker is dispatched", pool_copy[worker.id]);
       },
           */
         },
