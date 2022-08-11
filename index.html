@@ -53,6 +53,7 @@
   <link href="https://worktel.mrhost.com.tw/libs/select2/css/select2.min.css" rel="stylesheet">
   <link href="https://worktel.mrhost.com.tw/dist/frontend/css/notification.css" rel="newest stylesheet">
   <link href="https://worktel.mrhost.com.tw/dist/frontend/css/app.css?_ver=1.0.12" rel="stylesheet">
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/vant@2/lib/index.css" />
 
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link rel='stylesheet' id='google-font-css-css'
@@ -451,6 +452,7 @@
                   {{num_adults}} 位成人 - {{num_children}} 名孩童 - {{num_infants}} 名嬰兒
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
+
               </el-button>
               <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
                 <el-row style="margin: 15px;" style="position: relative;">
@@ -554,6 +556,11 @@
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
+              <van-tabs v-model="active">
+                <van-tab v-for="index in 4" :title="'tab' + index">
+                  content of tab {{ index }}
+                </van-tab>
+              </van-tabs>
 
               <div v-for="hotel in displayed_hotels">
                 <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
@@ -659,6 +666,7 @@
 
 
   </script>
+  <script src="https://fastly.jsdelivr.net/npm/vant@2/lib/vant.min.js"></script>
   <script defer src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
   <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
   <script defer src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -677,6 +685,7 @@
   <script defer type="text/javascript"
     src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
+    // Vue.use(vant.lazyload)
     if (window.Worker) {
       let MAX_WORKERS = 15;
       /*
@@ -687,13 +696,14 @@
         // false for not mobile device
         MAX_WORKERS = 15;
       }
-   */
+      */
 
       const today = new Date()
       const end_date = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000)
       const App = new Vue({
         el: "#app",
         data: {
+          active: 1,
           first_time: false,
           fullscreenLoading: false,
           attributes: [],
@@ -721,10 +731,8 @@
           },
         },
         created: function () {
-          console.log("new vue element created");
           const me = this;
           me.init();
-
           console.log("initialized");
         },
         mounted() {
@@ -961,8 +969,9 @@
           },
         },
       });
+      Vue.use(vant);
+      Vue.use(vant.Lazyload);
     }
-
   </script>
 </body>
 
