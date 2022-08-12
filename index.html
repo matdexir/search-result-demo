@@ -349,7 +349,7 @@
       }
 
       .hotel-card {
-        margin-left: 15;
+        margin: 0 auto;
         width: 315px;
         height: initial;
       }
@@ -585,7 +585,8 @@
                   </span>
                 </h2>
                 <div style="margin-top: 20px;">
-                  <el-radio-group v-model="sorting_method" @change="sort_hotels">
+                  <el-radio-group v-model="sorting_method" style="display: flex; flex-flow: row wrap;"
+                    @change="sort_hotels">
                     <el-radio-button class="radio-btn" label="recommended">
                       <span v-if="language==='en'">Recommended</span>
                       <span v-else>爲您精選</span>
