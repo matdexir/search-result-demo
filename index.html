@@ -438,6 +438,8 @@
             <el-date-picker v-model="date_range" type="daterange" range-separator="|"
               :picker-options="date_picker_options">
             </el-date-picker>
+
+
             <el-dropdown class="guests-type-selection" trigger="click">
               <el-button>
                 <span v-if="language ==='en' ">
@@ -486,6 +488,37 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-12">
+            <van-button @click="sort_popup_active = true" round>
+              <span v-if="language === 'en'">Sort</span>
+              <span v-else=>排序</span>
+            </van-button>
+            <van-button @click="filter_popup_active = true" round>
+              <span v-if="language === 'en'">Filter</span>
+              <span v-else=>篩選</span>
+            </van-button>
+            <van-popup v-model="sort_popup_active" position="bottom" :style="{height: '50%', padding: '10%'}" closeable
+              close-icon-position="top-right">
+              <van-radio-group v-model="sorting_method" style="margin-top: 30px;" @change="sort_hotels">
+                <van-radio name="recommended">
+                  <span v-if="language==='en'">Recommended</span>
+                  <span v-else>爲您精選</span>
+                </van-radio>
+                <van-radio name="price_low_high">
+                  <span v-if="language==='en'">Price(Low to High)</span>
+                  <span v-else>價錢由低至高</span>
+                </van-radio>
+                <van-radio name="price_high_low">
+                  <span v-if="language==='en'">Price(High to Low)</span>
+                  <span v-else>價錢由低至高</span>
+                </van-radio>
+                <van-radio name="rating_high_low">
+                  <span v-if="language==='en'">Rating(High to Low)</span>
+                  <span v-else>星級最高</span>
+                </van-radio>
+              </van-radio-group>
+            </van-popup>
+            <van-popup v-model="filter_popup_active" position="bottom" :style="{height: '90%'}" closeable
+              close-icon-position="top-right">Content</van-popup>
             <div class="bravo_filter">
               <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
                 <div slot="header" class="clearfix">
@@ -694,7 +727,8 @@
       const App = new Vue({
         el: "#app",
         data: {
-          active: false,
+          sort_popup_active: false,
+          filter_popup_active: false,
           first_time: false,
           fullscreenLoading: false,
           attributes: [],
