@@ -497,8 +497,8 @@
                 {{ find_location(location.id) }}
               </el-option>
             </el-select>
-            <el-date-picker style="width: 100%;" v-model="date_range" type="daterange" range-separator="|"
-              :picker-options="date_picker_options">
+            <el-date-picker editable="false" size="large" style="width: 100%;" v-model="date_range" type="daterange"
+              range-separator="|" :picker-options="date_picker_options">
             </el-date-picker>
             <el-dropdown trigger="click">
               <el-button style="width: 100%;">
