@@ -129,6 +129,7 @@
     };
   </script>
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/display.css" />
   <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <link href="https://worktel.mrhost.com.tw/dist/frontend/module/hotel/css/hotel.css?_ver=1.0.12" rel="stylesheet">
@@ -336,7 +337,7 @@
 
       .image-el-card {
         width: 315px;
-        height: 120px;
+        height: 200px;
       }
 
       .image-container {
@@ -381,9 +382,11 @@
         margin-bottom: 5px;
       }
 
+      /*
       .guests-type-selection {
         display: none;
       }
+      */
     }
   </style>
 
@@ -428,10 +431,10 @@
         style="position: fixed; bottom: 40px; right: 30px; z-index: 99; background-color: #EC3E3F;">
         <i class="el-icon-top"></i>
       </el-button>
-      <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
+      <div class="mb-2 pt-2 sticky-top hidden-xs-only" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
-            <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
+            <el-select v-model="selected_city" filterable placeholder="City">
               <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
@@ -443,6 +446,62 @@
             </el-date-picker>
             <el-dropdown class="guests-type-selection" trigger="click">
               <el-button>
+                <span v-if="language ==='en' ">
+                  {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <span v-else>
+                  {{num_adults}} 位成人 - {{num_children}} 名孩童 - {{num_infants}} 名嬰兒
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+              </el-button>
+              <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
+                <el-row style="margin: 15px;" style="position: relative;">
+                  <span style="margin-top: 5px;">Adults</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_adults" :min="1"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px;" style="position: relative;">
+                  <span>Children</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_children" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px;" style="position: relative;">
+                  <span>Infants</span>
+                  <el-input-number style="position: absolute; right: 0;" size="mini" v-model="num_infants" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data">
+              <span v-if="language === 'en'">
+                SEARCH
+              </span>
+              <span v-else>
+                搜尋
+              </span>
+            </el-button>
+          </div>
+        </div>
+      </div>
+      <div class="mb-2 pt-2 sticky-top hidden-sm-and-up" style="background-color: #EC3E3F;">
+        <div class="container">
+          <div style="display: grid; gap: 10px; padding-bottom: 10px;">
+            <el-select v-model="selected_city" placeholder="City">
+              <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
+              <el-option v-for="location in locations" :label="find_location(location.id)"
+                :key="location.name+location.id" :value="location.id">
+                {{ find_location(location.id) }}
+              </el-option>
+            </el-select>
+            <el-date-picker style="width: 100%;" v-model="date_range" type="daterange" range-separator="|"
+              :picker-options="date_picker_options">
+            </el-date-picker>
+            <el-dropdown trigger="click">
+              <el-button style="width: 100%;">
                 <span v-if="language ==='en' ">
                   {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
                   <i class="el-icon-arrow-down el-icon--right"></i>
