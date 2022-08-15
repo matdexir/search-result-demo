@@ -1000,7 +1000,7 @@
             this.sorting_method = "recommended";
             const resp = await fetch(api_url).then((res) => res.json());
             console.log(resp);
-            this.hotels = [...resp.hotels];
+            this.hotels = [...resp.hotels].reverse();
             this.worker_pool = [];
             this.dynamic_price_update();
             const sold_out = this.hotels.filter(
