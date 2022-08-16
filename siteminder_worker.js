@@ -5,19 +5,19 @@ onmessage = async (e) => {
   const adults = e.data.task.adults;
   const children = e.data.task.children;
   const infants = e.data.task.infants;
-  const sleep_time = 100;
+  //  const sleep_time = 100;
   let id_queue = [];
   for (query of siteminder_queue) {
     id_queue.push(query.siteminder_id);
   }
   // console.log("siteminder queue", siteminder_queue, id_queue);
 
-  function sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
+  // function sleep(ms) {
+  //   return new Promise((resolve) => setTimeout(resolve, ms));
+  // }
 
   const URL = "http://worktel-uat.xcodemy.com/api/vendor/getHotelAvailability";
-  await sleep(sleep_time);
+  // await sleep(sleep_time);
   const resp = await fetch(URL, {
     method: "POST",
     headers: {
