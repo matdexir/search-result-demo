@@ -397,7 +397,7 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript>
 
-  <div class="bravo_wrap" id="app">
+  <div v-cloak class="bravo_wrap" id="app">
     <div class="bravo_header">
       <div class="container">
         <div class="content">
@@ -434,7 +434,7 @@
       <div class="mb-2 pt-2 sticky-top hidden-sm-and-down" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
-            <el-select v-model="selected_city" filterable placeholder="City">
+            <el-select v-cloak v-model="selected_city" filterable placeholder="City">
               <el-option v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
                 {{ find_location(location.id) }}
@@ -491,7 +491,7 @@
           <div style="display: grid; gap: 10px; padding-bottom: 10px;">
             <el-select v-model="selected_city" placeholder="City">
               <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
-              <el-option v-for="location in locations" :label="find_location(location.id)"
+              <el-option v-cloak v-for="location in locations" :label="find_location(location.id)"
                 :key="location.name+location.id" :value="location.id">
                 {{ find_location(location.id) }}
               </el-option>
@@ -789,6 +789,7 @@
         },
         mounted() {
           // pass
+          console.log("mounted");
         },
 
         watch: {
@@ -948,7 +949,8 @@
                 }
                 const array_id = e.data.hotel_in_array_id;
                 const total_days = (this.date_range[1] - this.date_range[0]) / (3600 * 1000 * 24);
-                this.hotels[array_id].price = Math.floor(e.data.price / total_days)
+                // this.hotels[array_id].price = Math.floor(e.data.price / total_days)
+                this.hotels[array_id].price = Math.floor(e.data.price)
                 this.hotels[array_id].sold_out = e.data.sold_out;
                 // console.log(e.data.price, array_id, this.hotels)
               }
