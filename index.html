@@ -438,6 +438,7 @@
             </el-date-picker>
             <el-dropdown class="guests-type-selection" trigger="click">
               <el-button>
+                <img src="icon/person.svg">
                 <span v-if="language ==='en' ">
                   {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
                   <i class="el-icon-arrow-down el-icon--right"></i>
@@ -613,7 +614,7 @@
                     <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
                       <el-col class="image-container" :xs=" 24" :sm="8" :md="8" style="position: relative;">
                         <div v-if="item.sold_out"
-                          style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; color: #FFF; font-weight: 500; padding: 5px;">
+                          style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; left: 10; color: #FFF; font-weight: 500; padding: 5px; border-radius: 5px;">
                           <span v-if="language === 'en'">Sold out</span>
                           <span v-else>售完</span>
                         </div>
@@ -641,8 +642,8 @@
                           <el-col :xs=" 24" :sm="16" :md="16" class="attributes-col" style="border-style: solid 2px;">
                             <el-row style="margin-top: 5px;">
                               <span v-for="attribute in parse_attributes(item)" class="features-list-el"
-                                name="attribute.id">
-                                <i class="el-icon-info"></i> {{ attribute.name }}
+                                name="attribute.term_id">
+                                <img :src="get_correct_svg(attribute.term_id)"> {{ attribute.name }}
                               </span>
                             </el-row>
                             <el-row class="facility-row">
@@ -1011,7 +1012,21 @@
             // event.target.src = "https://via.placeholder.com/300x150";
             event.target.src = "http://placekitten.com/g/300/150";
           },
-        },
+
+          get_correct_svg: function (id) {
+            switch (id) {
+              case 32:
+              case 140:
+                return "./icon/self-health-management.svg"
+                break
+              case 33:
+                return "./icon/short-stay.svg"
+                break
+              default:
+                return "./icon/person.svg"
+            }
+          },
+        }
       });
     }
     // Vue.use(VueVirtualScroller)
