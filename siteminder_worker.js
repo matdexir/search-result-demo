@@ -65,4 +65,5 @@ onmessage = async (e) => {
       err: null,
     });
   }
+  close();
 };
