@@ -1032,6 +1032,7 @@
           },
           onConfirm: function (date) {
             const [start, end] = date;
+            this.date_range = date;
             this.show = false;
             this.mobile_date = `${this.formatDate(start)} - ${this.formatDate(end)}`;
           }
