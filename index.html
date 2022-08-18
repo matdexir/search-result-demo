@@ -14,6 +14,7 @@
 
   }
 </style>
+
 <!DOCTYPE html>
 <html lang="en" class="">
 
@@ -44,6 +45,7 @@
   <link rel="alternate" href="https://worktel.mrhost.com.tw/hotel" hreflang="x-default" />
   <link rel="alternate" href="https://worktel.mrhost.com.tw/zh/hotel" hreflang="zh" />
   <link href="https://worktel.mrhost.com.tw/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-virtual-scroller@1.0.10/dist/vue-virtual-scroller.css">
   <link href="https://worktel.mrhost.com.tw/libs/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="https://worktel.mrhost.com.tw/libs/ionicons/css/ionicons.min.css" rel="stylesheet">
   <link href="https://worktel.mrhost.com.tw/libs/icofont/icofont.min.css" rel="stylesheet">
@@ -127,8 +129,10 @@
     };
   </script>
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/display.css" />
   <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-virtual-scroller@1.0.10/dist/vue-virtual-scroller.umd.min.js"></script>
   <link href="https://worktel.mrhost.com.tw/dist/frontend/module/hotel/css/hotel.css?_ver=1.0.12" rel="stylesheet">
   <link href="https://worktel.mrhost.com.tw/custom-css" rel="stylesheet">
   <link href="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.css" rel="stylesheet">
@@ -221,7 +225,6 @@
       margin-top: 0.2rem;
     }
 
-
     .ratings-price {
       margin-bottom: 20px;
       font-size: 20px;
@@ -250,14 +253,14 @@
     }
 
     .image-el-card {
-      width: 260px;
+      width: 100%;
       height: 170px;
       border-radius: 5px;
     }
 
     .hotel-card {
-      width: 825px;
-      height: 200px;
+      width: 100%;
+      min-height: 200px;
       margin-bottom: 10px;
     }
 
@@ -307,16 +310,14 @@
       font-size: 10px;
     }
 
-    @media screen and (max-width: 820px) {
+    @media screen and (max-width: 900px) {
       .image-el-card {
-        width: 220px;
         height: 170px;
       }
 
       .hotel-card {
-        width: 700px;
         height: 200px;
-        margin-bottom: 10px;
+        margin-bottom: 30px;
       }
 
     }
@@ -331,8 +332,7 @@
       }
 
       .image-el-card {
-        width: 315px;
-        height: 120px;
+        height: 200px;
       }
 
       .image-container {
@@ -344,8 +344,8 @@
       }
 
       .hotel-card {
-        margin-left: 15;
-        width: 315px;
+        margin: 0 auto;
+        margin-bottom: 30px;
         height: initial;
       }
 
@@ -377,9 +377,11 @@
         margin-bottom: 5px;
       }
 
+      /*
       .guests-type-selection {
         display: none;
       }
+      */
     }
   </style>
 
@@ -393,7 +395,7 @@
     </iframe>
   </noscript>
 
-  <div class="bravo_wrap" id="app">
+  <div v-cloak class="bravo_wrap" id="app">
     <div class="bravo_header">
       <div class="container">
         <div class="content">
@@ -426,7 +428,7 @@
         style="position: fixed; bottom: 40px; right: 30px; z-index: 99; background-color: #EC3E3F;">
         <i class="el-icon-top"></i>
       </el-button>
-      <div class="mb-2 pt-2 sticky-top" style="background-color: #EC3E3F;">
+      <div class="mb-2 pt-2 sticky-top hidden-sm-and-down" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
             <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
@@ -435,13 +437,14 @@
                 {{ find_location(location.id) }}
               </el-option>
             </el-select>
-            <el-date-picker v-model="date_range" type="daterange" range-separator="|"
+            <el-date-picker v-model="date_range" size="large" type="daterange" range-separator="|"
               :picker-options="date_picker_options">
             </el-date-picker>
 
 
             <el-dropdown class="guests-type-selection" trigger="click">
               <el-button>
+                <img src="icon/person.svg">
                 <span v-if="language ==='en' ">
                   {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
                   <i class="el-icon-arrow-down el-icon--right"></i>
@@ -473,7 +476,65 @@
                 </el-row>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data">
+            <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data"
+              :loading="displayed_hotels.length === 0">
+              <span v-if="language === 'en'">
+                SEARCH
+              </span>
+              <span v-else>
+                搜尋
+              </span>
+            </el-button>
+          </div>
+        </div>
+      </div>
+      <div class="mb-2 pt-2 hidden-md-and-up" style="background-color: #EC3E3F;">
+        <div class="container">
+          <div style="display: grid; gap: 10px; padding-bottom: 10px;">
+            <el-select v-model="selected_city" placeholder="City">
+              <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
+              <el-option v-cloak v-for="location in locations" :label="find_location(location.id)"
+                :key="location.name+location.id" :value="location.id">
+                {{ find_location(location.id) }}
+              </el-option>
+            </el-select>
+            <el-date-picker editable="false" style="width: 100%;" v-model="date_range" type="daterange"
+              range-separator="|" :picker-options="date_picker_options">
+            </el-date-picker>
+            <el-dropdown trigger="click">
+              <el-button style="width: 100%;">
+                <span v-if="language ==='en' ">
+                  {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <span v-else>
+                  {{num_adults}} 位成人 - {{num_children}} 名孩童 - {{num_infants}} 名嬰兒
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+              </el-button>
+              <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
+                <el-row style="margin: 15px;" style="position: relative;">
+                  <span style="margin-top: 5px;">Adults</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_adults" :min="1"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px;" style="position: relative;">
+                  <span>Children</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_children" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px;" style="position: relative;">
+                  <span>Infants</span>
+                  <el-input-number style="position: absolute; right: 0;" size="mini" v-model="num_infants" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data"
+              :loading="displayed_hotels.length === 0">
               <span v-if="language === 'en'">
                 SEARCH
               </span>
@@ -558,7 +619,8 @@
                   </span>
                 </h2>
                 <div style="margin-top: 20px;">
-                  <el-radio-group v-model="sorting_method" @change="sort_hotels">
+                  <el-radio-group v-model="sorting_method" style="display: flex; flex-flow: row wrap;"
+                    @change="sort_hotels">
                     <el-radio-button class="radio-btn" label="recommended">
                       <span v-if="language==='en'">Recommended</span>
                       <span v-else>爲您精選</span>
@@ -585,74 +647,85 @@
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
-
-              <div v-for="hotel in displayed_hotels">
-                <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
-                  <el-col class="image-container" :xs=" 24" :sm="8" :md="8" style="position: relative;">
-                    <div v-if="hotel.sold_out"
-                      style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; color: #FFF; font-weight: 500; padding: 5px;">
-                      <span v-if="language === 'en'">Sold out</span>
-                      <span v-else>售完</span>
-                    </div>
-                    <a :href="hotel.detail_url">
-                      <img :src="hotel.image_id || default_url_alt" decoding="async" :alt="hotel.title"
-                        class="image image-el-card" @error="fallback_url">
-                    </a>
-
-                  </el-col>
-                  <el-col :xs="24" :sm="16" :md="16" class="hotel-details">
-                    <el-row>
-                      <span class="float-left hotel-title">{{ hotel.title }}</span>
-                      <span v-if="hotel.rate" class="float-right hotel-rating">
-                        {{ hotel.rate }} <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
-                      </span>
-                      <span v-else class="float-right hotel-rating"> -- </span>
-                    </el-row>
-                    <el-row>
-                      <span style="font-size: 12px; color: #0485D6;">
-                        <i class="el-icon-location"></i> {{ find_location(hotel.location_id) }}
-                      </span>
-                    </el-row>
-                    <el-row class="details-row">
-
-                      <el-col :xs=" 24" :sm="16" :md="16" class="attributes-col" style="border-style: solid 2px;">
-                        <el-row style="margin-top: 5px;">
-                          <span v-for="attribute in parse_attributes(hotel)" class="features-list-el"
-                            name="attribute.id">
-                            <i class="el-icon-info"></i> {{ attribute.name }}
-                          </span>
-                        </el-row>
-                        <el-row class="facility-row">
-                          <el-tag v-for="facility in parse_facilities(hotel)" type="info" size="mini"
-                            style="margin-right: 10px; margin-bottom: 5px;">
-                            {{ facility.name}}
-                          </el-tag>
-                        </el-row>
-                      </el-col>
-
-                      <el-col :xs="24" :sm="8" :md="8" class="pricing-col">
-                        <div v-if="hotel.price" class="ratings-price float-right">
-                          <span v-if="language ==='en' ">
-                            From {{ Math.floor(parseInt(hotel.price)) }} NT
-                          </span>
-                          <span v-else>
-                            NT {{ Math.floor(parseInt(hotel.price)) }}起
-                          </span>
+              <dynamic-scroller :items="displayed_hotels" :min-item-size="200" :buffer="2000">
+                <template v-slot="{ item, index, active }">
+                  <dynamic-scroller-item :item="item" :active="active" :data-index="index">
+                    <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
+                      <el-col class="image-container" :xs=" 24" :sm="8" :md="8" style="position: relative;">
+                        <div v-if="item.sold_out"
+                          style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; left: 10; color: #FFF; font-weight: 500; padding: 5px; border-radius: 5px;">
+                          <span v-if="language === 'en'">Sold out</span>
+                          <span v-else>售完</span>
                         </div>
-                        <div v-else class="ratings-price float-right"> -- </div>
-                        <el-button class="float-right price-btn"
-                          style="position: absolute; bottom: 0; right: 0; background-color: #EC3E3F;">
-                          <a :href="hotel.detail_url" style="text-decoration: none; color: #FFF;">
-                            <span v-if="language === 'en'"> see</span>
-                            <span v-else>查看</span>
-                            <i class="el-icon-arrow-right"></i></a>
-                        </el-button>
-                      </el-col>
-                    </el-row>
-                  </el-col>
-                </el-card>
+                        <a :href="item.detail_url">
+                          <img :src="item.image_id || default_url_alt" decoding="async" :alt="item.title"
+                            class="image image-el-card" @error="fallback_url">
+                        </a>
 
-              </div>
+                      </el-col>
+                      <el-col :xs="24" :sm="16" :md="16" class="hotel-details">
+                        <el-row>
+                          <span class="float-left hotel-title">{{ item.title }}</span>
+                          <span v-if="item.rate" class="float-right hotel-rating">
+                            {{ item.rate }} <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
+                          </span>
+                          <span v-else class="float-right hotel-rating"> -- </span>
+                        </el-row>
+                        <el-row>
+                          <span style="font-size: 12px; color: #0485D6;">
+                            <i class="el-icon-location"></i> {{ find_location(item.location_id) }}
+                          </span>
+                        </el-row>
+                        <el-row class="details-row">
+
+                          <el-col :xs=" 24" :sm="16" :md="16" class="attributes-col" style="border-style: solid 2px;">
+                            <el-row style="margin-top: 5px;">
+                              <span v-for="attribute in parse_attributes(item)" class="features-list-el"
+                                name="attribute.term_id">
+                                <img :src="get_correct_svg(attribute.term_id)"> {{ attribute.name }}
+                              </span>
+                            </el-row>
+                            <el-row class="facility-row">
+                              <el-tag v-for="facility in parse_facilities(item)" type="info" size="mini"
+                                style="margin-right: 10px; margin-bottom: 5px;">
+                                {{ facility.name}}
+                              </el-tag>
+                            </el-row>
+                          </el-col>
+
+                          <el-col :xs="24" :sm="8" :md="8" class="pricing-col">
+                            <div v-if="item.price" class="ratings-price float-right">
+                              <el-row>
+                                <span v-if="language === 'en' "
+                                  style="color: background: #A3A3A3; font-size: 12px; font-weight: 300;">
+                                  {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} night(s)
+                                </span>
+                                <span v-else style="color: background: #A3A3A3; font-size: 12px; font-weight: 300;"> {{
+                                  (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} 晚
+                                </span>
+                              </el-row>
+                              <span v-if="language ==='en' ">
+                                From {{ Math.floor(parseInt(item.price)) }} NT
+                              </span>
+                              <span v-else>
+                                NT {{ Math.floor(parseInt(item.price)) }}起
+                              </span>
+                            </div>
+                            <div v-else class="ratings-price float-right"> -- </div>
+                            <el-button class="float-right price-btn"
+                              style="position: absolute; bottom: 0; right: 0; background-color: #EC3E3F;">
+                              <a :href="item.detail_url" style="text-decoration: none; color: #FFF;">
+                                <span v-if="language === 'en'"> see</span>
+                                <span v-else>查看</span>
+                                <i class="el-icon-arrow-right"></i></a>
+                            </el-button>
+                          </el-col>
+                        </el-row>
+                      </el-col>
+                    </el-card>
+                  </dynamic-scroller-item>
+                </template>
+              </dynamic-scroller>
             </div>
           </div>
         </div>
@@ -762,6 +835,7 @@
         },
         mounted() {
           // pass
+          console.log("mounted");
         },
 
         watch: {
@@ -818,7 +892,7 @@
                 });
 
               console.log(resp);
-              this.hotels = [...resp.hotels];
+              this.hotels = [...resp.hotels].reverse();
               this.worker_pool = [];
               this.dynamic_price_update();
               const sold_out = this.hotels.filter(
@@ -920,7 +994,8 @@
                 }
                 const array_id = e.data.hotel_in_array_id;
                 const total_days = (this.date_range[1] - this.date_range[0]) / (3600 * 1000 * 24);
-                this.hotels[array_id].price = Math.floor(e.data.price / total_days)
+                // this.hotels[array_id].price = Math.floor(e.data.price / total_days)
+                this.hotels[array_id].price = Math.floor(e.data.price)
                 this.hotels[array_id].sold_out = e.data.sold_out;
                 // console.log(e.data.price, array_id, this.hotels)
               }
@@ -972,7 +1047,7 @@
             this.sorting_method = "recommended";
             const resp = await fetch(api_url).then((res) => res.json());
             console.log(resp);
-            this.hotels = [...resp.hotels];
+            this.hotels = [...resp.hotels].reverse();
             this.worker_pool = [];
             this.dynamic_price_update();
             const sold_out = this.hotels.filter(
@@ -988,10 +1063,24 @@
           },
 
           fallback_url: function (event) {
-            // event.target.src = "https://via.placeholder.com/300x150";
-            event.target.src = "http://placekitten.com/g/300/150";
+            event.target.src = "https://via.placeholder.com/300x150";
+            // event.target.src = "http://placekitten.com/g/300/150";
           },
-        },
+
+          get_correct_svg: function (id) {
+            switch (id) {
+              case 32:
+              case 140:
+                return "./icon/self-health-management.svg"
+                break
+              case 33:
+                return "./icon/short-stay.svg"
+                break
+              default:
+                return "./icon/person.svg"
+            }
+          },
+        }
       });
       Vue.use(vant);
       Vue.use(vant.Lazyload);
