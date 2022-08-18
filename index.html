@@ -498,9 +498,8 @@
                 {{ find_location(location.id) }}
               </el-option>
             </el-select>
-            <el-date-picker editable="false" style="width: 100%;" v-model="date_range" type="daterange"
-              range-separator="|" :picker-options="date_picker_options">
-            </el-date-picker>
+            <van-cell title="Select date" :value="mobile_date" @click="show = true"></van-cell>
+            <van-calendar v-model="show" type="range" @confirm="onConfirm"></van-calendar>
             <el-dropdown trigger="click">
               <el-button style="width: 100%;">
                 <span v-if="language ==='en' ">
@@ -549,37 +548,6 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-12">
-            <van-button @click="sort_popup_active = true" round>
-              <span v-if="language === 'en'">Sort</span>
-              <span v-else=>排序</span>
-            </van-button>
-            <van-button @click="filter_popup_active = true" round>
-              <span v-if="language === 'en'">Filter</span>
-              <span v-else=>篩選</span>
-            </van-button>
-            <van-popup v-model="sort_popup_active" position="bottom" :style="{height: '50%', padding: '10%'}" closeable
-              close-icon-position="top-right">
-              <van-radio-group v-model="sorting_method" style="margin-top: 30px;" @change="sort_hotels">
-                <van-radio name="recommended">
-                  <span v-if="language==='en'">Recommended</span>
-                  <span v-else>爲您精選</span>
-                </van-radio>
-                <van-radio name="price_low_high">
-                  <span v-if="language==='en'">Price(Low to High)</span>
-                  <span v-else>價錢由低至高</span>
-                </van-radio>
-                <van-radio name="price_high_low">
-                  <span v-if="language==='en'">Price(High to Low)</span>
-                  <span v-else>價錢由低至高</span>
-                </van-radio>
-                <van-radio name="rating_high_low">
-                  <span v-if="language==='en'">Rating(High to Low)</span>
-                  <span v-else>星級最高</span>
-                </van-radio>
-              </van-radio-group>
-            </van-popup>
-            <van-popup v-model="filter_popup_active" position="bottom" :style="{height: '90%'}" closeable
-              close-icon-position="top-right">Content</van-popup>
             <div class="bravo_filter">
               <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
                 <div slot="header" class="clearfix">
@@ -783,23 +751,14 @@
     src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
   <script>
     if (window.Worker) {
-      // let MAX_WORKERS = 15;
-      let MAX_WORKERS = 0;
-      /*
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        // true for mobile device
-        MAX_WORKERS = 0;
-      } else {
-        // false for not mobile device
-        MAX_WORKERS = 15;
-      }
-      */
-
+      let MAX_WORKERS = 15;
       const today = new Date()
       const end_date = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000)
       const App = new Vue({
         el: "#app",
         data: {
+          show: false,
+          mobile_date: '',
           sort_popup_active: false,
           filter_popup_active: false,
           first_time: false,
@@ -839,19 +798,7 @@
         },
 
         watch: {
-          /*
-      worker_pool: function () {
-        const worker = this.worker_pool.find(wrk => wrk.busy === false);
-        const task = this.query_queue.shift();
-        if (worker === undefined || task === undefined) {
-          return;
-        }
-        let pool_copy = [...this.worker_pool];
-        pool_copy[worker.id].busy = true;
-        pool_copy[worker.id].work.postMessage({task: task, id: worker.id});
-        this.worker_pool = pool_copy;
-      },
-          */
+          // pass
         },
 
         computed: {
@@ -1080,6 +1027,14 @@
                 return "./icon/person.svg"
             }
           },
+          formatDate: function (date) {
+            return `${date.getMonth() + 1}/${date.getDate()}`;
+          },
+          onConfirm: function (date) {
+            const [start, end] = date;
+            this.show = false;
+            this.mobile_date = `${this.formatDate(start)} - ${this.formatDate(end)}`;
+          }
         }
       });
       Vue.use(vant);
