@@ -865,20 +865,38 @@
             let tmp_hotels = this.displayed_hotels.filter(
               (hotel) => parseInt(hotel.price) > 0 && (hotel.sold_out === false || hotel.sold_out === undefined)
             )
-            // not too sure what recommended is about but I think it is the way we received it from the backend
-            if (this.sorting_method === "recommended") {
-              this.displayed_hotels = [...tmp_hotels, ...sold_out];
-            } else {
-              tmp_hotels = tmp_hotels.sort((a, b) => {
-                if (this.sorting_method === "price_low_high")
-                  return a.price - b.price;
-                else if (this.sorting_method === "price_high_low")
-                  return b.price - a.price;
-                else if (this.sorting_method === "rating_high_low")
-                  return b.rate - a.rate;
-              });
-              this.displayed_hotels = [...tmp_hotels, ...sold_out];
+            let sorted;
+
+            if (this.sorting_method === "rating_high_low") {
+              let ratings = tmp_hotels.map(function (element, index) {
+                return {index: index, value: element.rate};
+              })
+
+              ratings.sort((a, b) => b.value - a.value);
+              sorted = ratings.map((e) => tmp_hotels[e.index])
+              console.log("sorted", sorted);
             }
+            else if (this.sorting_method === "price_high_low" || this.sorting_method === "price_low_high") {
+              let prices = tmp_hotels.map(function (element, index) {
+                return {index: index, value: element.price};
+              })
+              if (this.sorting_method === "price_high_low") {
+                prices.sort((a, b) => b.value - a.value);
+              } else {
+                prices.sort((a, b) => a.value - b.value);
+              }
+              sorted = prices.map((e) => tmp_hotels[e.index]);
+            } else {
+              let births = tmp_hotels.map(function (element, index) {
+                return {index: index, value: element.id};
+              })
+              console.log("creation", births)
+              births.sort((a, b) => a.value - b.value);
+              sorted = births.map((e) => tmp_hotels[e.index])
+            }
+
+            this.displayed_hotels = [...sorted, ...sold_out]
+
           },
           filter_hotels: function () {
             let tmp_hotels = [...this.hotels];
