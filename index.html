@@ -477,7 +477,7 @@
               </el-dropdown-menu>
             </el-dropdown>
             <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data"
-              :loading="displayed_hotels.length === 0">
+              :loading="displayed_hotels.length === 0 && checked_attributes.length === 0">
               <span v-if="language === 'en'">
                 SEARCH
               </span>
@@ -533,7 +533,7 @@
               </el-dropdown-menu>
             </el-dropdown>
             <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data"
-              :loading="displayed_hotels.length === 0">
+              :loading="displayed_hotels.length === 0 && checked_attributes.length === 0">
               <span v-if="language === 'en'">
                 SEARCH
               </span>
