@@ -953,6 +953,7 @@
               this.worker_pool[i] = {work: new Worker("./siteminder_worker.js"), id: i};
               this.worker_pool[i].work.onmessage = (e) => {
                 console.log(e.data, this.worker_pool[i].id, "worker returned");
+                console.log(JSON.stringify(e.data));
                 if (e.data.error != null) {
                   this.error++;
                   return;
