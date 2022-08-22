@@ -249,12 +249,12 @@
     }
 
     .image-container {
-      padding: 13px;
+      padding: 0px;
     }
 
     .image-el-card {
       width: 100%;
-      height: 170px;
+      min-height: 200px;
       border-radius: 5px;
     }
 
@@ -619,7 +619,7 @@
                 <template v-slot="{ item, index, active }">
                   <dynamic-scroller-item :item="item" :active="active" :data-index="index">
                     <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
-                      <el-col class="image-container" :xs=" 24" :sm="8" :md="8" style="position: relative;">
+                      <el-col class="image-container" :xs=" 24" :sm="6" :md="6" style="position: relative;">
                         <div v-if="item.sold_out"
                           style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; left: 10; color: #FFF; font-weight: 500; padding: 5px; border-radius: 5px;">
                           <span v-if="language === 'en'">Sold out</span>
@@ -631,7 +631,7 @@
                         </a>
 
                       </el-col>
-                      <el-col :xs="24" :sm="16" :md="16" class="hotel-details">
+                      <el-col :xs="24" :sm="13" :md="13" class="hotel-details">
                         <el-row>
                           <span class="float-left hotel-title">{{ item.title }}</span>
                           <span v-if="item.rate" class="float-right hotel-rating">
@@ -646,7 +646,7 @@
                         </el-row>
                         <el-row class="details-row">
 
-                          <el-col :xs=" 24" :sm="16" :md="16" class="attributes-col" style="border-style: solid 2px;">
+                          <el-col :xs=" 24" class="attributes-col" style="border-style: solid 2px;">
                             <el-row style="margin-top: 5px;">
                               <span v-for="attribute in parse_attributes(item)" class="features-list-el"
                                 name="attribute.term_id">
@@ -655,40 +655,44 @@
                             </el-row>
                             <el-row class="facility-row">
                               <el-tag v-for="facility in parse_facilities(item)" type="info" size="mini"
-                                style="margin-right: 10px; margin-bottom: 5px;">
+                                style="margin-right: 10px; margin-top: 5px;">
                                 {{ facility.name}}
                               </el-tag>
                             </el-row>
                           </el-col>
 
-                          <el-col :xs="24" :sm="8" :md="8" class="pricing-col">
-                            <div v-if="item.price" class="ratings-price float-right">
-                              <el-row>
-                                <span v-if="language === 'en' "
-                                  style="color: background: #A3A3A3; font-size: 12px; font-weight: 300;">
-                                  {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} night(s)
-                                </span>
-                                <span v-else style="color: background: #A3A3A3; font-size: 12px; font-weight: 300;"> {{
-                                  (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} 晚
-                                </span>
-                              </el-row>
-                              <span v-if="language ==='en' ">
-                                From {{ Math.floor(parseInt(item.price)) }} NT
-                              </span>
-                              <span v-else>
-                                NT {{ Math.floor(parseInt(item.price)) }}起
-                              </span>
-                            </div>
-                            <div v-else class="ratings-price float-right"> -- </div>
-                            <el-button class="float-right price-btn"
-                              style="position: absolute; bottom: 0; right: 0; background-color: #EC3E3F;">
-                              <a :href="item.detail_url" style="text-decoration: none; color: #FFF;">
-                                <span v-if="language === 'en'"> see</span>
-                                <span v-else>查看</span>
-                                <i class="el-icon-arrow-right"></i></a>
-                            </el-button>
-                          </el-col>
                         </el-row>
+                      </el-col>
+                      <el-col :xs="24" :sm="5" :md="5" style="min-height: 200px;" class="pricing-col">
+                        <el-card :body-style="{padding: '5px'}" style="margin: 10px;" shadow="hover">
+                          <span class="float-right">Long stay deal</span>
+                          <span> 30 nights | NT 12000</span>
+                        </el-card>
+                        <div v-if="item.price" class="ratings-price float-right">
+                          <el-row>
+                            <span v-if="language === 'en' "
+                              style="color: background: #A3A3A3; font-size: 12px; font-weight: 300;">
+                              {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} night(s)
+                            </span>
+                            <span v-else style="color: background: #A3A3A3; font-size: 12px; font-weight: 300;">
+                              {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} 晚
+                            </span>
+                          </el-row>
+                          <span v-if="language ==='en' ">
+                            From {{ Math.floor(parseInt(item.price)) }} NT
+                          </span>
+                          <span v-else>
+                            NT {{ Math.floor(parseInt(item.price)) }}起
+                          </span>
+                        </div>
+                        <div v-else class="ratings-price float-right"> -- </div>
+                        <el-button class="float-right price-btn"
+                          style="position: absolute; bottom: 0; right: 0; background-color: #EC3E3F;">
+                          <a :href="item.detail_url" style="text-decoration: none; color: #FFF;">
+                            <span v-if="language === 'en'"> see</span>
+                            <span v-else>查看</span>
+                            <i class="el-icon-arrow-right"></i></a>
+                        </el-button>
                       </el-col>
                     </el-card>
                   </dynamic-scroller-item>
