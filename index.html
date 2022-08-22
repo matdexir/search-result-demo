@@ -261,7 +261,7 @@
     .image-el-card {
       width: 100%;
       min-height: 200px;
-      border-radius: 5px;
+      border-radius: 1px;
     }
 
     .hotel-card {
@@ -325,7 +325,6 @@
         height: 200px;
         margin-bottom: 30px;
       }
-
 
     }
 
@@ -697,11 +696,10 @@
                         <el-col :xs="12" :sm="24" class="price-wrapper" v-if="item.price">
                           <el-row>
                             <span class="float-right" v-if="language === 'en' "
-                              style="color: background: #141414; font-size: 12px; font-weight: 300;">
+                              style="color: #A3A3A3; font-size: 12px; font-weight: 300;">
                               {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} night(s)
                             </span>
-                            <span class="float-right" v-else
-                              style="color: background: #141414; font-size: 12px; font-weight: 300;">
+                            <span class="float-right" v-else style="color: #A3A3A3; font-size: 12px; font-weight: 300;">
                               {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} 晚
                             </span>
                           </el-row>
