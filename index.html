@@ -235,7 +235,9 @@
       text-align: right;
     }
 
-    .price-wrapper {}
+    .price-wrapper {
+      padding: 15px;
+    }
 
     .hotel-details {
       height: 200px;
@@ -334,6 +336,8 @@
       }
 
       .price-wrapper {
+        margin: 0;
+        padding: 10px;
         margin-top: 25px;
       }
 
@@ -683,14 +687,14 @@
                               </span>
                             </el-row>
                             <el-row>
-                              <span class="float-right" v-if="language === 'en' ">30 nights | NT
-                                {{item.price_30.slice(0,
-                                -3)}}</span>
-                              <span class="float-right" v-else>30晚 | NT {{item.price_30.slice(0, -3)}}起 </span>
+                              <span class="float-right" v-if="language === 'en' ">
+                                30 nights | NT {{item.price_30.slice(0,-3)}}
+                              </span>
+                              <span class="float-right" v-else> 30晚 | NT {{item.price_30.slice(0, -3)}}起 </span>
                             </el-row>
                           </el-card>
                         </el-col>
-                        <el-col :xs="12" :sm="24" style="padding: 15px;" v-if="item.price">
+                        <el-col :xs="12" :sm="24" class="price-wrapper" v-if="item.price">
                           <el-row>
                             <span class="float-right" v-if="language === 'en' "
                               style="color: background: #141414; font-size: 12px; font-weight: 300;">
