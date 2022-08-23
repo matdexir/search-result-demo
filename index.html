@@ -251,7 +251,7 @@
     }
 
     .hotel-rate {
-      font-size: 20px;
+      font-size: 15px;
     }
 
     .image-container {
@@ -262,6 +262,7 @@
       width: 100%;
       min-height: 200px;
       border-radius: 1px;
+      object-fit: cover;
     }
 
     .hotel-card {
@@ -628,7 +629,7 @@
                 <template v-slot="{ item, index, active }">
                   <dynamic-scroller-item :item="item" :active="active" :data-index="index">
                     <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
-                      <el-col class="image-container" :xs=" 24" :sm="7" :md="7" style="position: relative;">
+                      <el-col :xs=" 24" :sm="7" :md="7" style="position: relative;">
                         <div v-if="item.sold_out"
                           style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; left: 0; color: #FFF; font-weight: 500; padding: 5px; border-radius: 5px;">
                           <span v-if="language === 'en'">Sold out</span>
@@ -642,11 +643,13 @@
                       </el-col>
                       <el-col :xs="24" :sm="11" :md="11" class="hotel-details">
                         <el-row>
-                          <span class="float-left hotel-title">{{ item.title }}</span>
-                          <span v-if="item.rate" class="float-right hotel-rating">
+                          <span class="float-left hotel-title"
+                            style="width: 80%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{
+                            item.title }}</span>
+                          <span v-if="item.rate" class="float-right hotel-rate">
                             {{ item.rate }} <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
                           </span>
-                          <span v-else class="float-right hotel-rating"> -- </span>
+                          <span v-else class="float-right hotel-rate"> -- </span>
                         </el-row>
                         <el-row>
                           <span style="font-size: 12px; color: #0485D6;">
