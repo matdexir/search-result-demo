@@ -887,6 +887,8 @@
               this.attributes = resp.attributes;
               this.locations = resp.locations;
               this.first_time = true;
+              if (window.screen.width < 550)
+                this.shown_attributes = [];
             } else {
               return;
             }
@@ -1094,6 +1096,59 @@
       });
       Vue.use(vant);
       Vue.use(vant.Lazyload);
+
+      const en_vant_messages = {
+        'zh-CN': {
+          vanCalendar: {
+            confirm: "Confirm",
+            end: "End",
+            start: "Start",
+            title: "Calendar",
+            startEnd: "Start/End",
+            weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            monthTitle: function (year, month) {
+              return "".concat(year, "/").concat(month);
+            },
+            rangePrompt: function (maxRange) {
+              return "Choose no more than ".concat(maxRange, " days");
+            },
+          }
+        }
+      };
+
+      const zh_tw_vant_messages = {
+        'zh-CN': {
+          vanCalendar: {
+            end: '結束',
+            start: '開始',
+            title: '日期選擇',
+            confirm: '確定',
+            startEnd: '開始/結束',
+            weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+            monthTitle: function (year, month) {return "".concat(year, "\u5E74").concat(month, "\u6708");},
+            rangePrompt: function (maxRange) {return "\u9078\u64C7\u5929\u6578\u4E0D\u80FD\u8D85\u904E ".concat(maxRange, " \u5929");},
+          },
+        }
+      };
+
+      const jp_vant_messages = {
+        'zh-CN': {
+          vanCalendar: {
+            confirm: '確認',
+            end: '終了',
+            start: '開始',
+            title: '日付選択',
+            confirm: '確認',
+            startEnd: '開始/終了',
+            weekdays: ['日', '月', '火', '水', '木', '金', '土'],
+            monthTitle: function (year, month) {return "".concat(year, "\u5E74").concat(month, "\u6708");},
+            rangePrompt: function (maxRange) {return "".concat(maxRange, "\u65E5\u4EE5\u5185\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044");},
+          }
+        }
+      };
+
+
+      Vue.use(vant.Locale.add(en_vant_messages));
     }
   </script>
 </body>
