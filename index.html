@@ -690,10 +690,10 @@
                             </el-row>
                             <el-row>
                               <span class="float-right" style="font-size: 12px;" v-if="language === 'en' ">
-                                30 nights | NT {{parseInt(item.price_30).toLocaleString()}}+
+                                30 nights | NT${{parseInt(item.price_30).toLocaleString()}}+
                               </span>
                               <span class="float-right" style="font-size: 12px;" v-else>
-                                30晚 | NT {{ parseInt(item.price_30).toLocaleString()}}起
+                                30晚 | NT${{ parseInt(item.price_30).toLocaleString()}}起
                               </span>
                             </el-row>
                           </el-card>
@@ -709,10 +709,10 @@
                             </span>
                           </el-row>
                           <span class="float-right" style="font-weight: 700;" v-if="language ==='en' ">
-                            From {{ Math.floor(parseInt(item.price)).toLocaleString() }} NT
+                            From {{ Math.floor(parseInt(item.price)).toLocaleString() }} NT$
                           </span>
                           <span class="float-right" style="font-weight: 700;" v-else>
-                            NT {{ Math.floor(parseInt(item.price)).toLocaleString() }}起
+                            NT${{ Math.floor(parseInt(item.price)).toLocaleString() }}起
                           </span>
 
                           <div v-else class="ratings-price float-right"> -- </div>
