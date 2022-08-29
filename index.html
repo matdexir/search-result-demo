@@ -503,6 +503,7 @@
           </div>
         </div>
       </div>
+
       <div class="mb-2 pt-2 hidden-md-and-up" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: grid; gap: 10px; padding-bottom: 10px;">
@@ -517,11 +518,11 @@
             <van-calendar v-model="show" type="range" @confirm="onConfirm"></van-calendar>
             <el-dropdown trigger="click">
               <el-button style="width: 100%;">
-                <span v-if="language ==='en' ">
+                <span v-if="language ==='en' " class="float-left">
                   {{num_adults}} Adults - {{num_children}} children - {{num_infants}} Infants
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
-                <span v-else>
+                <span v-else class="float-left">
                   {{num_adults}} 位成人 - {{num_children}} 名孩童 - {{num_infants}} 名嬰兒
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
