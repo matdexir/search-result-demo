@@ -438,6 +438,7 @@
         style="position: fixed; bottom: 40px; right: 30px; z-index: 99; background-color: #EC3E3F;">
         <i class="el-icon-top"></i>
       </el-button>
+
       <div class="mb-2 pt-2 sticky-top hidden-sm-and-down" style="background-color: #EC3E3F;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
@@ -467,19 +468,22 @@
               </el-button>
               <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
                 <el-row style="margin: 15px;" style="position: relative;">
-                  <span style="margin-top: 5px;">Adults</span>
+                  <span v-if="language === 'en'" style="margin-top: 5px;">Adults</span>
+                  <span v-else>成人</span>
                   <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_adults" :min="1"
                     :max="20">
                   </el-input-number>
                 </el-row>
                 <el-row style="margin: 15px;" style="position: relative;">
-                  <span>Children</span>
+                  <span v-if="language === 'en'" style="margin-top: 5px;">Children</span>
+                  <span v-else>兒童</span>
                   <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_children" :min="0"
                     :max="20">
                   </el-input-number>
                 </el-row>
                 <el-row style="margin: 15px;" style="position: relative;">
-                  <span>Infants</span>
+                  <span v-if="language === 'en'" style="margin-top: 5px;">Infants</span>
+                  <span v-else>嬰兒</span>
                   <el-input-number style="position: absolute; right: 0;" size="mini" v-model="num_infants" :min="0"
                     :max="20">
                   </el-input-number>
@@ -523,19 +527,22 @@
               </el-button>
               <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px;">
                 <el-row style="margin: 15px;" style="position: relative;">
-                  <span style="margin-top: 5px;">Adults</span>
+                  <span v-if="language === 'en'" style="margin-top: 5px;">Adults</span>
+                  <span v-else>成人</span>
                   <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_adults" :min="1"
                     :max="20">
                   </el-input-number>
                 </el-row>
                 <el-row style="margin: 15px;" style="position: relative;">
-                  <span>Children</span>
+                  <span v-if="language === 'en'" style="margin-top: 5px;">Children</span>
+                  <span v-else>兒童</span>
                   <el-input-number size="mini" style="position: absolute; right: 0;" v-model="num_children" :min="0"
                     :max="20">
                   </el-input-number>
                 </el-row>
                 <el-row style="margin: 15px;" style="position: relative;">
-                  <span>Infants</span>
+                  <span v-if="language === 'en'" style="margin-top: 5px;">Infants</span>
+                  <span v-else>嬰兒</span>
                   <el-input-number style="position: absolute; right: 0;" size="mini" v-model="num_infants" :min="0"
                     :max="20">
                   </el-input-number>
@@ -557,7 +564,7 @@
 
       <div class="container">
         <div class="row">
-          <div class="col-lg-4 col-md-12">
+          <div class="col-lg-3 col-md-12">
             <div class="bravo_filter">
               <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
                 <div slot="header" class="clearfix">
@@ -584,7 +591,7 @@
             </div>
 
           </div>
-          <div class="col-lg-8 col-md-12">
+          <div class="col-lg-9 col-md-12">
 
             <div class="bravo-list-item">
               <div class="topbar-search" style="display: block;">
@@ -690,10 +697,11 @@
                             </el-row>
                             <el-row>
                               <span class="float-right" style="font-size: 12px;" v-if="language === 'en' ">
-                                30 nights | NT${{parseInt(item.price_30).toLocaleString()}}+
+                                from<span style="font-size: 13px; color: darkblue;">
+                                  TWD {{parseInt(item.price_30).toLocaleString()}}</span>/mo
                               </span>
                               <span class="float-right" style="font-size: 12px;" v-else>
-                                30晚 | NT${{ parseInt(item.price_30).toLocaleString()}}起
+                                30晚 | TWD {{ parseInt(item.price_30).toLocaleString()}}起
                               </span>
                             </el-row>
                           </el-card>
@@ -709,10 +717,10 @@
                             </span>
                           </el-row>
                           <span class="float-right" style="font-weight: 700;" v-if="language ==='en' ">
-                            From {{ Math.floor(parseInt(item.price)).toLocaleString() }} NT$
+                            From TWD {{ Math.floor(parseInt(item.price)).toLocaleString() }}
                           </span>
                           <span class="float-right" style="font-weight: 700;" v-else>
-                            NT${{ Math.floor(parseInt(item.price)).toLocaleString() }}起
+                            TWD {{ Math.floor(parseInt(item.price)).toLocaleString() }}起
                           </span>
 
                           <div v-else class="ratings-price float-right"> -- </div>
