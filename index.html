@@ -10,6 +10,7 @@
       background-image: url(https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/20/banner-en2.jpg) !important;
       width: auto !important;
       height: 200px !important;
+      display: none;
     }
 
   }
@@ -896,7 +897,7 @@
               this.locations = resp.locations;
               this.first_time = true;
               if (window.screen.width < 550)
-                this.shown_attributes = [];
+                this.shown_attributes = ["property-type"];
             } else {
               return;
             }
