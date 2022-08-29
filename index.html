@@ -643,7 +643,7 @@
                           <span v-if="language === 'en'">Sold out</span>
                           <span v-else>售完</span>
                         </div>
-                        <a :href="item.detail_url">
+                        <a :href="item.detail_url" target="_blank">
                           <img :src="item.image_id || default_url_alt" decoding="async" :alt="item.title"
                             class="image image-el-card" @error="fallback_url">
                         </a>
@@ -726,13 +726,14 @@
                           </span>
 
                           <div v-else class="ratings-price float-right"> -- </div>
-                          <el-button class="float-right price-btn"
-                            style="position: absolute; bottom: 15; right: 15; background-color: #EC3E3F;">
-                            <a :href="item.detail_url" style="text-decoration: none; color: #FFF;">
+                          <a :href="item.detail_url" target="_blank" style=>
+                            <el-button class="float-right price-btn"
+                              style="position: absolute; bottom: 15; right: 15; background-color: #EC3E3F; text-decoration: none; color: #FFF;">
                               <span v-if="language === 'en'"> see</span>
                               <span v-else>查看</span>
-                              <i class="el-icon-arrow-right"></i></a>
-                          </el-button>
+                              <i class="el-icon-arrow-right"></i>
+                            </el-button>
+                          </a>
                         </el-col>
                       </el-col>
                     </el-card>
