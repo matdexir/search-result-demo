@@ -685,7 +685,7 @@
                       </el-col>
                       <el-col :xs="24" :sm="6" :md="6" class="pricing-col">
                         <el-col :xs="12" :sm="24">
-                          <el-card :body-style="{padding: '10px'}" style="margin: 10px;"
+                          <el-card v-cloak :body-style="{padding: '10px'}" style="margin: 10px;"
                             :style="[item.price_30 === null? { 'visibility': 'hidden'} : {'display' :'block'}]"
                             shadow="hover">
                             <el-row>
@@ -703,7 +703,8 @@
                                   TWD {{parseInt(item.price_30).toLocaleString()}}</span>/mo
                               </span>
                               <span class="float-right" style="font-size: 12px;" v-else>
-                                30晚 | TWD {{ parseInt(item.price_30).toLocaleString()}}起
+                                30晚 | <span style="font-size: 13px; color: darkblue; font-weight: 700;">TWD {{
+                                  parseInt(item.price_30).toLocaleString()}}</span>起
                               </span>
                             </el-row>
                           </el-card>
