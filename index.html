@@ -439,7 +439,7 @@
         <i class="el-icon-top"></i>
       </el-button>
 
-      <div class="mb-2 pt-2 sticky-top hidden-sm-and-down" style="background-color: #EC3E3F;">
+      <div class="mb-2 pt-2 sticky-top hidden-sm-and-down" style="background-color: #D61A1B;">
         <div class="container">
           <div style="display: flex; gap: 20px; padding-bottom: 10px;">
             <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
@@ -490,7 +490,7 @@
                 </el-row>
               </el-dropdown-menu>
             </el-dropdown>
-            <el-button style="background-color: #EC3E3F; color: #FFF;" @click="fetch_data"
+            <el-button style="background-color: #D61A1B; color: #FFF;" @click="fetch_data"
               :loading="displayed_hotels.length === 0 && checked_attributes.length === 0">
               <span v-if="language === 'en'">
                 SEARCH
@@ -744,7 +744,7 @@
     </div>
   </div>
 
-  <div class="bravo_footer" style="background-color: #EC3E3F; color: white;">
+  <div class="bravo_footer" style="background-color: #D61A1B; color: white;">
     <div class="copy-right">
       <div class="container context">
         <div class="row">
