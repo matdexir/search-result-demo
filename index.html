@@ -273,12 +273,12 @@
     }
 
     .details-row {
-      height: 70%;
+      height: 65%;
     }
 
     .facility-row {
       position: absolute;
-      bottom: 4;
+      bottom: 5;
     }
 
     .attributes-col {
@@ -620,8 +620,8 @@
                       <span v-else>價錢由高至低</span>
                     </el-radio-button>
                     <el-radio-button label="rating_high_low">
-                      <span v-if="language==='en'">Rating(High to Low)</span>
-                      <span v-else>星級最高</span>
+                      <span v-if="language==='en'">Top reviewed</span>
+                      <span v-else>最佳評分</span>
                     </el-radio-button>
                   </el-radio-group>
                 </div>
@@ -651,13 +651,14 @@
                       </el-col>
                       <el-col :xs="24" :sm="11" :md="11" class="hotel-details">
                         <el-row>
-                          <span class="float-left hotel-title"
-                            style="width: 80%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{
-                            item.title }}</span>
-                          <span v-if="item.rate" class="float-right hotel-rate">
-                            {{ item.rate }} <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
+                          <span class="float-left hotel-title">
+                            {{item.title }}
+                            <span v-if="item.rate" class="hotel-rate">
+                              <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
+                              {{ item.rate }}
+                            </span>
+                            <span v-else class="hotel-rate"> -- </span>
                           </span>
-                          <span v-else class="float-right hotel-rate"> -- </span>
                         </el-row>
                         <el-row>
                           <span style="font-size: 12px; color: #0485D6;">
