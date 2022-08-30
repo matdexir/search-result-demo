@@ -640,7 +640,7 @@
                     <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
                       <el-col :xs=" 24" :sm="7" :md="7" style="position: relative;">
                         <div v-if="item.sold_out"
-                          style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; left: 0; color: #FFF; font-weight: 500; padding: 5px; border-radius: 5px;">
+                          style="background-color: #EC3E3F; z-index: 2; position: absolute; top: 30; left: 0; color: #FFF; font-weight: 500; padding: 5px;">
                           <span v-if="language === 'en'">Sold out</span>
                           <span v-else>售完</span>
                         </div>
@@ -654,11 +654,11 @@
                         <el-row>
                           <span class="float-left hotel-title">
                             {{item.title }}
-                            <span v-if="item.rate" class="hotel-rate">
-                              <i class="el-icon-star-on" style="color: #EC3E3F;"></i>
+                            <span v-if="item.rate" class="hotel-rate" style="margin-left: 3px; display: inline-block;">
+                              <img src="icon/star.svg" style="margin-bottom: 5px;">
                               {{ item.rate }}
                             </span>
-                            <span v-else class="hotel-rate"> -- </span>
+                            <span v-else class="hotel-rate" style="margin-left: 3px; display: inline-block;"> -- </span>
                           </span>
                         </el-row>
                         <el-row>
@@ -701,11 +701,11 @@
                             </el-row>
                             <el-row>
                               <span class="float-right" style="font-size: 12px;" v-if="language === 'en' ">
-                                from<span style="font-size: 13px; color: darkblue; font-weight: 700;">
+                                from<span style="font-size: 12px; font-weight: 700;">
                                   TWD {{parseInt(item.price_30).toLocaleString()}}</span>/mo
                               </span>
                               <span class="float-right" style="font-size: 12px;" v-else>
-                                30晚 | <span style="font-size: 13px; color: darkblue; font-weight: 700;">TWD {{
+                                30晚 | <span style="font-size: 12px; color: darkblue; font-weight: 700;">TWD {{
                                   parseInt(item.price_30).toLocaleString()}}</span>起
                               </span>
                             </el-row>
@@ -715,17 +715,22 @@
                           <el-row>
                             <span class="float-right" v-if="language === 'en' "
                               style="color: #A3A3A3; font-size: 12px; font-weight: 300;">
-                              {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} night(s)
+                              {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} nights
                             </span>
                             <span class="float-right" v-else style="color: #A3A3A3; font-size: 12px; font-weight: 300;">
                               {{ (date_range[1] - date_range[0])/(1000 * 3600 * 24) }} 晚
                             </span>
                           </el-row>
-                          <span class="float-right" style="font-weight: 700;" v-if="language ==='en' ">
-                            From TWD {{ Math.floor(parseInt(item.price)).toLocaleString() }}
+                          <span class="float-right" v-if="language ==='en' " style="font-size: 12px;">
+                            from
+                            <span style="font-weight: 700; font-size: 14px;">
+                              TWD {{ Math.floor(parseInt(item.price)).toLocaleString() }}
+                            </span>
                           </span>
-                          <span class="float-right" style="font-weight: 700;" v-else>
-                            TWD {{ Math.floor(parseInt(item.price)).toLocaleString() }}起
+                          <span class="float-right" v-else style="font-size: 12px;">
+                            <span style="font-weight: 700; font-size: 14px;">
+                              TWD{{Math.floor(parseInt(item.price)).toLocaleString() }}
+                            </span>起
                           </span>
 
                           <div v-else class="ratings-price float-right"> -- </div>
