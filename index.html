@@ -512,25 +512,25 @@
         </div>
 
         <transition name="el-fade-in">
-        <div>
-          <el-button
-            id="scroll-btn"
-            class="transition-box"
-            type="info"
-            @click="back_to_top"
-            style="
-              position: fixed;
-              bottom: 40px;
-              right: 30px;
-              z-index: 99;
-              background-color: #ec3e3f;
-              transition: opacity 1s;
-            "
-          >
-           <!--{{ show_backtop_button }}-->
-            <i class="el-icon-top"></i>
-          </el-button>
-        </div>
+          <div>
+            <el-button
+              id="scroll-btn"
+              class="transition-box"
+              type="info"
+              @click="back_to_top"
+              style="
+                position: fixed;
+                bottom: 40px;
+                right: 30px;
+                z-index: 99;
+                background-color: #ec3e3f;
+                transition: opacity 1s;
+              "
+            >
+              <!--{{ show_backtop_button }}-->
+              <i class="el-icon-top"></i>
+            </el-button>
+          </div>
         </transition>
 
         <div
@@ -880,6 +880,7 @@
                             />
                           </a>
                         </el-col>
+                        <a :href="item.detail_url" target="_blank">
                         <el-col
                           :xs="24"
                           :sm="11"
@@ -946,6 +947,8 @@
                             </el-col>
                           </el-row>
                         </el-col>
+                          </a>
+                            <a :href="item.detail_url" target="_blank">
                         <el-col :xs="24" :sm="6" :md="6" class="pricing-col">
                           <el-col :xs="12" :sm="24">
                             <el-card
@@ -1080,6 +1083,7 @@
                             </a>
                           </el-col>
                         </el-col>
+                          </a>
                       </el-card>
                     </dynamic-scroller-item>
                   </template>
@@ -1234,16 +1238,15 @@
             // pass
             console.log("mounted");
             let scroll_btn = document.getElementById("scroll-btn");
-            window.onscroll = function() {
+            window.onscroll = function () {
               if (window.scrollY === 0) {
-                 this.show_backtop_button = false;
-                 console.log("topppp", this.show_backtop_button)
+                this.show_backtop_button = false;
+                console.log("topppp", this.show_backtop_button);
+              } else {
+                this.show_backtop_button = true;
+                console.log("pushing p", this.show_backtop_button);
               }
-              else {
-                 this.show_backtop_button = true;
-                 console.log("pushing p", this.show_backtop_button)
-              }
-            }
+            };
           },
 
           watch: {
