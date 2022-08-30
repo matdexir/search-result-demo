@@ -512,8 +512,10 @@
         </div>
 
         <transition name="el-fade-in">
+        <div>
           <el-button
             id="scroll-btn"
+            class="transition-box"
             type="info"
             @click="back_to_top"
             style="
@@ -525,8 +527,10 @@
               transition: opacity 1s;
             "
           >
+          {{ show_backtop_button }}
             <i class="el-icon-top"></i>
           </el-button>
+        </div>
         </transition>
 
         <div
@@ -654,10 +658,10 @@
               <van-cell
                 title="Select date"
                 :value="mobile_date"
-                @click="show = true"
+                @click="show_vant_calendar = true"
               ></van-cell>
               <van-calendar
-                v-model="show"
+                v-model="show_vant_calendar"
                 type="range"
                 @confirm="onConfirm"
               ></van-calendar>
@@ -1037,7 +1041,7 @@
                               style="font-size: 12px"
                             >
                               from
-                              <span style="font-weight: 700; font-size: 14px">
+                              <span style="font-weight: 700; font-size: 16px">
                                 TWD {{
                                 Math.floor(parseInt(item.price)).toLocaleString()
                                 }}
@@ -1048,7 +1052,7 @@
                               v-else
                               style="font-size: 12px"
                             >
-                              <span style="font-weight: 700; font-size: 14px">
+                              <span style="font-weight: 700; font-size: 16px">
                                 TWD{{Math.floor(parseInt(item.price)).toLocaleString()
                                 }} </span
                               >起
@@ -1190,7 +1194,8 @@
         const App = new Vue({
           el: "#app",
           data: {
-            show: false,
+            show_vant_calendar: false,
+            show_backtop_button: false,
             mobile_date: "",
             sort_popup_active: false,
             filter_popup_active: false,
@@ -1228,17 +1233,17 @@
           mounted() {
             // pass
             console.log("mounted");
-            /*
-          let scroll_btn = document.getElementById("scroll-btn");
-          window.onscroll = function() {
-            if (window.scrollY === 0) {
-               scroll_btn.style.display = "none";
+            let scroll_btn = document.getElementById("scroll-btn");
+            window.onscroll = function() {
+              if (window.scrollY === 0) {
+                 this.show_backtop_button = false;
+                 console.log("topppp", this.show_backtop_button)
+              }
+              else {
+                 this.show_backtop_button = true;
+                 console.log("pushing p", this.show_backtop_button)
+              }
             }
-            else {
-               scroll_btn.style.display = "initial";
-            }
-          }
-          */
           },
 
           watch: {
@@ -1535,7 +1540,7 @@
             onConfirm: function (date) {
               const [start, end] = date;
               this.date_range = date;
-              this.show = false;
+              this.show_vant_calendar = false;
               this.mobile_date = `${this.formatDate(start)} - ${this.formatDate(
                 end
               )}`;
