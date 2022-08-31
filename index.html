@@ -885,10 +885,10 @@
           window.onscroll = function () {
             if (window.scrollY === 0) {
               this.show_backtop_button = false;
-              console.log("topppp", this.show_backtop_button);
+              scroll_btn.style.display = "none";
             } else {
               this.show_backtop_button = true;
-              console.log("pushing p", this.show_backtop_button);
+              scroll_btn.style.display = "initial";
             }
           };
         },
