@@ -17,847 +17,620 @@
 
 <!DOCTYPE html>
 <html lang="en" class="">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta
-      name="csrf-token"
-      content="sxcmHHm5tPy4BxhcKH5b114cCGV2ctEKTSZdzxP0"
-    />
-    <link
-      rel="icon"
-      type="image/vnd.microsoft.icon"
-      href="https://worktel.mrhost.com.tw/uploads/0000/1/2022/03/22/favicon.png"
-    />
-    <title>
-      mrhost-Worktel, Extended Stay &amp; Service Apartment online booking
-      platform
-    </title>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta
-      name="description"
-      content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay."
-    />
-    <meta property="og:url" content="https://worktel.mrhost.com.tw/hotel" />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:title"
-      content="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform"
-    />
-    <meta
-      property="og:description"
-      content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay."
-    />
-    <meta
-      property="og:image"
-      content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform"
-    />
-    <meta
-      name="twitter:description"
-      content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay."
-    />
-    <meta
-      name="twitter:image"
-      content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg"
-    />
-    <link rel="canonical" href="https://worktel.mrhost.com.tw/hotel" />
-    <link
-      rel="alternate"
-      href="https://worktel.mrhost.com.tw/hotel"
-      hreflang="x-default"
-    />
-    <link
-      rel="alternate"
-      href="https://worktel.mrhost.com.tw/zh/hotel"
-      hreflang="zh"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/libs/bootstrap/css/bootstrap.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/vue-virtual-scroller@1.0.10/dist/vue-virtual-scroller.css"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/libs/font-awesome/css/font-awesome.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/libs/ionicons/css/ionicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/libs/icofont/icofont.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/libs/select2/css/select2.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/dist/frontend/css/notification.css"
-      rel="newest stylesheet"
-    />
-    <link
-      href="https://worktel.mrhost.com.tw/dist/frontend/css/app.css?_ver=1.0.12"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fastly.jsdelivr.net/npm/vant@2/lib/index.css"
-    />
+  <meta name="csrf-token" content="sxcmHHm5tPy4BxhcKH5b114cCGV2ctEKTSZdzxP0" />
+  <link rel="icon" type="image/vnd.microsoft.icon"
+    href="https://worktel.mrhost.com.tw/uploads/0000/1/2022/03/22/favicon.png" />
+  <title>
+    mrhost-Worktel, Extended Stay &amp; Service Apartment online booking
+    platform
+  </title>
 
-    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-    <link
-      rel="stylesheet"
-      id="google-font-css-css"
-      href="https://fonts.googleapis.com/css?family=Poppins%3A300%2C400%2C500%2C600"
-      type="text/css"
-      media="all"
-    />
-    <script>
-      var bookingCore = {
-        url: "https://worktel.mrhost.com.tw",
-        url_root: "https://worktel.mrhost.com.tw",
-        booking_decimals: 0,
-        thousand_separator: ",",
-        decimal_separator: ".",
-        currency_position: "left",
-        currency_symbol: "NT$",
-        currency_rate: "1",
-        date_format: "MM/DD/YYYY",
-        map_provider: "gmap",
-        map_gmap_key: "AIzaSyAGDg5j4O512bsBovm1nv_AnZTaF6JESFE",
-        map_options: {
-          map_lat_default: "25.032969",
-          map_lng_default: "121.565414",
-          map_clustering: "on",
-          map_fit_bounds: "on",
-        },
-        routes: {},
-        module: {
-          hotel: "https://worktel.mrhost.com.tw/hotel",
-        },
-        currentUser: 0,
-        isAdmin: 0,
-        rtl: 0,
-        markAsRead: "https://worktel.mrhost.com.tw/notify/markAsRead",
-        markAllAsRead: "https://worktel.mrhost.com.tw/notify/markAllAsRead",
-        loadNotify: "https://worktel.mrhost.com.tw/notify/notifications",
-        pusher_api_key: "",
-        pusher_cluster: "",
-      };
-      var i18n = {
-        warning: "Warning",
-        success: "Success",
-      };
-      var daterangepickerLocale = {
-        applyLabel: "Apply",
-        cancelLabel: "Cancel",
-        fromLabel: "From",
-        toLabel: "To",
-        customRangeLabel: "Custom",
-        weekLabel: "W",
-        first_day_of_week: 1,
+  <meta name="description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta property="og:url" content="https://worktel.mrhost.com.tw/hotel" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform" />
+  <meta property="og:description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta property="og:image" content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform" />
+  <meta name="twitter:description"
+    content="Taiwan extended stay, short stay, monthly hotel, workation. We have a range of brands that help you find the best hotel for your stay." />
+  <meta name="twitter:image" content="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/22/ally-en.jpeg" />
+  <link rel="canonical" href="https://worktel.mrhost.com.tw/hotel" />
+  <link rel="alternate" href="https://worktel.mrhost.com.tw/hotel" hreflang="x-default" />
+  <link rel="alternate" href="https://worktel.mrhost.com.tw/zh/hotel" hreflang="zh" />
+  <link href="https://worktel.mrhost.com.tw/libs/bootstrap/css/bootstrap.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/vue-virtual-scroller@1.0.10/dist/vue-virtual-scroller.css" />
+  <link href="https://worktel.mrhost.com.tw/libs/font-awesome/css/font-awesome.css" rel="stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/libs/ionicons/css/ionicons.min.css" rel="stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/libs/icofont/icofont.min.css" rel="stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/libs/select2/css/select2.min.css" rel="stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/css/notification.css" rel="newest stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/css/app.css?_ver=1.0.12" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/vant@2/lib/index.css" />
 
-        daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-        monthNames: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December",
-        ],
-      };
-    </script>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/element-ui/lib/theme-chalk/display.css"
-    />
-    <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-virtual-scroller@1.0.10/dist/vue-virtual-scroller.umd.min.js"></script>
-    <link
-      href="https://worktel.mrhost.com.tw/dist/frontend/module/hotel/css/hotel.css?_ver=1.0.12"
-      rel="stylesheet"
-    />
-    <link href="https://worktel.mrhost.com.tw/custom-css" rel="stylesheet" />
-    <link
-      href="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.css"
-      rel="stylesheet"
-    />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+  <link rel="stylesheet" id="google-font-css-css"
+    href="https://fonts.googleapis.com/css?family=Poppins%3A300%2C400%2C500%2C600" type="text/css" media="all" />
+  <script>
+    var bookingCore = {
+      url: "https://worktel.mrhost.com.tw",
+      url_root: "https://worktel.mrhost.com.tw",
+      booking_decimals: 0,
+      thousand_separator: ",",
+      decimal_separator: ".",
+      currency_position: "left",
+      currency_symbol: "NT$",
+      currency_rate: "1",
+      date_format: "MM/DD/YYYY",
+      map_provider: "gmap",
+      map_gmap_key: "AIzaSyAGDg5j4O512bsBovm1nv_AnZTaF6JESFE",
+      map_options: {
+        map_lat_default: "25.032969",
+        map_lng_default: "121.565414",
+        map_clustering: "on",
+        map_fit_bounds: "on",
+      },
+      routes: {},
+      module: {
+        hotel: "https://worktel.mrhost.com.tw/hotel",
+      },
+      currentUser: 0,
+      isAdmin: 0,
+      rtl: 0,
+      markAsRead: "https://worktel.mrhost.com.tw/notify/markAsRead",
+      markAllAsRead: "https://worktel.mrhost.com.tw/notify/markAllAsRead",
+      loadNotify: "https://worktel.mrhost.com.tw/notify/notifications",
+      pusher_api_key: "",
+      pusher_cluster: "",
+    };
+    var i18n = {
+      warning: "Warning",
+      success: "Success",
+    };
+    var daterangepickerLocale = {
+      applyLabel: "Apply",
+      cancelLabel: "Cancel",
+      fromLabel: "From",
+      toLabel: "To",
+      customRangeLabel: "Custom",
+      weekLabel: "W",
+      first_day_of_week: 1,
 
-    <div id="fb-root"></div>
+      daysOfWeek: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+      monthNames: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+    };
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/display.css" />
+  <script src="https://worktel.mrhost.com.tw/libs/vue/vue.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-virtual-scroller@1.0.10/dist/vue-virtual-scroller.umd.min.js"></script>
+  <link href="https://worktel.mrhost.com.tw/dist/frontend/module/hotel/css/hotel.css?_ver=1.0.12" rel="stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/custom-css" rel="stylesheet" />
+  <link href="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.css" rel="stylesheet" />
 
-    <div id="fb-customer-chat" class="fb-customerchat"></div>
-    <script>
-      var chatbox = document.getElementById("fb-customer-chat");
-      chatbox.setAttribute("page_id", "145891912753401");
-      //   chatbox.setAttribute("page_id", "145891912753401");
-      //   chatbox.setAttribute("page_id", "1149874751858022");
-      chatbox.setAttribute("attribution", "biz_inbox");
-      chatbox.setAttribute("theme_color", "#E97676");
-      chatbox.setAttribute("logged_in_greeting", "Hi! How can we help you?");
-    </script>
+  <div id="fb-root"></div>
 
-    <style>
-      html {
-        scroll-behavior: smooth;
-        font-size-adjust: none;
-      }
+  <div id="fb-customer-chat" class="fb-customerchat"></div>
+  <script>
+    var chatbox = document.getElementById("fb-customer-chat");
+    chatbox.setAttribute("page_id", "145891912753401");
+    //   chatbox.setAttribute("page_id", "145891912753401");
+    //   chatbox.setAttribute("page_id", "1149874751858022");
+    chatbox.setAttribute("attribution", "biz_inbox");
+    chatbox.setAttribute("theme_color", "#E97676");
+    chatbox.setAttribute("logged_in_greeting", "Hi! How can we help you?");
+  </script>
 
-      .features-list {
-        margin-top: 0;
-        display: flex;
-        flex-wrap: wrap;
-        width: 90%;
-      }
+  <style>
+    html {
+      scroll-behavior: smooth;
+      font-size-adjust: none;
+    }
 
-      .features-list-el {
-        color: #a10508;
-        font-size: 12px;
-        margin-right: 5px;
-      }
+    .features-list {
+      margin-top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      width: 90%;
+    }
 
-      .bravo_wrap .bravo_form .form-content {
-        padding: 0;
-      }
+    .features-list-el {
+      color: #a10508;
+      font-size: 12px;
+      margin-right: 5px;
+    }
 
-      .button-child {
-        background-color: #cccccc;
-        color: #a3a3a3;
-      }
+    .bravo_wrap .bravo_form .form-content {
+      padding: 0;
+    }
 
-      .button-child-target {
-        background-color: #ec3e3f;
-        color: #ffffff;
-      }
+    .button-child {
+      background-color: #cccccc;
+      color: #a3a3a3;
+    }
 
-      .info {
-      }
+    .button-child-target {
+      background-color: #ec3e3f;
+      color: #ffffff;
+    }
 
-      .el-icon-plus {
-        line-height: 2;
-      }
+    .info {}
 
-      .el-icon-minus {
-        line-height: 2;
-      }
+    .el-icon-plus {
+      line-height: 2;
+    }
 
-      .capabilities {
-        display: flex;
-        flex-wrap: wrap;
-      }
+    .el-icon-minus {
+      line-height: 2;
+    }
 
-      .capabilities-el {
-        background-color: #f5f5f5;
-        margin-right: 10px;
-        border-radius: 5px;
-        border: 1px solid #e0e0e0;
-        padding: 3px;
-        font-size: 12px;
-      }
+    .capabilities {
+      display: flex;
+      flex-wrap: wrap;
+    }
 
-      .info .info-star {
-        font-size: 18px;
-        color: #484848;
-        text-align: right;
-      }
+    .capabilities-el {
+      background-color: #f5f5f5;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #e0e0e0;
+      padding: 3px;
+      font-size: 12px;
+    }
 
-      .info .info-comment {
-        font-size: 12px;
-        color: #a3a3a3;
-        text-align: right;
-      }
+    .info .info-star {
+      font-size: 18px;
+      color: #484848;
+      text-align: right;
+    }
 
-      .render {
-        margin-top: 0.2rem;
-      }
+    .info .info-comment {
+      font-size: 12px;
+      color: #a3a3a3;
+      text-align: right;
+    }
 
-      .ratings-price {
-        position: absolute;
-        margin-top: 5px;
-        font-size: 20px;
-        bottom: 60;
-        right: 15;
-        font-weight: 700;
-        text-align: right;
-      }
+    .render {
+      margin-top: 0.2rem;
+    }
 
-      .price-wrapper {
-        padding: 15px;
-      }
+    .ratings-price {
+      position: absolute;
+      margin-top: 5px;
+      font-size: 20px;
+      bottom: 60;
+      right: 15;
+      font-weight: 700;
+      text-align: right;
+    }
 
-      .hotel-details {
-        height: 200px;
-        padding: 10px;
-        position: relative;
-      }
+    .price-wrapper {
+      padding: 15px;
+    }
 
-      .hotel-title {
-        color: #141414;
-        font-size: 20px;
-        font-weight: 700;
-      }
+    .hotel-details {
+      height: 200px;
+      padding: 10px;
+      position: relative;
+    }
 
-      .hotel-rate {
-        font-size: 15px;
-      }
+    .hotel-title {
+      color: #141414;
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-      .image-container {
-        padding: 0px;
-      }
+    .hotel-rate {
+      font-size: 15px;
+    }
 
+    .image-container {
+      padding: 0px;
+    }
+
+    .image-el-card {
+      width: 100%;
+      min-height: 200px;
+      border-radius: 1px;
+      object-fit: cover;
+    }
+
+    .hotel-card {
+      width: 100%;
+      min-height: 200px;
+      margin-bottom: 10px;
+    }
+
+    .details-row {
+      height: 65%;
+    }
+
+    .facility-row {
+      position: absolute;
+      bottom: 5;
+    }
+
+    .attributes-col {
+      position: relative;
+      height: 100%;
+      margin-bottom: 10px;
+    }
+
+    .pricing-col {
+      min-height: 200px;
+      position: relative;
+    }
+
+    .el-radio-button__inner:hover {
+      color: #ec3e3f;
+    }
+
+    .el-radio-button__orig-radio:checked+.el-radio-button__inner {
+      color: #fff;
+      background-color: #ec3e3f;
+      border-color: #dcdfe6;
+    }
+
+    .el-select-dropdown__item.selected {
+      color: #ec3e3f;
+      font-weight: 700;
+    }
+
+    .el-date-editor .el-range__icon {
+      color: #000;
+    }
+
+    .el-tag.el-tag--info {
+      background-color: #f5f5f5;
+      border-color: #e0e0e0;
+      color: #484848;
+      font-size: 12px;
+    }
+
+    @media screen and (max-width: 900px) {
       .image-el-card {
-        width: 100%;
-        min-height: 200px;
-        border-radius: 1px;
-        object-fit: cover;
+        height: 170px;
       }
 
       .hotel-card {
-        width: 100%;
-        min-height: 200px;
-        margin-bottom: 10px;
+        height: 200px;
+        margin-bottom: 30px;
+      }
+    }
+
+    @media screen and (max-width: 550px) {
+      .ratings-price {
+        position: initial;
+        margin-top: 20px;
+      }
+
+      .price-wrapper {
+        margin: 0;
+        padding: 10px;
+        margin-top: 15px;
+      }
+
+      .card-container {
+        align-items: center;
+      }
+
+      .image-el-card {
+        height: 200px;
+      }
+
+      .image-container {
+        padding: 1px;
+      }
+
+      .hotel-card {
+        margin: 0 auto;
+        margin-bottom: 30px;
+        height: initial;
+      }
+
+      .hotel-details {
+        height: initial;
+        padding: 5px;
       }
 
       .details-row {
-        height: 65%;
+        height: initial;
       }
 
       .facility-row {
-        position: absolute;
-        bottom: 5;
-      }
-
-      .attributes-col {
+        margin-top: 10px;
         position: relative;
-        height: 100%;
-        margin-bottom: 10px;
       }
 
       .pricing-col {
-        min-height: 200px;
+        min-height: initial;
         position: relative;
       }
 
-      .el-radio-button__inner:hover {
-        color: #ec3e3f;
+      .price-btn {
+        display: none;
       }
 
-      .el-radio-button__orig-radio:checked + .el-radio-button__inner {
-        color: #fff;
-        background-color: #ec3e3f;
-        border-color: #dcdfe6;
+      .attributes-col {
+        height: initial;
+        margin-bottom: 5px;
       }
 
-      .el-select-dropdown__item.selected {
-        color: #ec3e3f;
-        font-weight: 700;
-      }
-
-      .el-date-editor .el-range__icon {
-        color: #000;
-      }
-
-      .el-tag.el-tag--info {
-        background-color: #f5f5f5;
-        border-color: #e0e0e0;
-        color: #484848;
-        font-size: 12px;
-      }
-
-      @media screen and (max-width: 900px) {
-        .image-el-card {
-          height: 170px;
-        }
-
-        .hotel-card {
-          height: 200px;
-          margin-bottom: 30px;
-        }
-      }
-
-      @media screen and (max-width: 550px) {
-        .ratings-price {
-          position: initial;
-          margin-top: 20px;
-        }
-
-        .price-wrapper {
-          margin: 0;
-          padding: 10px;
-          margin-top: 15px;
-        }
-
-        .card-container {
-          align-items: center;
-        }
-
-        .image-el-card {
-          height: 200px;
-        }
-
-        .image-container {
-          padding: 1px;
-        }
-
-        .hotel-card {
-          margin: 0 auto;
-          margin-bottom: 30px;
-          height: initial;
-        }
-
-        .hotel-details {
-          height: initial;
-          padding: 5px;
-        }
-
-        .details-row {
-          height: initial;
-        }
-
-        .facility-row {
-          margin-top: 10px;
-          position: relative;
-        }
-
-        .pricing-col {
-          min-height: initial;
-          position: relative;
-        }
-
-        .price-btn {
-          display: none;
-        }
-
-        .attributes-col {
-          height: initial;
-          margin-bottom: 5px;
-        }
-
-        /*
+      /*
       .guests-type-selection {
         display: none;
       }
       */
-      }
-    </style>
-  </head>
+    }
+  </style>
+</head>
 
-  <body class="frontend-page header-normal">
-    <noscript>
-      <iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP"
-        height="0"
-        width="0"
-        style="display: none; visibility: hidden"
-      >
-      </iframe>
-    </noscript>
+<body class="frontend-page header-normal">
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFDMNDP" height="0" width="0"
+      style="display: none; visibility: hidden">
+    </iframe>
+  </noscript>
 
-    <div v-cloak class="bravo_wrap" id="app">
-      <div class="bravo_header">
-        <div class="container">
-          <div class="content">
-            <div class="header-left">
-              <a href="https://worktel.mrhost.com.tw" class="bravo-logo">
-                <img
-                  decoding="async"
-                  src="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/21/logo-300.png"
-                  alt="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform"
-                />
-              </a>
-              <div class="bravo-menu"></div>
-            </div>
-            <div style="margin-left: auto; margin-right: 0">
-              <el-select
-                v-model="language"
-                placeholder="language"
-                @change="fetch_data"
-              >
-                <el-option key="English" label="English" value="en"></el-option>
-                <el-option
-                  key="繁體中文"
-                  label="繁體中文"
-                  value="zh"
-                ></el-option>
-              </el-select>
-            </div>
+  <div v-cloak class="bravo_wrap" id="app">
+    <div class="bravo_header">
+      <div class="container">
+        <div class="content">
+          <div class="header-left">
+            <a href="https://worktel.mrhost.com.tw" class="bravo-logo">
+              <img decoding="async" src="https://worktel.mrhost.com.tw/uploads/0000/1/2022/06/21/logo-300.png"
+                alt="mrhost-Worktel, Extended Stay &amp; Service Apartment online booking platform" />
+            </a>
+            <div class="bravo-menu"></div>
+          </div>
+          <div style="margin-left: auto; margin-right: 0">
+            <el-select v-model="language" placeholder="language" @change="fetch_data">
+              <el-option key="English" label="English" value="en"></el-option>
+              <el-option key="繁體中文" label="繁體中文" value="zh"></el-option>
+            </el-select>
           </div>
         </div>
       </div>
-      <div class="bravo_search_hotel">
-        <div class="bravo_banner">
-          <div class="container">
-            <h1></h1>
-          </div>
+    </div>
+    <div class="bravo_search_hotel">
+      <div class="bravo_banner">
+        <div class="container">
+          <h1></h1>
         </div>
+      </div>
 
-        <transition name="el-fade-in">
-          <div>
-            <el-button
-              id="scroll-btn"
-              class="transition-box"
-              type="info"
-              @click="back_to_top"
-              style="
+      <transition name="el-fade-in">
+        <div>
+          <el-button id="scroll-btn" class="transition-box" type="info" @click="back_to_top" style="
                 position: fixed;
                 bottom: 40px;
                 right: 30px;
                 z-index: 99;
                 background-color: #ec3e3f;
                 transition: opacity 1s;
-              "
-            >
-              <!--{{ show_backtop_button }}-->
-              <i class="el-icon-top"></i>
+              ">
+            <!--{{ show_backtop_button }}-->
+            <i class="el-icon-top"></i>
+          </el-button>
+        </div>
+      </transition>
+
+      <div class="mb-2 pt-2 sticky-top hidden-sm-and-down" style="background-color: #d61a1b">
+        <div class="container">
+          <div style="display: flex; gap: 20px; padding-bottom: 10px">
+            <el-select :xs="24" v-model="selected_city" filterable placeholder="City">
+              <el-option v-for="location in locations" :label="find_location(location.id)"
+                :key="location.name+location.id" :value="location.id">
+                {{ find_location(location.id) }}
+              </el-option>
+            </el-select>
+            <el-date-picker v-model="date_range" size="large" type="daterange" range-separator="|"
+              :picker-options="date_picker_options">
+            </el-date-picker>
+
+            <el-dropdown class="guests-type-selection" trigger="click">
+              <el-button>
+                <img src="icon/person.svg" />
+                <span v-if="language ==='en' ">
+                  {{num_adults}} Adults - {{num_children}} children -
+                  {{num_infants}} Infants
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <span v-else>
+                  {{num_adults}} 位成人 - {{num_children}} 名孩童 -
+                  {{num_infants}} 名嬰兒
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+              </el-button>
+              <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px">
+                <el-row style="margin: 15px" style="position: relative">
+                  <span v-if="language === 'en'" style="margin-top: 5px">Adults</span>
+                  <span v-else>成人</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0" v-model="num_adults" :min="1"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px" style="position: relative">
+                  <span v-if="language === 'en'" style="margin-top: 5px">Children</span>
+                  <span v-else>兒童</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0" v-model="num_children" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px" style="position: relative">
+                  <span v-if="language === 'en'" style="margin-top: 5px">Infants</span>
+                  <span v-else>嬰兒</span>
+                  <el-input-number style="position: absolute; right: 0" size="mini" v-model="num_infants" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-button style="background-color: #d61a1b; color: #fff" @click="fetch_data"
+              :loading="displayed_hotels.length === 0 && checked_attributes.length === 0">
+              <span v-if="language === 'en'"> SEARCH </span>
+              <span v-else> 搜尋 </span>
             </el-button>
           </div>
-        </transition>
+        </div>
+      </div>
 
-        <div
-          class="mb-2 pt-2 sticky-top hidden-sm-and-down"
-          style="background-color: #d61a1b"
-        >
-          <div class="container">
-            <div style="display: flex; gap: 20px; padding-bottom: 10px">
-              <el-select
-                :xs="24"
-                v-model="selected_city"
-                filterable
-                placeholder="City"
-              >
-                <el-option
-                  v-for="location in locations"
-                  :label="find_location(location.id)"
-                  :key="location.name+location.id"
-                  :value="location.id"
-                >
-                  {{ find_location(location.id) }}
-                </el-option>
-              </el-select>
-              <el-date-picker
-                v-model="date_range"
-                size="large"
-                type="daterange"
-                range-separator="|"
-                :picker-options="date_picker_options"
-              >
-              </el-date-picker>
+      <div class="mb-2 pt-2 hidden-md-and-up" style="background-color: #ec3e3f">
+        <div class="container">
+          <div style="display: grid; gap: 10px; padding-bottom: 10px">
+            <el-select v-model="selected_city" placeholder="City">
+              <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
+              <el-option v-cloak v-for="location in locations" :label="find_location(location.id)"
+                :key="location.name+location.id" :value="location.id">
+                {{ find_location(location.id) }}
+              </el-option>
+            </el-select>
+            <van-cell title="Select date" :value="mobile_date" @click="show_vant_calendar = true"></van-cell>
+            <van-calendar v-model="show_vant_calendar" type="range" @confirm="onConfirm"></van-calendar>
+            <el-dropdown trigger="click">
+              <el-button style="width: 100%">
+                <span v-if="language ==='en' " class="float-left">
+                  {{num_adults}} Adults - {{num_children}} children -
+                  {{num_infants}} Infants
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <span v-else class="float-left">
+                  {{num_adults}} 位成人 - {{num_children}} 名孩童 -
+                  {{num_infants}} 名嬰兒
+                  <i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+              </el-button>
+              <el-dropdown-menu slot="dropdown" style="position: relative; width: 300px">
+                <el-row style="margin: 15px" style="position: relative">
+                  <span v-if="language === 'en'" style="margin-top: 5px">Adults</span>
+                  <span v-else>成人</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0" v-model="num_adults" :min="1"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px" style="position: relative">
+                  <span v-if="language === 'en'" style="margin-top: 5px">Children</span>
+                  <span v-else>兒童</span>
+                  <el-input-number size="mini" style="position: absolute; right: 0" v-model="num_children" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+                <el-row style="margin: 15px" style="position: relative">
+                  <span v-if="language === 'en'" style="margin-top: 5px">Infants</span>
+                  <span v-else>嬰兒</span>
+                  <el-input-number style="position: absolute; right: 0" size="mini" v-model="num_infants" :min="0"
+                    :max="20">
+                  </el-input-number>
+                </el-row>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <el-button style="background-color: #ec3e3f; color: #fff" @click="fetch_data"
+              :loading="displayed_hotels.length === 0 && checked_attributes.length === 0">
+              <span v-if="language === 'en'"> SEARCH </span>
+              <span v-else> 搜尋 </span>
+            </el-button>
+          </div>
+        </div>
+      </div>
 
-              <el-dropdown class="guests-type-selection" trigger="click">
-                <el-button>
-                  <img src="icon/person.svg" />
-                  <span v-if="language ==='en' ">
-                    {{num_adults}} Adults - {{num_children}} children -
-                    {{num_infants}} Infants
-                    <i class="el-icon-arrow-down el-icon--right"></i>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-12">
+            <div class="bravo_filter">
+              <el-card class="box-card" shadow="hover" :body-style="{ padding: '0px' }">
+                <div slot="header" class="clearfix">
+                  <span v-if="language === 'en' ">FILTER:</span>
+                  <span v-else>透過以下分類搜尋:</span>
+                </div>
+                <el-collapse v-model="shown_attributes">
+                  <el-collapse-item v-for="attribute in attributes" :name="attribute.slug">
+                    <template slot="title">
+                      <span style="margin-left: 1rem; font-weight: 700">
+                        {{ proper_language(attribute) }}</span>
+                    </template>
+                    <el-checkbox-group v-model="checked_attributes" @change="filter_hotels">
+                      <el-col>
+                        <el-row v-for="term in attribute.terms">
+                          <el-checkbox :label="term.id" :key="term.id" style="margin-left: 1rem">
+                            {{ proper_language(term) }}
+                          </el-checkbox>
+                        </el-row>
+                      </el-col>
+                    </el-checkbox-group>
+                  </el-collapse-item>
+                </el-collapse>
+              </el-card>
+            </div>
+          </div>
+          <div class="col-lg-9 col-md-12">
+            <div class="bravo-list-item">
+              <div class="topbar-search" style="display: block">
+                <h2 class="text">
+                  <span v-if="language==='en'">
+                    {{ displayed_hotels.length }} hotel(s) found
                   </span>
                   <span v-else>
-                    {{num_adults}} 位成人 - {{num_children}} 名孩童 -
-                    {{num_infants}} 名嬰兒
-                    <i class="el-icon-arrow-down el-icon--right"></i>
+                    找到{{ displayed_hotels.length }}間住宿
                   </span>
-                </el-button>
-                <el-dropdown-menu
-                  slot="dropdown"
-                  style="position: relative; width: 300px"
-                >
-                  <el-row style="margin: 15px" style="position: relative">
-                    <span v-if="language === 'en'" style="margin-top: 5px"
-                      >Adults</span
-                    >
-                    <span v-else>成人</span>
-                    <el-input-number
-                      size="mini"
-                      style="position: absolute; right: 0"
-                      v-model="num_adults"
-                      :min="1"
-                      :max="20"
-                    >
-                    </el-input-number>
-                  </el-row>
-                  <el-row style="margin: 15px" style="position: relative">
-                    <span v-if="language === 'en'" style="margin-top: 5px"
-                      >Children</span
-                    >
-                    <span v-else>兒童</span>
-                    <el-input-number
-                      size="mini"
-                      style="position: absolute; right: 0"
-                      v-model="num_children"
-                      :min="0"
-                      :max="20"
-                    >
-                    </el-input-number>
-                  </el-row>
-                  <el-row style="margin: 15px" style="position: relative">
-                    <span v-if="language === 'en'" style="margin-top: 5px"
-                      >Infants</span
-                    >
-                    <span v-else>嬰兒</span>
-                    <el-input-number
-                      style="position: absolute; right: 0"
-                      size="mini"
-                      v-model="num_infants"
-                      :min="0"
-                      :max="20"
-                    >
-                    </el-input-number>
-                  </el-row>
-                </el-dropdown-menu>
-              </el-dropdown>
-              <el-button
-                style="background-color: #d61a1b; color: #fff"
-                @click="fetch_data"
-                :loading="displayed_hotels.length === 0 && checked_attributes.length === 0"
-              >
-                <span v-if="language === 'en'"> SEARCH </span>
-                <span v-else> 搜尋 </span>
-              </el-button>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="mb-2 pt-2 hidden-md-and-up"
-          style="background-color: #ec3e3f"
-        >
-          <div class="container">
-            <div style="display: grid; gap: 10px; padding-bottom: 10px">
-              <el-select v-model="selected_city" placeholder="City">
-                <!-- <el-select :xs="24" v-model="selected_city" placeholder="City"> -->
-                <el-option
-                  v-cloak
-                  v-for="location in locations"
-                  :label="find_location(location.id)"
-                  :key="location.name+location.id"
-                  :value="location.id"
-                >
-                  {{ find_location(location.id) }}
-                </el-option>
-              </el-select>
-              <van-cell
-                title="Select date"
-                :value="mobile_date"
-                @click="show_vant_calendar = true"
-              ></van-cell>
-              <van-calendar
-                v-model="show_vant_calendar"
-                type="range"
-                @confirm="onConfirm"
-              ></van-calendar>
-              <el-dropdown trigger="click">
-                <el-button style="width: 100%">
-                  <span v-if="language ==='en' " class="float-left">
-                    {{num_adults}} Adults - {{num_children}} children -
-                    {{num_infants}} Infants
-                    <i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                  <span v-else class="float-left">
-                    {{num_adults}} 位成人 - {{num_children}} 名孩童 -
-                    {{num_infants}} 名嬰兒
-                    <i class="el-icon-arrow-down el-icon--right"></i>
-                  </span>
-                </el-button>
-                <el-dropdown-menu
-                  slot="dropdown"
-                  style="position: relative; width: 300px"
-                >
-                  <el-row style="margin: 15px" style="position: relative">
-                    <span v-if="language === 'en'" style="margin-top: 5px"
-                      >Adults</span
-                    >
-                    <span v-else>成人</span>
-                    <el-input-number
-                      size="mini"
-                      style="position: absolute; right: 0"
-                      v-model="num_adults"
-                      :min="1"
-                      :max="20"
-                    >
-                    </el-input-number>
-                  </el-row>
-                  <el-row style="margin: 15px" style="position: relative">
-                    <span v-if="language === 'en'" style="margin-top: 5px"
-                      >Children</span
-                    >
-                    <span v-else>兒童</span>
-                    <el-input-number
-                      size="mini"
-                      style="position: absolute; right: 0"
-                      v-model="num_children"
-                      :min="0"
-                      :max="20"
-                    >
-                    </el-input-number>
-                  </el-row>
-                  <el-row style="margin: 15px" style="position: relative">
-                    <span v-if="language === 'en'" style="margin-top: 5px"
-                      >Infants</span
-                    >
-                    <span v-else>嬰兒</span>
-                    <el-input-number
-                      style="position: absolute; right: 0"
-                      size="mini"
-                      v-model="num_infants"
-                      :min="0"
-                      :max="20"
-                    >
-                    </el-input-number>
-                  </el-row>
-                </el-dropdown-menu>
-              </el-dropdown>
-              <el-button
-                style="background-color: #ec3e3f; color: #fff"
-                @click="fetch_data"
-                :loading="displayed_hotels.length === 0 && checked_attributes.length === 0"
-              >
-                <span v-if="language === 'en'"> SEARCH </span>
-                <span v-else> 搜尋 </span>
-              </el-button>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-12">
-              <div class="bravo_filter">
-                <el-card
-                  class="box-card"
-                  shadow="hover"
-                  :body-style="{ padding: '0px' }"
-                >
-                  <div slot="header" class="clearfix">
-                    <span v-if="language === 'en' ">FILTER:</span>
-                    <span v-else>透過以下分類搜尋:</span>
-                  </div>
-                  <el-collapse v-model="shown_attributes">
-                    <el-collapse-item
-                      v-for="attribute in attributes"
-                      :name="attribute.slug"
-                    >
-                      <template slot="title">
-                        <span style="margin-left: 1rem; font-weight: 700">
-                          {{ proper_language(attribute) }}</span
-                        >
-                      </template>
-                      <el-checkbox-group
-                        v-model="checked_attributes"
-                        @change="filter_hotels"
-                      >
-                        <el-col>
-                          <el-row v-for="term in attribute.terms">
-                            <el-checkbox
-                              :label="term.id"
-                              :key="term.id"
-                              style="margin-left: 1rem"
-                            >
-                              {{ proper_language(term) }}
-                            </el-checkbox>
-                          </el-row>
-                        </el-col>
-                      </el-checkbox-group>
-                    </el-collapse-item>
-                  </el-collapse>
-                </el-card>
-              </div>
-            </div>
-            <div class="col-lg-9 col-md-12">
-              <div class="bravo-list-item">
-                <div class="topbar-search" style="display: block">
-                  <h2 class="text">
-                    <span v-if="language==='en'">
-                      {{ displayed_hotels.length }} hotel(s) found
-                    </span>
-                    <span v-else>
-                      找到{{ displayed_hotels.length }}間住宿
-                    </span>
-                  </h2>
-                  <div style="margin-top: 20px">
-                    <el-radio-group
-                      v-model="sorting_method"
-                      style="display: flex; flex-flow: row wrap"
-                      @change="sort_hotels"
-                    >
-                      <el-radio-button class="radio-btn" label="recommended">
-                        <span v-if="language==='en'">Recommended</span>
-                        <span v-else>爲您精選</span>
-                      </el-radio-button>
-                      <el-radio-button label="price_low_high">
-                        <span v-if="language==='en'">Price(Low to High)</span>
-                        <span v-else>價錢由低至高</span>
-                      </el-radio-button>
-                      <el-radio-button label="price_high_low">
-                        <span v-if="language==='en'">Price(High to Low)</span>
-                        <span v-else>價錢由高至低</span>
-                      </el-radio-button>
-                      <el-radio-button label="rating_high_low">
-                        <span v-if="language==='en'">Top reviewed</span>
-                        <span v-else>最佳評分</span>
-                      </el-radio-button>
-                    </el-radio-group>
-                  </div>
+                </h2>
+                <div style="margin-top: 20px">
+                  <el-radio-group v-model="sorting_method" style="display: flex; flex-flow: row wrap"
+                    @change="sort_hotels">
+                    <el-radio-button class="radio-btn" label="recommended">
+                      <span v-if="language==='en'">Recommended</span>
+                      <span v-else>爲您精選</span>
+                    </el-radio-button>
+                    <el-radio-button label="price_low_high">
+                      <span v-if="language==='en'">Price(Low to High)</span>
+                      <span v-else>價錢由低至高</span>
+                    </el-radio-button>
+                    <el-radio-button label="price_high_low">
+                      <span v-if="language==='en'">Price(High to Low)</span>
+                      <span v-else>價錢由高至低</span>
+                    </el-radio-button>
+                    <el-radio-button label="rating_high_low">
+                      <span v-if="language==='en'">Top reviewed</span>
+                      <span v-else>最佳評分</span>
+                    </el-radio-button>
+                  </el-radio-group>
                 </div>
               </div>
-              <div class="list-item" style="justify-content: center">
-                <div
-                  class="text-center mx-auto"
-                  v-if="displayed_hotels.length === 0 && checked_attributes.length === 0"
-                >
-                  <div
-                    class="spinner-border spinner-border-lg"
-                    style="width: 3rem; height: 3rem"
-                    role="status"
-                  >
-                    <span class="sr-only">Loading...</span>
-                  </div>
+            </div>
+            <div class="list-item" style="justify-content: center">
+              <div class="text-center mx-auto" v-if="displayed_hotels.length === 0 && checked_attributes.length === 0">
+                <div class="spinner-border spinner-border-lg" style="width: 3rem; height: 3rem" role="status">
+                  <span class="sr-only">Loading...</span>
                 </div>
-                <dynamic-scroller
-                  :items="displayed_hotels"
-                  :min-item-size="200"
-                  :buffer="2000"
-                >
-                  <template v-slot="{ item, index, active }">
-                    <dynamic-scroller-item
-                      :item="item"
-                      :active="active"
-                      :data-index="index"
-                    >
-                      <el-card
-                        class="hotel-card"
-                        :body-style="{padding: '0px'}"
-                        shadow="hover"
-                      >
-                        <el-col
-                          :xs=" 24"
-                          :sm="7"
-                          :md="7"
-                          style="position: relative"
-                        >
-                          <div
-                            v-if="item.sold_out"
-                            style="
+              </div>
+              <dynamic-scroller :items="displayed_hotels" :min-item-size="200" :buffer="2000">
+                <template v-slot="{ item, index, active }">
+                  <dynamic-scroller-item :item="item" :active="active" :data-index="index">
+                    <el-card class="hotel-card" :body-style="{padding: '0px'}" shadow="hover">
+                      <el-col :xs=" 24" :sm="7" :md="7" style="position: relative">
+                        <div v-if="item.sold_out" style="
                               background-color: #ec3e3f;
                               z-index: 2;
                               position: absolute;
@@ -866,47 +639,25 @@
                               color: #fff;
                               font-weight: 700;
                               padding: 5px;
-                            "
-                          >
-                            <span v-if="language === 'en'">Sold out</span>
-                            <span v-else>售完</span>
-                          </div>
-                          <a :href="item.detail_url" target="_blank">
-                            <img
-                              :src="item.image_id || default_url_alt"
-                              decoding="async"
-                              :alt="item.title"
-                              class="image image-el-card"
-                              @error="fallback_url"
-                            />
-                          </a>
-                        </el-col>
+                            ">
+                          <span v-if="language === 'en'">Sold out</span>
+                          <span v-else>售完</span>
+                        </div>
                         <a :href="item.detail_url" target="_blank">
-                        <el-col
-                          :xs="24"
-                          :sm="11"
-                          :md="11"
-                          class="hotel-details"
-                        >
+                          <img :src="item.image_id || default_url_alt" decoding="async" :alt="item.title"
+                            class="image image-el-card" @error="fallback_url" />
+                        </a>
+                      </el-col>
+                      <a :href="item.detail_url" target="_blank">
+                        <el-col :xs="24" :sm="11" :md="11" class="hotel-details">
                           <el-row>
                             <span class="float-left hotel-title">
                               {{item.title }}
-                              <span
-                                v-if="item.rate"
-                                class="hotel-rate"
-                                style="margin-left: 3px; display: inline-block"
-                              >
-                                <img
-                                  src="icon/star.svg"
-                                  style="margin-bottom: 5px"
-                                />
+                              <span v-if="item.rate" class="hotel-rate" style="margin-left: 3px; display: inline-block">
+                                <img src="icon/star.svg" style="margin-bottom: 5px" />
                                 {{ item.rate }}
                               </span>
-                              <span
-                                v-else
-                                class="hotel-rate"
-                                style="margin-left: 3px; display: inline-block"
-                              >
+                              <span v-else class="hotel-rate" style="margin-left: 3px; display: inline-block">
                                 --
                               </span>
                             </span>
@@ -918,132 +669,77 @@
                             </span>
                           </el-row>
                           <el-row class="details-row">
-                            <el-col
-                              :xs=" 24"
-                              class="attributes-col"
-                              style="border-style: solid 2px"
-                            >
+                            <el-col :xs=" 24" class="attributes-col" style="border-style: solid 2px">
                               <el-row style="margin-top: 5px">
-                                <span
-                                  v-for="attribute in parse_attributes(item)"
-                                  class="features-list-el"
-                                  name="attribute.term_id"
-                                >
-                                  <img
-                                    :src="get_correct_svg(attribute.term_id)"
-                                  />
+                                <span v-for="attribute in parse_attributes(item)" class="features-list-el"
+                                  name="attribute.term_id">
+                                  <img :src="get_correct_svg(attribute.term_id)" />
                                   {{ attribute.name }}
                                 </span>
                               </el-row>
                               <el-row class="facility-row">
-                                <el-tag
-                                  v-for="facility in parse_facilities(item)"
-                                  type="info"
-                                  size="mini"
-                                  style="margin-right: 10px; margin-top: 5px"
-                                >
+                                <el-tag v-for="facility in parse_facilities(item)" type="info" size="mini"
+                                  style="margin-right: 10px; margin-top: 5px">
                                   {{ facility.name}}
                                 </el-tag>
                               </el-row>
                             </el-col>
                           </el-row>
                         </el-col>
-                          </a>
-                            <a :href="item.detail_url" target="_blank">
+                      </a>
+                      <a :href="item.detail_url" target="_blank">
                         <el-col :xs="24" :sm="6" :md="6" class="pricing-col">
                           <el-col :xs="12" :sm="24">
-                            <el-card
-                              v-cloak
-                              :body-style="{padding: '10px'}"
-                              style="margin: 10px"
+                            <el-card v-cloak :body-style="{padding: '10px'}" style="margin: 10px"
                               :style="[item.price_30 === null? { 'visibility': 'hidden'} : {'display' :'block'}]"
-                              shadow="hover"
-                            >
+                              shadow="hover">
                               <el-row>
-                                <span
-                                  v-if="language === 'en' "
-                                  class="float-right"
-                                  style="color: #d61a1b; font-weight: 700"
-                                >
+                                <span v-if="language === 'en' " class="float-right"
+                                  style="color: #d61a1b; font-weight: 700">
                                   Long Stay Deal
                                 </span>
-                                <span
-                                  v-else
-                                  class="float-right"
-                                  style="color: #d61a1b; font-weight: 700"
-                                >
+                                <span v-else class="float-right" style="color: #d61a1b; font-weight: 700">
                                   長住優惠
                                 </span>
                               </el-row>
                               <el-row>
-                                <span
-                                  class="float-right"
-                                  style="font-size: 12px"
-                                  v-if="language === 'en' "
-                                >
-                                  from<span
-                                    style="font-size: 12px; font-weight: 700"
-                                  >
+                                <span class="float-right" style="font-size: 12px" v-if="language === 'en' ">
+                                  from<span style="font-size: 12px; font-weight: 700">
                                     TWD
-                                    {{parseInt(item.price_30).toLocaleString()}}</span
-                                  >/mo
+                                    {{parseInt(item.price_30).toLocaleString()}}</span>/mo
                                 </span>
-                                <span
-                                  class="float-right"
-                                  style="font-size: 12px"
-                                  v-else
-                                >
+                                <span class="float-right" style="font-size: 12px" v-else>
                                   30晚 |
-                                  <span
-                                    style="
+                                  <span style="
                                       font-size: 12px;
                                       color: darkblue;
                                       font-weight: 700;
-                                    "
-                                    >TWD {{
-                                    parseInt(item.price_30).toLocaleString()}}</span
-                                  >起
+                                    ">TWD {{
+                                    parseInt(item.price_30).toLocaleString()}}</span>起
                                 </span>
                               </el-row>
                             </el-card>
                           </el-col>
-                          <el-col
-                            :xs="12"
-                            :sm="24"
-                            class="price-wrapper"
-                            v-if="item.price"
-                          >
+                          <el-col :xs="12" :sm="24" class="price-wrapper" v-if="item.price">
                             <el-row>
-                              <span
-                                class="float-right"
-                                v-if="language === 'en' "
-                                style="
+                              <span class="float-right" v-if="language === 'en' " style="
                                   color: #a3a3a3;
                                   font-size: 12px;
                                   font-weight: 300;
-                                "
-                              >
+                                ">
                                 {{ (date_range[1] - date_range[0])/(1000 * 3600
                                 * 24) }} nights
                               </span>
-                              <span
-                                class="float-right"
-                                v-else
-                                style="
+                              <span class="float-right" v-else style="
                                   color: #a3a3a3;
                                   font-size: 12px;
                                   font-weight: 300;
-                                "
-                              >
+                                ">
                                 {{ (date_range[1] - date_range[0])/(1000 * 3600
                                 * 24) }} 晚
                               </span>
                             </el-row>
-                            <span
-                              class="float-right"
-                              v-if="language ==='en' "
-                              style="font-size: 12px; color: #141414;"
-                            >
+                            <span class="float-right" v-if="language ==='en' " style="font-size: 12px; color: #141414;">
                               from
                               <span style="font-weight: 700; font-size: 16px;">
                                 TWD {{
@@ -1051,32 +747,24 @@
                                 }}
                               </span>
                             </span>
-                            <span
-                              class="float-right"
-                              v-else
-                              style="font-size: 12px; color: #141414;"
-                            >
+                            <span class="float-right" v-else style="font-size: 12px; color: #141414;">
                               <span style="font-weight: 700; font-size: 16px;">
                                 TWD{{Math.floor(parseInt(item.price)).toLocaleString()
-                                }} </span
-                              >起
+                                }} </span>起
                             </span>
 
                             <div v-else class="ratings-price float-right">
                               --
                             </div>
                             <a :href="item.detail_url" target="_blank">
-                              <el-button
-                                class="float-right price-btn"
-                                style="
+                              <el-button class="float-right price-btn" style="
                                   position: absolute;
                                   bottom: 15;
                                   right: 15;
                                   background-color: #ec3e3f;
                                   text-decoration: none;
                                   color: #fff;
-                                "
-                              >
+                                ">
                                 <span v-if="language === 'en'"> see</span>
                                 <span v-else>查看</span>
                                 <i class="el-icon-arrow-right"></i>
@@ -1084,415 +772,155 @@
                             </a>
                           </el-col>
                         </el-col>
-                          </a>
-                      </el-card>
-                    </dynamic-scroller-item>
-                  </template>
-                </dynamic-scroller>
-              </div>
+                      </a>
+                    </el-card>
+                  </dynamic-scroller-item>
+                </template>
+              </dynamic-scroller>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="bravo_footer" style="background-color: #d61a1b; color: white">
-      <div class="copy-right">
-        <div class="container context">
-          <div class="row">
-            <div class="col-md-12 mt-3" style="text-align: center">
-              <div style="margin: 0 auto">
-                <p>Copyright © 2022 by mrhost</p>
-              </div>
+  <div class="bravo_footer" style="background-color: #d61a1b; color: white">
+    <div class="copy-right">
+      <div class="container context">
+        <div class="row">
+          <div class="col-md-12 mt-3" style="text-align: center">
+            <div style="margin: 0 auto">
+              <p>Copyright © 2022 by mrhost</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <link
-      rel="stylesheet"
-      href="https://worktel.mrhost.com.tw/libs/flags/css/flag-icon.min.css"
-    />
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/lazy-load/intersection-observer.js"
-    ></script>
-    <script
-      async
-      src="https://worktel.mrhost.com.tw/libs/lazy-load/lazyload.min.js"
-    ></script>
-    <script>
-      // Set the options to make LazyLoad self-initialize
-      window.lazyLoadOptions = {
-        elements_selector: ".lazy",
-        // ... more custom settings?
-      };
+  </div>
+  <link rel="stylesheet" href="https://worktel.mrhost.com.tw/libs/flags/css/flag-icon.min.css" />
+  <script defer src="https://worktel.mrhost.com.tw/libs/lazy-load/intersection-observer.js"></script>
+  <script async src="https://worktel.mrhost.com.tw/libs/lazy-load/lazyload.min.js"></script>
+  <script>
+    // Set the options to make LazyLoad self-initialize
+    window.lazyLoadOptions = {
+      elements_selector: ".lazy",
+      // ... more custom settings?
+    };
 
-      // Listen to the initialization event and get the instance of LazyLoad
-      window.addEventListener(
-        "LazyLoad::Initialized",
-        function (event) {
-          window.lazyLoadInstance = event.detail.instance;
+    // Listen to the initialization event and get the instance of LazyLoad
+    window.addEventListener(
+      "LazyLoad::Initialized",
+      function (event) {
+        window.lazyLoadInstance = event.detail.instance;
+      },
+      false
+    );
+  </script>
+  <script src="https://fastly.jsdelivr.net/npm/vant@2/lib/vant.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/lodash.min.js"></script>
+  <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"></script>
+  <script defer type="text/javascript" src="https://worktel.mrhost.com.tw/libs/daterange/moment.min.js"></script>
+  <script defer type="text/javascript"
+    src="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/select2/js/select2.min.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/js/functions.js?_ver=1.0.12"></script>
+  <script defer src="https://worktel.mrhost.com.tw/js/home.js?_ver=1.0.12"></script>
+  <script defer src="https://apps.elfsight.com/p/platform.js"></script>
+  <script defer src="https://worktel.mrhost.com.tw/libs/pusher.min.js"></script>
+  <script type="text/javascript"
+    src="https://worktel.mrhost.com.tw/libs/ion_rangeslider/js/ion.rangeSlider.min.js"></script>
+  <script defer type="text/javascript"
+    src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"></script>
+  <script>
+    if (window.Worker) {
+      let MAX_WORKERS = 15;
+      const today = new Date();
+      const end_date = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000);
+      const App = new Vue({
+        el: "#app",
+        data: {
+          show_vant_calendar: false,
+          show_backtop_button: false,
+          mobile_date: "",
+          sort_popup_active: false,
+          filter_popup_active: false,
+          first_time: false,
+          fullscreenLoading: false,
+          attributes: [],
+          checked_attributes: [],
+          hotels: [],
+          displayed_hotels: [],
+          NUM_WORKERS: MAX_WORKERS,
+          worker_pool: new Array(this.NUM_WORKERS),
+          query_queue: [],
+          locations: [],
+          language: "en",
+          sorting_method: "recommended",
+          date_range: [today, end_date],
+          shown_attributes: ["property-type", "facilities-1"],
+          num_adults: 1,
+          num_infants: 0,
+          num_children: 0,
+          selected_city: 1,
+          error: 0,
+          date_picker_options: {
+            disabledDate(time) {
+              const day = 3600 * 1000 * 24;
+              return time.getTime() < Date.now() - day;
+            },
+          },
         },
-        false
-      );
-    </script>
-    <script src="https://fastly.jsdelivr.net/npm/vant@2/lib/vant.min.js"></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/lodash.min.js"
-    ></script>
-    <script src="https://worktel.mrhost.com.tw/libs/jquery-3.3.1.min.js"></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/bootstrap/js/bootstrap.bundle.min.js"
-    ></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/bootbox/bootbox.min.js"
-    ></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/carousel-2/owl.carousel.min.js"
-    ></script>
-    <script
-      defer
-      type="text/javascript"
-      src="https://worktel.mrhost.com.tw/libs/daterange/moment.min.js"
-    ></script>
-    <script
-      defer
-      type="text/javascript"
-      src="https://worktel.mrhost.com.tw/libs/daterange/daterangepicker.min.js"
-    ></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/select2/js/select2.min.js"
-    ></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/js/functions.js?_ver=1.0.12"
-    ></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/js/home.js?_ver=1.0.12"
-    ></script>
-    <script defer src="https://apps.elfsight.com/p/platform.js"></script>
-    <script
-      defer
-      src="https://worktel.mrhost.com.tw/libs/pusher.min.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://worktel.mrhost.com.tw/libs/ion_rangeslider/js/ion.rangeSlider.min.js"
-    ></script>
-    <script
-      defer
-      type="text/javascript"
-      src="https://worktel.mrhost.com.tw/module/hotel/js/hotel.js?_ver=1.0.12"
-    ></script>
-    <script>
-      if (window.Worker) {
-        let MAX_WORKERS = 15;
-        const today = new Date();
-        const end_date = new Date(today.getTime() + 5 * 24 * 60 * 60 * 1000);
-        const App = new Vue({
-          el: "#app",
-          data: {
-            show_vant_calendar: false,
-            show_backtop_button: false,
-            mobile_date: "",
-            sort_popup_active: false,
-            filter_popup_active: false,
-            first_time: false,
-            fullscreenLoading: false,
-            attributes: [],
-            checked_attributes: [],
-            hotels: [],
-            displayed_hotels: [],
-            NUM_WORKERS: MAX_WORKERS,
-            worker_pool: new Array(this.NUM_WORKERS),
-            query_queue: [],
-            locations: [],
-            language: "en",
-            sorting_method: "recommended",
-            date_range: [today, end_date],
-            shown_attributes: ["property-type", "facilities-1"],
-            num_adults: 1,
-            num_infants: 0,
-            num_children: 0,
-            selected_city: 1,
-            error: 0,
-            date_picker_options: {
-              disabledDate(time) {
-                const day = 3600 * 1000 * 24;
-                return time.getTime() < Date.now() - day;
-              },
-            },
-          },
-          created: function () {
-            const me = this;
-            me.init();
-            console.log("initialized");
-          },
-          mounted() {
-            // pass
-            console.log("mounted");
-            let scroll_btn = document.getElementById("scroll-btn");
-            window.onscroll = function () {
-              if (window.scrollY === 0) {
-                this.show_backtop_button = false;
-                console.log("topppp", this.show_backtop_button);
-              } else {
-                this.show_backtop_button = true;
-                console.log("pushing p", this.show_backtop_button);
-              }
-            };
+        created: function () {
+          const me = this;
+          me.init();
+          console.log("initialized");
+        },
+        mounted() {
+          // pass
+          console.log("mounted");
+          let scroll_btn = document.getElementById("scroll-btn");
+          window.onscroll = function () {
+            if (window.scrollY === 0) {
+              this.show_backtop_button = false;
+              console.log("topppp", this.show_backtop_button);
+            } else {
+              this.show_backtop_button = true;
+              console.log("pushing p", this.show_backtop_button);
+            }
+          };
+        },
+
+        watch: {
+          // pass
+        },
+
+        computed: {
+          // In case the image_id passed is NULL
+          default_url_alt: function () {
+            return "https://via.placeholder.com/300x150";
           },
 
-          watch: {
-            // pass
-          },
-
-          computed: {
-            // In case the image_id passed is NULL
-            default_url_alt: function () {
-              return "https://via.placeholder.com/300x150";
-            },
-
-            parsed_attributes: function (hotel) {
-              return (hotel) =>
-                hotel.terms.filter((term) => {
-                  term.attr_id === 5;
-                });
-            },
-
-            parsed_facilities: function (hotel) {
-              return (hotel) =>
-                hotel.terms.filter((term) => {
-                  term.attr_id === 6;
-                });
-            },
-          },
-
-          methods: {
-            init: async function () {
-              if (!this.first_time) {
-                const parameters = {
-                  location_id: this.selected_city,
-                  locale: this.language,
-                };
-                const api_url =
-                  "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" +
-                  new URLSearchParams(parameters).toString();
-
-                const resp = await fetch(api_url)
-                  .then((res) => res.json())
-                  .catch((err) => {
-                    console.error(err);
-                  });
-
-                console.log(resp);
-                this.hotels = [...resp.hotels].reverse();
-                this.worker_pool = [];
-                this.dynamic_price_update();
-                const sold_out = this.hotels.filter(
-                  (hotel) =>
-                    parseInt(hotel.price) === 0 ||
-                    hotel.price === null ||
-                    hotel.sold_out === true
-                );
-                const available = this.hotels.filter(
-                  (hotel) =>
-                    parseInt(hotel.price) > 0 &&
-                    (hotel.sold_out === false || hotel.sold_out === undefined)
-                );
-                this.displayed_hotels = [...available, ...sold_out];
-                this.attributes = resp.attributes;
-                this.locations = resp.locations;
-                this.first_time = true;
-                if (window.screen.width < 550)
-                  this.shown_attributes = ["property-type"];
-              } else {
-                return;
-              }
-            },
-
-            sort_hotels: function () {
-              const sold_out = this.displayed_hotels.filter(
-                (hotel) =>
-                  parseInt(hotel.price) === 0 ||
-                  hotel.price === null ||
-                  hotel.sold_out === true
-              );
-              // console.log("sold out array", sold_out);
-              let tmp_hotels = this.displayed_hotels.filter(
-                (hotel) =>
-                  parseInt(hotel.price) > 0 &&
-                  (hotel.sold_out === false || hotel.sold_out === undefined)
-              );
-              let sorted;
-
-              if (this.sorting_method === "rating_high_low") {
-                let ratings = tmp_hotels.map(function (element, index) {
-                  return { index: index, value: element.rate };
-                });
-
-                ratings.sort((a, b) => b.value - a.value);
-                sorted = ratings.map((e) => tmp_hotels[e.index]);
-                console.log("sorted", sorted);
-              } else if (
-                this.sorting_method === "price_high_low" ||
-                this.sorting_method === "price_low_high"
-              ) {
-                let prices = tmp_hotels.map(function (element, index) {
-                  return { index: index, value: element.price };
-                });
-                if (this.sorting_method === "price_high_low") {
-                  prices.sort((a, b) => b.value - a.value);
-                } else {
-                  prices.sort((a, b) => a.value - b.value);
-                }
-                sorted = prices.map((e) => tmp_hotels[e.index]);
-              } else {
-                let births = tmp_hotels.map(function (element, index) {
-                  return { index: index, value: element.id };
-                });
-                console.log("creation", births);
-                births.sort((a, b) => a.value - b.value);
-                sorted = births.map((e) => tmp_hotels[e.index]);
-              }
-
-              this.displayed_hotels = [...sorted, ...sold_out];
-            },
-            filter_hotels: function () {
-              let tmp_hotels = [...this.hotels];
-              tmp_hotels = tmp_hotels.filter((hotel) => {
-                const all_attributes = [...hotel.terms];
-                let passed = true;
-                for (let attr of this.checked_attributes) {
-                  const found = all_attributes.find(
-                    (elem) => elem.term_id === attr
-                  );
-                  if (!found) {
-                    passed = false;
-                    break;
-                  }
-                }
-                return passed;
+          parsed_attributes: function (hotel) {
+            return (hotel) =>
+              hotel.terms.filter((term) => {
+                term.attr_id === 5;
               });
-              const sold_out = tmp_hotels.filter(
-                (hotel) =>
-                  parseInt(hotel.price) === 0 ||
-                  hotel.price === null ||
-                  hotel.sold_out === true
-              );
-              const available = tmp_hotels.filter(
-                (hotel) =>
-                  parseInt(hotel.price) > 0 &&
-                  (hotel.sold_out === false || hotel.sold_out === undefined)
-              );
-              this.displayed_hotels = [...available, ...sold_out];
-            },
+          },
 
-            parse_attributes: function (hotel) {
-              return hotel.terms.filter((term) => term.attr_id === 5);
-            },
-            parse_facilities: function (hotel) {
-              return hotel.terms.filter((term) => term.attr_id === 6);
-            },
+          parsed_facilities: function (hotel) {
+            return (hotel) =>
+              hotel.terms.filter((term) => {
+                term.attr_id === 6;
+              });
+          },
+        },
 
-            find_location: function (id) {
-              const location = this.locations.find(
-                (location) => location.id === id
-              );
-              const lang = this.language === "en" ? 0 : 1;
-              return location.translations[lang].name;
-            },
-            proper_language: function (component) {
-              const lang = this.language === "en" ? 0 : 1;
-              if (component.translations.length < 2) {
-                if (lang === 0)
-                  // english
-                  return component.name;
-                return component.translations[0].name;
-              } else return component.translations[lang].name;
-            },
-
-            back_to_top: function () {
-              document.body.scrollTop = 0;
-            },
-
-            dynamic_price_update: function () {
-              for (let i = 0; i < this.NUM_WORKERS; i++) {
-                this.worker_pool[i] = {
-                  work: new Worker("./siteminder_worker.js"),
-                  id: i,
-                };
-                this.worker_pool[i].work.onmessage = (e) => {
-                  console.log(
-                    e.data,
-                    this.worker_pool[i].id,
-                    "worker returned"
-                  );
-                  console.log(JSON.stringify(e.data));
-                  if (e.data.error != null) {
-                    this.error++;
-                    return;
-                  }
-                  const array_id = e.data.hotel_in_array_id;
-                  const total_days =
-                    (this.date_range[1] - this.date_range[0]) /
-                    (3600 * 1000 * 24);
-                  // this.hotels[array_id].price = Math.floor(e.data.price / total_days)
-                  this.hotels[array_id].price = Math.floor(e.data.price);
-                  this.hotels[array_id].sold_out = e.data.sold_out;
-                  // console.log(e.data.price, array_id, this.hotels)
-                };
-              }
-              let siteminder_queue = [];
-              let period = Math.floor(this.hotels.length / this.NUM_WORKERS);
-              for (let id = 0; id < this.hotels.length; id++) {
-                if (this.hotels[id].siteminder_digital_id != null) {
-                  siteminder_queue.push({
-                    siteminder_id: this.hotels[id].siteminder_digital_id,
-                    hotel_in_array_id: id,
-                  });
-                }
-                if (
-                  (id && id % period === 0) ||
-                  id === this.hotels.length - 1
-                ) {
-                  // console.log(id, period, siteminder_queue)
-                  this.query_queue.push({
-                    siteminder_queue: [...siteminder_queue],
-                    date_start: this.date_range[0].toISOString().slice(0, 10),
-                    date_end: this.date_range[1].toISOString().slice(0, 10),
-                    adults: this.num_adults,
-                    children: this.num_children,
-                    infants: this.num_infants,
-                  });
-
-                  // flush the siteminder_queue
-                  siteminder_queue = [];
-                }
-              }
-              console.log("query_queue", this.query_queue);
-
-              for (let worker of this.worker_pool) {
-                const task = this.query_queue.shift();
-                // console.log(task, worker, this.query_queue.length)
-                if (task === undefined) {
-                  break;
-                }
-                worker.work.postMessage({ task: task, id: worker.id });
-              }
-            },
-
-            fetch_data: async function () {
-              this.displayed_hotels = [];
-              this.checked_attributes = [];
-              this.error = 0;
+        methods: {
+          init: async function () {
+            if (!this.first_time) {
               const parameters = {
                 location_id: this.selected_city,
                 locale: this.language,
@@ -1500,8 +928,13 @@
               const api_url =
                 "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" +
                 new URLSearchParams(parameters).toString();
-              this.sorting_method = "recommended";
-              const resp = await fetch(api_url).then((res) => res.json());
+
+              const resp = await fetch(api_url)
+                .then((res) => res.json())
+                .catch((err) => {
+                  console.error(err);
+                });
+
               console.log(resp);
               this.hotels = [...resp.hotels].reverse();
               this.worker_pool = [];
@@ -1513,113 +946,324 @@
                   hotel.sold_out === true
               );
               const available = this.hotels.filter(
-                (hotel) => parseInt(hotel.price) > 0
+                (hotel) =>
+                  parseInt(hotel.price) > 0 &&
+                  (hotel.sold_out === false || hotel.sold_out === undefined)
               );
               this.displayed_hotels = [...available, ...sold_out];
               this.attributes = resp.attributes;
               this.locations = resp.locations;
-            },
+              this.first_time = true;
+              if (window.screen.width < 550)
+                this.shown_attributes = ["property-type"];
+            } else {
+              return;
+            }
+          },
 
-            fallback_url: function (event) {
-              event.target.src = "https://via.placeholder.com/300x150";
-              // event.target.src = "http://placekitten.com/g/300/150";
-            },
+          sort_hotels: function () {
+            const sold_out = this.displayed_hotels.filter(
+              (hotel) =>
+                parseInt(hotel.price) === 0 ||
+                hotel.price === null ||
+                hotel.sold_out === true
+            );
+            // console.log("sold out array", sold_out);
+            let tmp_hotels = this.displayed_hotels.filter(
+              (hotel) =>
+                parseInt(hotel.price) > 0 &&
+                (hotel.sold_out === false || hotel.sold_out === undefined)
+            );
+            let sorted;
 
-            get_correct_svg: function (id) {
-              switch (id) {
-                case 32:
-                case 140:
-                  return "./icon/self-health-management.svg";
-                  break;
-                case 33:
-                  return "./icon/short-stay.svg";
-                  break;
-                default:
-                  return "./icon/person.svg";
+            if (this.sorting_method === "rating_high_low") {
+              let ratings = tmp_hotels.map(function (element, index) {
+                return {index: index, value: element.rate};
+              });
+
+              ratings.sort((a, b) => b.value - a.value);
+              sorted = ratings.map((e) => tmp_hotels[e.index]);
+              console.log("sorted", sorted);
+            } else if (
+              this.sorting_method === "price_high_low" ||
+              this.sorting_method === "price_low_high"
+            ) {
+              let prices = tmp_hotels.map(function (element, index) {
+                return {index: index, value: element.price};
+              });
+              if (this.sorting_method === "price_high_low") {
+                prices.sort((a, b) => b.value - a.value);
+              } else {
+                prices.sort((a, b) => a.value - b.value);
               }
-            },
-            formatDate: function (date) {
-              return `${date.getMonth() + 1}/${date.getDate()}`;
-            },
-            onConfirm: function (date) {
-              const [start, end] = date;
-              this.date_range = date;
-              this.show_vant_calendar = false;
-              this.mobile_date = `${this.formatDate(start)} - ${this.formatDate(
-                end
-              )}`;
-            },
-          },
-        });
-        Vue.use(vant);
-        Vue.use(vant.Lazyload);
+              sorted = prices.map((e) => tmp_hotels[e.index]);
+            } else {
+              let births = tmp_hotels.map(function (element, index) {
+                return {index: index, value: element.id};
+              });
+              console.log("creation", births);
+              births.sort((a, b) => a.value - b.value);
+              sorted = births.map((e) => tmp_hotels[e.index]);
+            }
 
-        const en_vant_messages = {
-          "zh-CN": {
-            vanCalendar: {
-              confirm: "Confirm",
-              end: "End",
-              start: "Start",
-              title: "Calendar",
-              startEnd: "Start/End",
-              weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-              monthTitle: function (year, month) {
-                return "".concat(year, "/").concat(month);
-              },
-              rangePrompt: function (maxRange) {
-                return "Choose no more than ".concat(maxRange, " days");
-              },
-            },
+            this.displayed_hotels = [...sorted, ...sold_out];
           },
-        };
-
-        const zh_tw_vant_messages = {
-          "zh-CN": {
-            vanCalendar: {
-              end: "結束",
-              start: "開始",
-              title: "日期選擇",
-              confirm: "確定",
-              startEnd: "開始/結束",
-              weekdays: ["日", "一", "二", "三", "四", "五", "六"],
-              monthTitle: function (year, month) {
-                return "".concat(year, "\u5E74").concat(month, "\u6708");
-              },
-              rangePrompt: function (maxRange) {
-                return "\u9078\u64C7\u5929\u6578\u4E0D\u80FD\u8D85\u904E ".concat(
-                  maxRange,
-                  " \u5929"
+          filter_hotels: function () {
+            let tmp_hotels = [...this.hotels];
+            tmp_hotels = tmp_hotels.filter((hotel) => {
+              const all_attributes = [...hotel.terms];
+              let passed = true;
+              for (let attr of this.checked_attributes) {
+                const found = all_attributes.find(
+                  (elem) => elem.term_id === attr
                 );
-              },
-            },
+                if (!found) {
+                  passed = false;
+                  break;
+                }
+              }
+              return passed;
+            });
+            const sold_out = tmp_hotels.filter(
+              (hotel) =>
+                parseInt(hotel.price) === 0 ||
+                hotel.price === null ||
+                hotel.sold_out === true
+            );
+            const available = tmp_hotels.filter(
+              (hotel) =>
+                parseInt(hotel.price) > 0 &&
+                (hotel.sold_out === false || hotel.sold_out === undefined)
+            );
+            this.displayed_hotels = [...available, ...sold_out];
           },
-        };
 
-        const jp_vant_messages = {
-          "zh-CN": {
-            vanCalendar: {
-              confirm: "確認",
-              end: "終了",
-              start: "開始",
-              title: "日付選択",
-              confirm: "確認",
-              startEnd: "開始/終了",
-              weekdays: ["日", "月", "火", "水", "木", "金", "土"],
-              monthTitle: function (year, month) {
-                return "".concat(year, "\u5E74").concat(month, "\u6708");
-              },
-              rangePrompt: function (maxRange) {
-                return "".concat(
-                  maxRange,
-                  "\u65E5\u4EE5\u5185\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
+          parse_attributes: function (hotel) {
+            return hotel.terms.filter((term) => term.attr_id === 5);
+          },
+          parse_facilities: function (hotel) {
+            return hotel.terms.filter((term) => term.attr_id === 6);
+          },
+
+          find_location: function (id) {
+            const location = this.locations.find(
+              (location) => location.id === id
+            );
+            const lang = this.language === "en" ? 0 : 1;
+            return location.translations[lang].name;
+          },
+          proper_language: function (component) {
+            const lang = this.language === "en" ? 0 : 1;
+            if (component.translations.length < 2) {
+              if (lang === 0)
+                // english
+                return component.name;
+              return component.translations[0].name;
+            } else return component.translations[lang].name;
+          },
+
+          back_to_top: function () {
+            document.body.scrollTop = 0;
+          },
+
+          dynamic_price_update: function () {
+            for (let i = 0; i < this.NUM_WORKERS; i++) {
+              this.worker_pool[i] = {
+                work: new Worker("./siteminder_worker.js"),
+                id: i,
+              };
+              this.worker_pool[i].work.onmessage = (e) => {
+                console.log(
+                  e.data,
+                  this.worker_pool[i].id,
+                  "worker returned"
                 );
-              },
+                console.log(JSON.stringify(e.data));
+                if (e.data.error != null) {
+                  this.error++;
+                  return;
+                }
+                const array_id = e.data.hotel_in_array_id;
+                const total_days =
+                  (this.date_range[1] - this.date_range[0]) /
+                  (3600 * 1000 * 24);
+                // this.hotels[array_id].price = Math.floor(e.data.price / total_days)
+                this.hotels[array_id].price = Math.floor(e.data.price);
+                this.hotels[array_id].sold_out = e.data.sold_out;
+                // console.log(e.data.price, array_id, this.hotels)
+              };
+            }
+            let siteminder_queue = [];
+            let period = Math.floor(this.hotels.length / this.NUM_WORKERS);
+            for (let id = 0; id < this.hotels.length; id++) {
+              if (this.hotels[id].siteminder_digital_id != null) {
+                siteminder_queue.push({
+                  siteminder_id: this.hotels[id].siteminder_digital_id,
+                  hotel_in_array_id: id,
+                });
+              }
+              if (
+                (id && id % period === 0) ||
+                id === this.hotels.length - 1
+              ) {
+                // console.log(id, period, siteminder_queue)
+                this.query_queue.push({
+                  siteminder_queue: [...siteminder_queue],
+                  date_start: this.date_range[0].toISOString().slice(0, 10),
+                  date_end: this.date_range[1].toISOString().slice(0, 10),
+                  adults: this.num_adults,
+                  children: this.num_children,
+                  infants: this.num_infants,
+                });
+
+                // flush the siteminder_queue
+                siteminder_queue = [];
+              }
+            }
+            console.log("query_queue", this.query_queue);
+
+            for (let worker of this.worker_pool) {
+              const task = this.query_queue.shift();
+              // console.log(task, worker, this.query_queue.length)
+              if (task === undefined) {
+                break;
+              }
+              worker.work.postMessage({task: task, id: worker.id});
+            }
+          },
+
+          fetch_data: async function () {
+            this.displayed_hotels = [];
+            this.checked_attributes = [];
+            this.error = 0;
+            const parameters = {
+              location_id: this.selected_city,
+              locale: this.language,
+            };
+            const api_url =
+              "https://worktel.mrhost.com.tw/api/SearchHotels_v2?" +
+              new URLSearchParams(parameters).toString();
+            this.sorting_method = "recommended";
+            const resp = await fetch(api_url).then((res) => res.json());
+            console.log(resp);
+            this.hotels = [...resp.hotels].reverse();
+            this.worker_pool = [];
+            this.dynamic_price_update();
+            const sold_out = this.hotels.filter(
+              (hotel) =>
+                parseInt(hotel.price) === 0 ||
+                hotel.price === null ||
+                hotel.sold_out === true
+            );
+            const available = this.hotels.filter(
+              (hotel) => parseInt(hotel.price) > 0
+            );
+            this.displayed_hotels = [...available, ...sold_out];
+            this.attributes = resp.attributes;
+            this.locations = resp.locations;
+          },
+
+          fallback_url: function (event) {
+            event.target.src = "https://via.placeholder.com/300x150";
+            // event.target.src = "http://placekitten.com/g/300/150";
+          },
+
+          get_correct_svg: function (id) {
+            switch (id) {
+              case 32:
+              case 140:
+                return "./icon/self-health-management.svg";
+                break;
+              case 33:
+                return "./icon/short-stay.svg";
+                break;
+              default:
+                return "./icon/person.svg";
+            }
+          },
+          formatDate: function (date) {
+            return `${date.getMonth() + 1}/${date.getDate()}`;
+          },
+          onConfirm: function (date) {
+            const [start, end] = date;
+            this.date_range = date;
+            this.show_vant_calendar = false;
+            this.mobile_date = `${this.formatDate(start)} - ${this.formatDate(
+              end
+            )}`;
+          },
+        },
+      });
+      Vue.use(vant);
+      Vue.use(vant.Lazyload);
+
+      const en_vant_messages = {
+        "zh-CN": {
+          vanCalendar: {
+            confirm: "Confirm",
+            end: "End",
+            start: "Start",
+            title: "Calendar",
+            startEnd: "Start/End",
+            weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            monthTitle: function (year, month) {
+              return "".concat(year, "/").concat(month);
+            },
+            rangePrompt: function (maxRange) {
+              return "Choose no more than ".concat(maxRange, " days");
             },
           },
-        };
+        },
+      };
 
-        vant.Locale.add(en_vant_messages);
-      }
-    </script>
-  </body>
+      const zh_tw_vant_messages = {
+        "zh-CN": {
+          vanCalendar: {
+            end: "結束",
+            start: "開始",
+            title: "日期選擇",
+            confirm: "確定",
+            startEnd: "開始/結束",
+            weekdays: ["日", "一", "二", "三", "四", "五", "六"],
+            monthTitle: function (year, month) {
+              return "".concat(year, "\u5E74").concat(month, "\u6708");
+            },
+            rangePrompt: function (maxRange) {
+              return "\u9078\u64C7\u5929\u6578\u4E0D\u80FD\u8D85\u904E ".concat(
+                maxRange,
+                " \u5929"
+              );
+            },
+          },
+        },
+      };
+
+      const jp_vant_messages = {
+        "zh-CN": {
+          vanCalendar: {
+            confirm: "確認",
+            end: "終了",
+            start: "開始",
+            title: "日付選択",
+            confirm: "確認",
+            startEnd: "開始/終了",
+            weekdays: ["日", "月", "火", "水", "木", "金", "土"],
+            monthTitle: function (year, month) {
+              return "".concat(year, "\u5E74").concat(month, "\u6708");
+            },
+            rangePrompt: function (maxRange) {
+              return "".concat(
+                maxRange,
+                "\u65E5\u4EE5\u5185\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
+              );
+            },
+          },
+        },
+      };
+
+      vant.Locale.add(en_vant_messages);
+    }
+  </script>
+</body>
+
 </html>
