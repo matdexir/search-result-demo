@@ -998,6 +998,7 @@
               }
               sorted = prices.map((e) => tmp_hotels[e.index]);
             } else {
+              // sorting elements by their id
               let births = tmp_hotels.map(function (element, index) {
                 return {index: index, value: element.id};
               });
