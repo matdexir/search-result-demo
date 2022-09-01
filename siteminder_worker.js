@@ -39,6 +39,7 @@ onmessage = async (e) => {
 
   if (resp === undefined) {
     postMessage({ error: "Request failed" });
+    console.error(siteminder_queue, "may be invalid");
     return;
   }
 
@@ -51,13 +52,20 @@ onmessage = async (e) => {
     }
     let min_price = Infinity;
     let sold_out = true;
+    let fallback_price = -1;
     for (let room of rooms) {
-      min_price = Math.min(room.price.amount, min_price);
       // console.log(rooms, room.available, min_price);
+      fallback_price = Math.min(room.price.amount, min_price);
       if (room.available > 0) {
         sold_out = false;
+        min_price = Math.min(room.price.amount, min_price);
       }
     }
+
+    if (min_price === Infinity) {
+      min_price = fallback_price;
+    }
+
     postMessage({
       hotel_in_array_id: siteminder_queue[i].hotel_in_array_id,
       sold_out: sold_out,
