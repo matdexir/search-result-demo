@@ -842,6 +842,7 @@
       const App = new Vue({
         el: "#app",
         data: {
+          changes_counter: 0,
           show_vant_calendar: false,
           show_backtop_button: false,
           mobile_date: "",
@@ -895,6 +896,18 @@
 
         watch: {
           // pass
+          hotels: {
+            handler() {
+              console.log("changed", this.changes_counter);
+              this.changes_counter += 1;
+              if (this.changes_counter % 20 === 0) {
+                setTimeout(() => {
+                  this.sort_hotels();
+                }, 500);
+              }
+            },
+            deep: true,
+          }
         },
 
         computed: {
@@ -1079,7 +1092,7 @@
                   this.worker_pool[i].id,
                   "worker returned"
                 );
-                console.log(JSON.stringify(e.data));
+                //console.log(JSON.stringify(e.data));
                 if (e.data.error != null) {
                   this.error++;
                   return;
@@ -1102,6 +1115,7 @@
                   siteminder_id: this.hotels[id].siteminder_digital_id,
                   hotel_in_array_id: id,
                 });
+                console.log(id, this.hotels[id].title)
               }
               if (
                 (id && id % period === 0) ||
